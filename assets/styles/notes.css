@@ -1,0 +1,473 @@
+/* ==========================================================================
+   Study Notes theme  --  edit freely, no Python changes needed.
+   Loaded at render time by modules/notes/renderer.py.
+
+   RENDERER LIMITS -- read before adding anything fancy.
+   The notes pane is Tkhtml3 (via tkinterweb), which is CSS 2.1 plus a few
+   CSS3 extras. The following DO work:
+       border-radius, linear-gradient, float, position, max-width,
+       border-collapse, background-color, inline-block, nth-child
+   The following DO NOT work and will be silently ignored:
+       flexbox, grid, box-shadow, transitions/animations, var() custom
+       properties, @media queries, SVG images
+   For side-by-side layout use a table or floats. Colours must be written
+   out literally -- there is no variable support.
+   ========================================================================== */
+
+
+/* --- Base ---------------------------------------------------------------- */
+
+body {
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 28px 34px 60px 34px;
+}
+
+/* Tkhtml has no default display rule for HTML5 sectioning elements, so any
+   element used by the renderer must be declared block explicitly. */
+figure, figcaption {
+    display: block;
+    margin: 0;
+}
+
+/* Caps the measure so text does not sprawl across a maximised window. */
+.page {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* --- Note header card ---------------------------------------------------- */
+
+.note-header {
+    background-color: #232323;
+    border-left: 4px solid #3B82F6;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 22px 18px 22px;
+    margin-bottom: 26px;
+}
+
+/* The badge is an inline span inside a block row. Tkhtml gives inline-block
+   boxes a shrunken width here, which wraps the text one word per line, so keep
+   it inline and hold it on one line with nowrap. */
+.note-badge-row {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.note-badge {
+    display: inline;
+    white-space: nowrap;
+    background-color: #3B82F6;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 3px 9px;
+}
+
+.note-title {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1.25;
+    margin: 4px 0 0 0;
+}
+
+
+/* --- Table of contents --------------------------------------------------- */
+
+.toc-card {
+    background-color: #242424;
+    border: 1px solid #383838;
+    border-radius: 8px;
+    padding: 14px 20px 16px 20px;
+    margin-bottom: 30px;
+}
+
+.toc-title {
+    color: #8b8b8b;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.toc-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.toc-card li {
+    margin-bottom: 2px;
+    line-height: 1.5;
+}
+
+.toc-card a {
+    color: #9ec5fe;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.toc-card a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+/* --- Headings ------------------------------------------------------------ */
+
+h1 {
+    color: #ffffff;
+    font-size: 23px;
+    border-bottom: 2px solid #3B82F6;
+    padding-bottom: 8px;
+    margin-top: 34px;
+    margin-bottom: 14px;
+}
+
+/* Accent bar reads as a section marker without the heavy full-width rule. */
+h2 {
+    color: #7fb0ff;
+    font-size: 19px;
+    border-left: 4px solid #3B82F6;
+    padding-left: 12px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: #10B981;
+    font-size: 16px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+h4 {
+    color: #d0d0d0;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 6px;
+}
+
+
+/* --- Body text ----------------------------------------------------------- */
+
+p {
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+strong {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+em {
+    color: #d8d8d8;
+}
+
+a {
+    color: #7fb0ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #3a3a3a;
+    margin: 30px 0;
+}
+
+ul, ol {
+    padding-left: 26px;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+
+/* --- Definition lists (def_list extension) -- good for A+ vocab ---------- */
+
+dl {
+    margin: 16px 0;
+}
+
+dt {
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+dd {
+    margin-left: 0;
+    padding-left: 16px;
+    border-left: 2px solid #3a3a3a;
+    color: #c8c8c8;
+    margin-bottom: 8px;
+}
+
+
+/* --- Code ---------------------------------------------------------------- */
+
+code {
+    background-color: #1e1e1e;
+    color: #10B981;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+}
+
+pre {
+    background-color: #1e1e1e;
+    border: 1px solid #383838;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 18px 0;
+    color: #d8d8d8;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #d8d8d8;
+}
+
+
+/* --- Tables -------------------------------------------------------------- */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 22px 0;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+th, td {
+    border: 1px solid #3d3d3d;
+    padding: 9px 13px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #1e1e1e;
+    color: #7fb0ff;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+
+tr:nth-child(even) {
+    background-color: #313131;
+}
+
+
+/* --- Blockquote ---------------------------------------------------------- */
+
+blockquote {
+    border-left: 4px solid #10B981;
+    background-color: #222222;
+    margin: 18px 0;
+    padding: 12px 18px;
+    color: #c8c8c8;
+    border-radius: 0 6px 6px 0;
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* --- Callouts (admonition extension) -------------------------------------
+   Authoring syntax:
+       !!! exam "Exam Tip"
+           Cat 6 reaches 10 Gbps only to 55 m; Cat 6a holds it to 100 m.
+   Supported flavours: exam, tip, note, warning, danger, example
+   -------------------------------------------------------------------------- */
+
+.admonition {
+    background-color: #262626;
+    border: 1px solid #383838;
+    border-left: 4px solid #6b7280;
+    border-radius: 0 8px 8px 0;
+    padding: 13px 18px 14px 18px;
+    margin: 20px 0;
+}
+
+.admonition p {
+    margin-bottom: 8px;
+}
+
+.admonition p:last-child {
+    margin-bottom: 0;
+}
+
+.admonition-title {
+    color: #d0d0d0;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.admonition.exam {
+    border-left-color: #3B82F6;
+    background-color: #1d2635;
+}
+
+.admonition.exam .admonition-title {
+    color: #7fb0ff;
+}
+
+.admonition.tip, .admonition.hint {
+    border-left-color: #10B981;
+    background-color: #16291f;
+}
+
+.admonition.tip .admonition-title, .admonition.hint .admonition-title {
+    color: #34d399;
+}
+
+.admonition.note, .admonition.info {
+    border-left-color: #8b5cf6;
+    background-color: #221f30;
+}
+
+.admonition.note .admonition-title, .admonition.info .admonition-title {
+    color: #b39dfa;
+}
+
+.admonition.warning, .admonition.caution {
+    border-left-color: #F59E0B;
+    background-color: #2e2617;
+}
+
+.admonition.warning .admonition-title, .admonition.caution .admonition-title {
+    color: #fbbf24;
+}
+
+.admonition.danger, .admonition.pitfall {
+    border-left-color: #EF4444;
+    background-color: #301c1c;
+}
+
+.admonition.danger .admonition-title, .admonition.pitfall .admonition-title {
+    color: #f87171;
+}
+
+.admonition.example {
+    border-left-color: #06b6d4;
+    background-color: #16292e;
+}
+
+.admonition.example .admonition-title {
+    color: #22d3ee;
+}
+
+
+/* --- Figures ------------------------------------------------------------- */
+
+figure {
+    margin: 24px 0;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #3a3a3a;
+}
+
+figcaption {
+    color: #8b8b8b;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Opt out of the frame for transparent cutouts: ![alt](path){.bare} */
+img.bare {
+    border: none;
+    border-radius: 0;
+}
+
+
+/* --- Missing image placeholder ------------------------------------------
+   Shown instead of a silently broken image while artwork is still pending.
+   -------------------------------------------------------------------------- */
+
+.img-missing {
+    border: 2px dashed #5a5a5a;
+    border-radius: 8px;
+    background-color: #262626;
+    padding: 22px 18px;
+    margin: 24px 0;
+    text-align: center;
+}
+
+.img-missing-title {
+    color: #F59E0B;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.img-missing-path {
+    color: #8b8b8b;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+}
+
+
+/* --- Empty / error states ------------------------------------------------ */
+
+.notice {
+    background-color: #262626;
+    border: 1px solid #383838;
+    border-left: 4px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin-top: 40px;
+}
+
+.notice-title {
+    color: #F59E0B;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.notice-body {
+    color: #c8c8c8;
+    font-size: 14px;
+}
+
+.notice-body code {
+    font-size: 12px;
+}

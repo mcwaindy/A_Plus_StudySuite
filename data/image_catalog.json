@@ -1,0 +1,89 @@
+{
+  "_readme": "Shared image catalog for both the Notes viewer and the Hardware Identification game. 'file' is relative to assets/images/<category>/ -- never write a full path. Set 'quiz' to null for reference diagrams that should be readable in notes but never appear as a guessing-game prompt. See assets/notes/_TEMPLATE.md for how notes reference these images.",
+
+  "categories": [
+    { "key": "cables",      "label": "Cables & Connectors" },
+    { "key": "motherboard", "label": "Motherboards & Boards" },
+    { "key": "cpu",         "label": "CPUs & Sockets" },
+    { "key": "memory",      "label": "RAM & Memory" },
+    { "key": "storage",     "label": "Storage Devices" },
+    { "key": "expansion",   "label": "Expansion Cards" },
+    { "key": "power",       "label": "Power Supplies" },
+    { "key": "cooling",     "label": "Cooling" },
+    { "key": "printers",    "label": "Printer Components" },
+    { "key": "networking",  "label": "Network Devices" },
+    { "key": "tools",       "label": "Tools & Test Equipment" },
+    { "key": "mobile",      "label": "Mobile & Laptop Parts" },
+    { "key": "display",     "label": "Displays & Video" }
+  ],
+
+  "images": [
+    {
+      "id": "connector_rj45",
+      "category": "cables",
+      "file": "RJ45.jpg",
+      "name": "RJ-45 Modular Connector",
+      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "quiz": {
+        "options": [
+          "RJ-11 Connector",
+          "RJ-45 Connector",
+          "F-Type Connector",
+          "LC Fiber Connector"
+        ],
+        "correct_index": 1,
+        "explanation": "RJ-45 is an 8-position, 8-contact (8P8C) modular connector used for Ethernet. RJ-11 is the narrower 6-position connector used for telephone lines."
+      }
+    },
+    {
+      "id": "diagram_utp_stp",
+      "category": "cables",
+      "file": "UTP_STP.png",
+      "name": "UTP vs STP Cross-Section",
+      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "quiz": null
+    },
+    {
+      "id": "diagram_rj_comparison",
+      "category": "cables",
+      "file": "rj_comparisons.png",
+      "name": "RJ-45 vs RJ-11 Comparison",
+      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "quiz": null
+    },
+    {
+      "id": "cable_cat6a",
+      "category": "cables",
+      "file": "cat6a_cable.png",
+      "name": "Cat 6a Ethernet Cable",
+      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "quiz": {
+        "options": [
+          "Cat 5e Cable",
+          "Cat 6a Cable",
+          "RG-6 Coaxial",
+          "Single-Mode Fiber"
+        ],
+        "correct_index": 1,
+        "explanation": "Cat 6a features thicker shielding and tighter twists to support 10 Gbps speeds up to 100 meters."
+      }
+    },
+    {
+      "id": "printer_fuser",
+      "category": "printers",
+      "file": "laser_fuser.png",
+      "name": "Laser Printer Fuser Assembly",
+      "objectives": ["Core 1 - 3.7 Printer Consumables"],
+      "quiz": {
+        "options": [
+          "Transfer Roller",
+          "Primary Corona Wire",
+          "Fuser Assembly",
+          "Pickup Roller"
+        ],
+        "correct_index": 2,
+        "explanation": "The fuser uses pressure and high heat to melt toner powder directly onto the paper."
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "fc_001",
+    "objective": "1.1 - Cable Types",
+    "term": "RJ-45",
+    "definition": "An 8-ping/8-position connector used primarily for Ethernet networking.",
+    "image_path": "assets/images/rj45_cable.png"
+  },
+  {
+    "id": "fc_002",
+    "objective": "2.1 - Networking Protocols",
+    "term": "DNS (Domain Name System)",
+    "definition": "Resolves human-readable hostnames (e.g., google.com) to IP addresses. Uses Port 53.",
+    "image_path": null
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "core": "core1",
+      "objective": "Core 1 - 1.1 Cable Types",
+      "question": "Which cable type supports a maximum length of 100 meters (328 feet) for 10Gbps speeds under optimal conditions?",
+      "options": [
+        "Cat 5e",
+        "Cat 6",
+        "Cat 6a",
+        "RG-6"
+      ],
+      "correct_index": 2,
+      "explanation": "Cat 6a supports 10 Gbps speeds up to 100 meters. Standard Cat 6 supports 10 Gbps up to only 55 meters."
+    },
+    {
+      "id": "q2",
+      "core": "core1",
+      "objective": "Core 1 - 1.2 Expansion Slots",
+      "question": "Which expansion slot standard uses point-to-point serial connections called 'lanes'?",
+      "options": [
+        "PCI",
+        "PCIe",
+        "AGP",
+        "PCI-X"
+      ],
+      "correct_index": 1,
+      "explanation": "PCI Express (PCIe) uses dedicated point-to-point serial communication lanes (x1, x4, x8, x16)."
+    },
+    {
+      "id": "q3",
+      "core": "core2",
+      "objective": "Core 2 - 1.1 Operating Systems",
+      "question": "Which Windows command line utility is used to check and repair file system corruption on a disk drive?",
+      "options": [
+        "sfc /scannow",
+        "chkdsk",
+        "gpupdate",
+        "bootrec"
+      ],
+      "correct_index": 1,
+      "explanation": "chkdsk checks the file system and file system metadata of a volume for logical and physical errors."
+    }
+  ]
+}

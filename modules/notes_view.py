@@ -1,0 +1,370 @@
+import webbrowser
+from urllib.parse import urlparse, unquote
+
+import customtkinter as ctk
+from tkinterweb import HtmlFrame
+
+from modules.notes import html_compat, library, renderer
+
+
+class NotesView(ctk.CTkFrame):
+    """Study notes browser: a filterable objective sidebar beside a styled
+    Markdown reading pane.
+
+    Notes are discovered from assets/notes/ at load time rather than from a
+    hardcoded map, so the list can never drift from what is on disk.
+    """
+
+    NAV_WIDTH = 260
+    FONT_SCALE_MIN = 0.7
+    FONT_SCALE_MAX = 1.6
+    FONT_SCALE_STEP = 0.1
+    MAX_LABEL_CHARS = 24
+
+    SCROLLBAR_COLORS = {
+        "trough": "#2b2b2b",
+        "thumb": "#4a4a4a",
+        "thumb_active": "#5e5e5e",
+    }
+
+    def __init__(self, parent):
+        super().__init__(parent, fg_color="transparent")
+
+        # Must run before the first page renders, or PNGs come out as alt text.
+        html_compat.apply_image_fix()
+
+        self.sections = []
+        self.current_note = None
+        self.nav_buttons = {}
+        self.font_scale = 1.0
+
+        # Grid: fixed-width nav column, content column takes the rest.
+        self.grid_columnconfigure(0, weight=0)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        self.create_nav_panel()
+        self.create_content_panel()
+
+        self.refresh_library(select_default=True)
+
+    # --- NAV PANEL --- #
+    def create_nav_panel(self):
+        """Left rail: filter box, grouped objective list, progress footer."""
+        nav = ctk.CTkFrame(self, width=self.NAV_WIDTH, corner_radius=10)
+        nav.grid(row=0, column=0, sticky="nsew", padx=(0, 12), pady=0)
+        nav.grid_propagate(False)  # hold the width against the child list
+        nav.grid_columnconfigure(0, weight=1)
+        nav.grid_rowconfigure(2, weight=1)
+
+        lbl_heading = ctk.CTkLabel(
+            nav,
+            text="STUDY NOTES",
+            font=ctk.CTkFont(size=12, weight="bold"),
+            text_color="gray",
+            anchor="w",
+        )
+        lbl_heading.grid(row=0, column=0, sticky="ew", padx=16, pady=(14, 6))
+
+        self.filter_var = ctk.StringVar()
+        self.filter_var.trace_add("write", lambda *_: self.render_nav_list())
+
+        self.entry_filter = ctk.CTkEntry(
+            nav,
+            placeholder_text="Filter objectives…",
+            textvariable=self.filter_var,
+            height=30,
+        )
+        self.entry_filter.grid(row=1, column=0, sticky="ew", padx=12, pady=(0, 8))
+
+        self.nav_list = ctk.CTkScrollableFrame(nav, fg_color="transparent")
+        self.nav_list.grid(row=2, column=0, sticky="nsew", padx=4, pady=0)
+        self.nav_list.grid_columnconfigure(0, weight=1)
+
+        self.lbl_progress = ctk.CTkLabel(
+            nav,
+            text="",
+            font=ctk.CTkFont(size=11),
+            text_color="gray50",
+            anchor="w",
+        )
+        self.lbl_progress.grid(row=3, column=0, sticky="ew", padx=16, pady=(6, 12))
+
+    def create_content_panel(self):
+        """Right side: breadcrumb + reader controls above the HTML pane."""
+        content = ctk.CTkFrame(self, fg_color="transparent")
+        content.grid(row=0, column=1, sticky="nsew")
+        content.grid_columnconfigure(0, weight=1)
+        content.grid_rowconfigure(1, weight=1)
+
+        header = ctk.CTkFrame(content, fg_color="transparent")
+        header.grid(row=0, column=0, sticky="ew", pady=(0, 8))
+
+        self.lbl_breadcrumb = ctk.CTkLabel(
+            header,
+            text="",
+            font=ctk.CTkFont(size=12, weight="bold"),
+            text_color="gray50",
+        )
+        self.lbl_breadcrumb.pack(side="left", padx=(4, 0))
+
+        btn_reload = ctk.CTkButton(
+            header,
+            text="⟳  Reload",
+            width=90,
+            height=28,
+            font=ctk.CTkFont(size=12),
+            command=self.reload_current,
+        )
+        btn_reload.pack(side="right", padx=(8, 4))
+
+        # Text sizing, so long reading sessions are not stuck at one size.
+        size_box = ctk.CTkFrame(header, fg_color="transparent")
+        size_box.pack(side="right")
+
+        ctk.CTkButton(
+            size_box,
+            text="A−",
+            width=34,
+            height=28,
+            font=ctk.CTkFont(size=12, weight="bold"),
+            command=lambda: self.adjust_font_scale(-self.FONT_SCALE_STEP),
+        ).pack(side="left", padx=2)
+
+        ctk.CTkButton(
+            size_box,
+            text="A+",
+            width=34,
+            height=28,
+            font=ctk.CTkFont(size=13, weight="bold"),
+            command=lambda: self.adjust_font_scale(self.FONT_SCALE_STEP),
+        ).pack(side="left", padx=2)
+
+        self.html_view = HtmlFrame(
+            content,
+            messages_enabled=False,
+            horizontal_scrollbar="auto",
+            on_link_click=self.on_link_click,
+        )
+        self.html_view.grid(row=1, column=0, sticky="nsew")
+        html_compat.style_scrollbars(self.html_view, self.SCROLLBAR_COLORS)
+
+    # --- LIBRARY / NAV RENDERING --- #
+    def refresh_library(self, select_default=False):
+        """Rescans assets/notes/ and rebuilds the sidebar.
+
+        :param select_default: Open the first note with content once scanning finishes.
+        """
+        self.sections = library.discover_notes()
+        self.render_nav_list()
+
+        written, total = library.count_written(self.sections)
+        self.lbl_progress.configure(
+            text=f"{written} of {total} written" if total else "No notes found"
+        )
+
+        if not select_default:
+            return
+
+        first = self._first_note(prefer_written=True)
+        if first:
+            self.select_note(first)
+        else:
+            self.show_empty_library()
+
+    def _first_note(self, prefer_written=False):
+        """Returns the first note in sidebar order, preferring ones with content."""
+        notes = [n for section in self.sections for n in section["notes"]]
+        if not notes:
+            return None
+        if prefer_written:
+            return next((n for n in notes if not n["is_empty"]), notes[0])
+        return notes[0]
+
+    def render_nav_list(self):
+        """Draws the grouped, filtered objective list."""
+        for child in self.nav_list.winfo_children():
+            child.destroy()
+        self.nav_buttons = {}
+
+        needle = self.filter_var.get().strip().lower()
+        row = 0
+        matches = 0
+
+        for section in self.sections:
+            visible = [n for n in section["notes"] if self._matches(n, needle)]
+            if not visible:
+                continue
+
+            lbl = ctk.CTkLabel(
+                self.nav_list,
+                text=section["label"].upper(),
+                font=ctk.CTkFont(size=11, weight="bold"),
+                text_color="gray",
+                anchor="w",
+            )
+            lbl.grid(row=row, column=0, sticky="ew", padx=12, pady=(12, 4))
+            row += 1
+
+            for note in visible:
+                self.nav_buttons[note["id"]] = self._add_nav_button(note, row)
+                row += 1
+                matches += 1
+
+        if not matches:
+            message = "No matching objectives" if needle else "No notes in assets/notes/"
+            ctk.CTkLabel(
+                self.nav_list,
+                text=message,
+                font=ctk.CTkFont(size=12, slant="italic"),
+                text_color="gray50",
+                wraplength=self.NAV_WIDTH - 50,
+            ).grid(row=row, column=0, sticky="ew", padx=14, pady=14)
+
+        self._highlight_active()
+
+    def _add_nav_button(self, note, row):
+        """Creates one objective button, styled to match the app's main sidebar."""
+        btn = ctk.CTkButton(
+            self.nav_list,
+            text=self._nav_label(note),
+            anchor="w",
+            height=30,
+            fg_color="transparent",
+            text_color=("gray10", "gray90") if not note["is_empty"] else ("gray40", "gray55"),
+            hover_color=("gray70", "gray30"),
+            font=ctk.CTkFont(size=12),
+            command=lambda target=note: self.select_note(target),
+        )
+        btn.grid(row=row, column=0, sticky="ew", padx=6, pady=1)
+        return btn
+
+    def _nav_label(self, note):
+        """Builds the button caption: a written/empty marker, objective, and title."""
+        marker = "○" if note["is_empty"] else "●"
+        title = note["title"]
+
+        if len(title) > self.MAX_LABEL_CHARS:
+            title = title[: self.MAX_LABEL_CHARS - 1].rstrip() + "…"
+
+        objective = f"{note['objective']}  " if note["objective"] else ""
+        return f"  {marker}  {objective}{title}"
+
+    @staticmethod
+    def _matches(note, needle):
+        """Case-insensitive filter across objective number, title, and section."""
+        if not needle:
+            return True
+        haystack = f"{note['objective']} {note['title']} {note['group_label']}".lower()
+        return needle in haystack
+
+    def _highlight_active(self):
+        """Applies the selected background to whichever note is open."""
+        for note_id, btn in self.nav_buttons.items():
+            is_active = self.current_note and note_id == self.current_note["id"]
+            btn.configure(fg_color=("gray75", "gray25") if is_active else "transparent")
+
+    # --- NOTE DISPLAY --- #
+    def select_note(self, note):
+        """Renders a note into the reading pane and marks it active in the sidebar."""
+        self.current_note = note
+        self.lbl_breadcrumb.configure(text=note["group_label"])
+        self._highlight_active()
+        self.html_view.load_html(renderer.render_note(note), base_url=renderer.base_url())
+
+    def reload_current(self):
+        """Rescans the notes folder and re-renders the open note from disk.
+
+        Lets you edit Markdown (or the stylesheet) in another editor and see the
+        result without restarting the app.
+        """
+        open_id = self.current_note["id"] if self.current_note else None
+
+        self.sections = library.discover_notes()
+        written, total = library.count_written(self.sections)
+        self.lbl_progress.configure(
+            text=f"{written} of {total} written" if total else "No notes found"
+        )
+
+        note = library.find_note(self.sections, open_id) if open_id else None
+        if note is None:
+            note = self._first_note(prefer_written=True)
+
+        self.current_note = note
+        self.render_nav_list()
+
+        if note:
+            self.select_note(note)
+        else:
+            self.show_empty_library()
+
+    def show_empty_library(self):
+        """Shown when assets/notes/ contains no usable markdown files."""
+        self.current_note = None
+        self.lbl_breadcrumb.configure(text="")
+        self.html_view.load_html(
+            renderer.render_notice(
+                "No notes found",
+                "Add Markdown files under <code>assets/notes/core1/</code> or "
+                "<code>assets/notes/core2/</code>, then press "
+                "<strong>Reload</strong>.<br><br>"
+                "Copy <code>assets/notes/_TEMPLATE.md</code> to get the front "
+                "matter and callout syntax.",
+            ),
+            base_url=renderer.base_url(),
+        )
+
+    def adjust_font_scale(self, delta):
+        """Steps the reading text size within a sane range."""
+        new_scale = round(self.font_scale + delta, 2)
+
+        if not self.FONT_SCALE_MIN <= new_scale <= self.FONT_SCALE_MAX:
+            return
+
+        self.font_scale = new_scale
+        self.html_view.configure(fontscale=new_scale)
+
+    # --- LINK HANDLING --- #
+    def on_link_click(self, url):
+        """Routes clicks instead of letting the pane try to navigate.
+
+        Three cases: in-page anchors scroll, note: links switch notes, and real
+        URLs open in the system browser rather than inside the reading pane.
+        """
+        if not url:
+            return
+
+        if "note:" in url:
+            note_id = unquote(url.split("note:", 1)[1]).strip("/")
+            target = library.find_note(self.sections, note_id)
+            if target:
+                self.select_note(target)
+            else:
+                print(f"Note link points at an unknown note: {note_id}")
+            return
+
+        parsed = urlparse(url)
+
+        if parsed.scheme in ("http", "https"):
+            webbrowser.open(url)
+            return
+
+        if parsed.fragment:
+            self.scroll_to_anchor(parsed.fragment)
+
+    def scroll_to_anchor(self, anchor):
+        """Scrolls the pane to a heading anchor generated by the toc extension."""
+        try:
+            element = self.html_view.document.getElementById(anchor)
+            if element is not None:
+                self.html_view.yview(element.node)
+                return
+        except Exception:
+            pass  # fall through to the reload-with-fragment path
+
+        if self.current_note:
+            self.html_view.load_html(
+                renderer.render_note(self.current_note),
+                base_url=renderer.base_url(),
+                fragment=anchor,
+            )

@@ -1,0 +1,45 @@
+{
+  "modern_atx": {
+    "title": "Modern Workstation / ATX Board",
+    "image_path": "assets/images/motherboard/modern_eatx_908x871.png",
+    "components": [
+      {
+        "id": "cpu_socket",
+        "name": "LGA 1700 CPU Socket",
+        "coords": [363, 179, 526, 410],
+        "summary": "Land Grid Array socket designed for modern desktop processors. Connecting pins are located on the socket rather than the CPU."
+      },
+      {
+        "id": "dimm_slots",
+        "name": "DDR5 RAM Slots",
+        "coords": [645, 4, 710, 538],
+        "summary": "Dual In-Line Memory Module slots operating in dual-channel mode for DDR5 system memory."
+      },
+      {
+        "id": "dimm_slots",
+        "name": "DDR5 RAM Slots",
+        "coords": [754, 4, 818, 538],
+        "summary": "Dual In-Line Memory Module slots operating in dual-channel mode for DDR5 system memory."
+      },
+
+      {
+        "id": "pcie_x16",
+        "name": "PCIe 4.0 x16 Slot",
+        "coords": [188, 700, 508, 728],
+        "summary": "Dual In-Line Memory Module slots operating in dual-channel mode for system memory."
+      },
+      {
+        "id": "pcie_x16",
+        "name": "PCIe 4.0 x16 Slot",
+        "coords": [188, 561, 508, 588],
+        "summary": "Primary high-bandwidth expansion slot used for dedicated graphics cards or high-speed add-in cards."
+      },
+      {
+        "id": "atx_power",
+        "name": "24-Pin ATX Main Power",
+        "coords": [843, 158, 893, 347],
+        "summary": "Primary power connector delivering +3.3V, +5V, +12V, and -12V DC power from the PSU to the motherboard."
+      }
+    ]
+  }
+}
