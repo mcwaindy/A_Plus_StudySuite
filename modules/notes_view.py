@@ -270,7 +270,10 @@ class NotesView(ctk.CTkFrame):
         self.current_note = note
         self.lbl_breadcrumb.configure(text=note["group_label"])
         self._highlight_active()
-        self.html_view.load_html(renderer.render_note(note), base_url=renderer.base_url())
+        # Note: base_url is omitted because images are now embedded as data URIs,
+        # which don't need a base URL to resolve. Including base_url can interfere
+        # with data URI rendering in tkinterweb.
+        self.html_view.load_html(renderer.render_note(note))
 
     def reload_current(self):
         """Rescans the notes folder and re-renders the open note from disk.
@@ -310,8 +313,7 @@ class NotesView(ctk.CTkFrame):
                 "<strong>Reload</strong>.<br><br>"
                 "Copy <code>assets/notes/_TEMPLATE.md</code> to get the front "
                 "matter and callout syntax.",
-            ),
-            base_url=renderer.base_url(),
+            )
         )
 
     def adjust_font_scale(self, delta):
@@ -365,6 +367,5 @@ class NotesView(ctk.CTkFrame):
         if self.current_note:
             self.html_view.load_html(
                 renderer.render_note(self.current_note),
-                base_url=renderer.base_url(),
                 fragment=anchor,
             )

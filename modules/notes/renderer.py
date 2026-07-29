@@ -1,5 +1,7 @@
 import re
 from html import escape
+import base64
+from mimetypes import guess_type
 
 import markdown
 
@@ -47,12 +49,35 @@ def _with_src(tag: str, new_src: str) -> str:
 
 
 def _display_src(resolved):
-    """Returns a source string that stays inside the project tree when possible."""
+    """Returns a data URI for the image to ensure it renders in tkinterweb.
+
+    tkinterweb has compatibility issues with file:// URLs and relative paths.
+    Converting images to base64 data URIs works reliably across all scenarios.
+    """
     try:
-        relative = resolved.relative_to(PROJECT_ROOT)
-    except ValueError:
+        image_data = resolved.read_bytes()
+
+        # Detect MIME type from file content (magic bytes), not extension
+        # because some files have wrong extensions (e.g., JPEG files named .png)
+        if image_data.startswith(b'\x89PNG'):
+            mime_type = "image/png"
+        elif image_data.startswith(b'\xff\xd8\xff'):
+            mime_type = "image/jpeg"
+        elif image_data.startswith(b'RIFF') and b'WEBP' in image_data[:20]:
+            mime_type = "image/webp"
+        elif image_data.startswith(b'GIF'):
+            mime_type = "image/gif"
+        else:
+            # Fallback to extension-based detection
+            _, mime_type = guess_type(str(resolved))
+            if not mime_type:
+                mime_type = "application/octet-stream"
+
+        b64_data = base64.b64encode(image_data).decode('ascii')
+        return f"data:{mime_type};base64,{b64_data}"
+    except (OSError, IOError):
+        # Fallback if reading fails; shouldn't happen since we checked existence
         return as_file_url(resolved)
-    return relative.as_posix()
 
 
 def _resolve_image(src: str, note_dir):
