@@ -23,7 +23,7 @@
       "category": "cables",
       "file": "RJ45.jpg",
       "name": "RJ-45 Modular Connector",
-      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
       "quiz": {
         "options": [
           "RJ-11 Connector",
@@ -40,7 +40,7 @@
       "category": "cables",
       "file": "UTP_STP.png",
       "name": "UTP vs STP Cross-Section",
-      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
       "quiz": null
     },
     {
@@ -48,7 +48,7 @@
       "category": "cables",
       "file": "rj_comparisons.png",
       "name": "RJ-45 vs RJ-11 Comparison",
-      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
       "quiz": null
     },
     {
@@ -56,7 +56,7 @@
       "category": "cables",
       "file": "cat6a_cable.png",
       "name": "Cat 6a Ethernet Cable",
-      "objectives": ["Core 1 - 1.1 Cable Types"],
+      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
       "quiz": {
         "options": [
           "Cat 5e Cable",

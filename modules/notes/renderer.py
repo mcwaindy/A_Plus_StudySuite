@@ -46,6 +46,15 @@ def _with_src(tag: str, new_src: str) -> str:
                   tag, count=1, flags=re.IGNORECASE)
 
 
+def _display_src(resolved):
+    """Returns a source string that stays inside the project tree when possible."""
+    try:
+        relative = resolved.relative_to(PROJECT_ROOT)
+    except ValueError:
+        return as_file_url(resolved)
+    return relative.as_posix()
+
+
 def _resolve_image(src: str, note_dir):
     """Locates an image referenced from a note.
 
@@ -97,7 +106,7 @@ def _process_images(html_body: str, note_dir) -> str:
 
         alt = _attr(tag, "alt")
         caption = f"<figcaption>{alt}</figcaption>" if alt else ""
-        return f'<figure>{_with_src(tag, as_file_url(resolved))}{caption}</figure>'
+        return f'<figure>{_with_src(tag, _display_src(resolved))}{caption}</figure>'
 
     html_body = STANDALONE_IMG_RE.sub(standalone, html_body)
 
@@ -114,7 +123,7 @@ def _process_images(html_body: str, note_dir) -> str:
         if resolved is None:
             return f'<span class="img-missing-path">[missing: {escape(src)}]</span>'
 
-        return _with_src(tag, as_file_url(resolved))
+        return _with_src(tag, _display_src(resolved))
 
     return IMG_TAG_RE.sub(inline, html_body)
 

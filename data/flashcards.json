@@ -1,7 +1,7 @@
 [
   {
     "id": "fc_001",
-    "objective": "1.1 - Cable Types",
+    "objective": "2.5 - Network Cables & Connectors",
     "term": "RJ-45",
     "definition": "An 8-ping/8-position connector used primarily for Ethernet networking.",
     "image_path": "assets/images/rj45_cable.png"

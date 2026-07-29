@@ -7,7 +7,7 @@ objective: 3.4
   HOW TO ADD A NOTE
   =================
   1. Copy this file into assets/notes/core1/ or assets/notes/core2/.
-  2. Name it <objective>_<topic>.md   e.g.  3.4_motherboards.md
+    2. Name it <objective>_<topic>.md   e.g.  2.5_network_cables_connectors.md
      The folder decides which sidebar section it lands in; the front matter
      above supplies the display title and objective badge.
   3. Write. Press the reload button in the notes header to see changes --
@@ -113,4 +113,4 @@ app pane.
 To cross-reference another note, use its id — the path under `assets/notes/`
 without the `.md`:
 
-    [See the cables note](note:core1/1.1_cables)
+    [See the cables note](note:core1/2.5_network_cables_connectors)

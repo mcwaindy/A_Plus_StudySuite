@@ -15,8 +15,8 @@ GROUP_LABELS = {
 GROUP_ORDER = ["core1", "core2", ""]
 
 # Matches an optional core prefix, an objective number, then the topic:
-#   core1_1.1_cables.md  ->  core1 / 1.1 / cables
-#   3.2_ram.md           ->  ----- / 3.2 / ram
+#   core1_2.5_network_cables_connectors.md  ->  core1 / 2.5 / network cables connectors
+#   3.2_ram.md                              ->  ----- / 3.2 / ram
 FILENAME_RE = re.compile(
     r"^(?:core(?P<core>\d+)[_\-\s]+)?(?P<objective>\d+(?:\.\d+)*)[_\-\s]+(?P<topic>.+)$"
 )
