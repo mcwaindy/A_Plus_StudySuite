@@ -20,6 +20,8 @@ class DiagramCanvasWidget(ctk.CTkFrame):
         self.selected_component = None
         self.zoom_level = 1.0
         self.debug_mode = True
+        self.coord_label = None
+        self.show_highlights = True
 
         # Debug drag tracking
         self.drag_start_x = 0
@@ -109,7 +111,10 @@ class DiagramCanvasWidget(ctk.CTkFrame):
         self.render_hotspots(board_info.get("components", []))
 
     def render_hotspots(self, components):
-        """Draws bounding boxes over components."""
+        """Draws bounding boxes over components if highlights are enabled."""
+        if not self.show_highlights:
+            return
+
         for comp in components:
             coords = comp.get("coords", [0, 0, 0, 0])
             x1, y1, x2, y2 = self.translator.native_to_canvas(
@@ -186,6 +191,8 @@ class DiagramCanvasWidget(ctk.CTkFrame):
 
             print("\n🎯 --- NEW HOTSPOT COORDINATES ---")
             print(f'"coords": {native_coords}')
+            if self.coord_label:
+                print(f'"name": "{self.coord_label}"')
             print("------------------------------------\n")
 
     def _check_hotspot_click(self, click_x, click_y):

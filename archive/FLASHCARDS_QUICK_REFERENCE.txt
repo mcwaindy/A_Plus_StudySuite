@@ -1,0 +1,47 @@
+# Flashcards Quick Reference
+
+## Current Statistics
+- **Total Cards:** 110
+- **Objectives Covered:** 5 (1, 2, 3, 4, 5)
+- **Status:** ✅ Ready to use
+
+## Cards by Objective
+```
+Objective 1 (Mobile Devices)        → 22 cards
+Objective 2 (Networking)            → 44 cards  
+Objective 3 (Hardware/RAM)          → 17 cards
+Objective 4 (Cloud/Virtualization)  → 17 cards
+Objective 5 (Troubleshooting)       → 10 cards
+```
+
+## How to Study
+1. Click "Flash Cards" in sidebar
+2. Select objective from dropdown
+3. Click card to flip (term ↔ definition)
+4. Toggle "Start with Definition" if desired
+5. Mark each card as "Know It" or "Needs Review"
+6. Switch objectives anytime to study different domains
+
+## Content Quality
+✅ Extracted from official Core 1 A+ notes  
+✅ Concise definitions (10-20 words average)  
+✅ All required fields present  
+✅ No duplicates  
+✅ Covers exam-critical concepts  
+
+## Top Study Areas
+- **Networking Protocols** — 20 cards covering all major ports/services
+- **Network Cables** — 24 cards on cabling standards and specifications
+- **RAM Technologies** — 17 cards on DDR generations and architectures
+- **Cloud Services** — 17 cards on IaaS/PaaS/SaaS and deployment models
+- **Hardware Components** — 22 cards on mobile device internals
+
+## File Locations
+- **Study Data:** `data/flashcards.json`
+- **UI Code:** `modules/flashcards_view.py`
+- **Scripts:** `generate_flashcards.py`, `validate_flashcards.py`
+- **Documentation:** `_plans/FLASHCARDS_*.md`
+
+---
+
+**Ready to study!** 🎓

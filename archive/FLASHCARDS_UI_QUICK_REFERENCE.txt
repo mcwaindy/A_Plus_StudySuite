@@ -1,0 +1,126 @@
+# Flashcards View - Quick UI Reference
+
+## What Changed
+
+✅ **Fixed:** Text wrapping and overflow issues  
+✅ **Improved:** Visual appearance and layout  
+✅ **Added:** Scrollbar for long content  
+
+---
+
+## New Card Layout
+
+```
+┌─────────────────────────────────────────────┐
+│                                             │
+│  [ Term Side ]  ← Side indicator           │
+│                                             │
+│  ╔═══════════════════════════════════════╗ │
+│  ║                                       ║ │
+│  ║  Your flashcard content is displayed  ║ │
+│  ║  here with automatic text wrapping    ║ │
+│  ║  and a scrollbar if needed.           ║ │
+│  ║                                       ║ │
+│  ║  (Click to flip)  ← Subtle hint       ║ │ ← Scrollbar appears
+│  ╚═══════════════════════════════════════╝ │    if content exceeds
+│                                             │    card height
+└─────────────────────────────────────────────┘
+```
+
+---
+
+## Key Features
+
+### Text Wrapping
+- Automatic word wrapping keeps text in bounds
+- No more text overflow or hidden content
+
+### Scrolling
+- Vertical scrollbar appears when content is too long
+- Smooth, responsive scrolling
+
+### Responsive
+- Adapts to any window size
+- Generous padding (30px) for readability
+
+### Themes
+- Light mode: Light background, dark text
+- Dark mode: Dark background, light text
+
+---
+
+## Components
+
+| Component | Purpose | Style |
+|-----------|---------|-------|
+| Card Container | Outer frame with rounded corners | Themed background |
+| [ Side Indicator ] | Shows term vs. definition | Subtle gray, top-left |
+| Text Area | Main content display | 18px bold font, wrapping |
+| (Click to flip) | Interaction hint | Subtle gray, bottom-right |
+| Scrollbar | Long content support | Appears when needed |
+
+---
+
+## How to Use (Same As Before)
+
+1. Click "Flash Cards" in sidebar
+2. Select objective from dropdown
+3. **Click card to flip** — Shows term/definition
+4. **Mark card as "Know It" or "Needs Review"** — Advances to next
+5. **Toggle "Start with Definition"** — Changes study mode
+
+---
+
+## What's Better
+
+| Before | After |
+|--------|-------|
+| Text overflows ❌ | Text wraps ✅ |
+| No scrolling | Has scrollbar |
+| Cramped layout | Spacious (30px padding) |
+| One big button | Multiple components |
+| Basic styling | Professional appearance |
+
+---
+
+## Examples
+
+### Short Term
+```
+[ Term Side ]
+
+TCP
+```
+
+### Long Definition
+```
+[ Definition Side ]
+
+Connection-oriented, reliable transport layer 
+protocol that uses a 3-way handshake and 
+guarantees packet delivery in sequence order.
+```
+
+### Very Long Content (Scrollbar)
+```
+[ Definition Side ]
+
+Virtual Desktop Infrastructure (VDI)...
+[Text continues, scrollbar appears]
+```
+
+---
+
+## File Information
+
+- **Modified:** `modules/flashcards_view.py`
+- **New Components:** CTkTextbox, 2 labels
+- **Backward Compatible:** Data format unchanged
+- **Status:** ✅ Validated and tested
+
+---
+
+## Ready to Use! 🎓
+
+Test the flashcards in the application to see the improved layout in action.
+

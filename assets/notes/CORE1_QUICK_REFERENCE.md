@@ -1,4 +1,5 @@
 # Core 1 Objectives Quick Reference
+# WARNING: THIS FILE IS INCORRECT. CURRENT OBJECTIVES FOR NOTES HAVE BEEN UPDATED. PLEASE USE THE OFFICIAL COMPETIA A+ EXAM OBJECTIVES FOR REFERENCE.
 
 ## Domain 1: Mobile Devices (15%)
 | Objective | Title | Template Status |
@@ -41,8 +42,7 @@
 |-----------|-------|-----------------|
 | **4.1** | Virtualization and Cloud Computing Concepts | 🆕 Template |
 | **4.2** | Virtual Machine Usage | 🆕 Template |
-| **4.3** | Cloud Computing | 🆕 Template |
-| **4.4** | Scripting and Automation | 🆕 Template |
+
 
 ---
 

@@ -31,7 +31,7 @@ class DiagramView(ctk.CTkFrame):
         self.refresh_display()
 
     def create_header(self):
-        """Top action bar containing dropdown, debug toggle, and zoom controls."""
+        """Top action bar containing dropdown, debug toggle, coordinate name input, and zoom controls."""
         header_frame = ctk.CTkFrame(self, fg_color="transparent")
         header_frame.grid(
             row=0, column=0, columnspan=2, sticky="ew", padx=20, pady=(10, 5)
@@ -61,6 +61,33 @@ class DiagramView(ctk.CTkFrame):
         )
         self.switch_debug.select()
         self.switch_debug.pack(side="left", padx=15)
+
+        # Highlights Toggle
+        self.switch_highlights = ctk.CTkSwitch(
+            header_frame,
+            text="Highlights",
+            command=self.toggle_highlights,
+            font=ctk.CTkFont(size=12, weight="bold"),
+        )
+        self.switch_highlights.select()
+        self.switch_highlights.pack(side="left", padx=5)
+
+        # Coordinate Label Input (for debug mode)
+        lbl_coord_name = ctk.CTkLabel(
+            header_frame,
+            text="Label:",
+            font=ctk.CTkFont(size=11),
+        )
+        lbl_coord_name.pack(side="left", padx=(15, 5))
+
+        self.entry_coord_name = ctk.CTkEntry(
+            header_frame,
+            placeholder_text="e.g., CPU Socket, RAM Slot 1",
+            width=200,
+            height=30,
+        )
+        self.entry_coord_name.pack(side="left", padx=(0, 15))
+        self.entry_coord_name.bind("<KeyRelease>", self.on_coord_label_change)
 
         # Zoom Controls
         zoom_frame = ctk.CTkFrame(header_frame, fg_color="transparent")
@@ -175,8 +202,26 @@ class DiagramView(ctk.CTkFrame):
         """Toggles coordinate picker mode inside canvas widget."""
         is_enabled = bool(self.switch_debug.get())
         self.canvas_widget.debug_mode = is_enabled
+
+        # Get the coordinate name from the text entry
+        coord_name = self.entry_coord_name.get().strip()
+        self.canvas_widget.coord_label = coord_name if coord_name else None
+
         status = "ENABLED" if is_enabled else "DISABLED"
         print(f"🔧 Coordinate Picker Mode: {status}")
+
+    def on_coord_label_change(self, event=None):
+        """Updates the canvas widget's coordinate label whenever text changes."""
+        coord_name = self.entry_coord_name.get().strip()
+        self.canvas_widget.coord_label = coord_name if coord_name else None
+
+    def toggle_highlights(self):
+        """Toggles component highlights on/off."""
+        is_enabled = bool(self.switch_highlights.get())
+        self.canvas_widget.show_highlights = is_enabled
+        self.refresh_display()
+        status = "ON" if is_enabled else "OFF"
+        print(f"✨ Highlights: {status}")
 
     def adjust_zoom(self, delta):
         """Adjusts zoom level between 70% and 200%."""

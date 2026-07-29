@@ -1,6 +1,6 @@
 {
   "modern_atx": {
-    "title": "Modern Workstation / ATX Board",
+    "title": "Modern Micro ATX Board",
     "image_path": "assets/images/motherboard/modern_eatx_908x871.png",
     "components": [
       {
@@ -39,6 +39,102 @@
         "name": "24-Pin ATX Main Power",
         "coords": [843, 158, 893, 347],
         "summary": "Primary power connector delivering +3.3V, +5V, +12V, and -12V DC power from the PSU to the motherboard."
+      },
+      {
+        "id": "cmos_battery",
+        "name": "CMOS Battery",
+        "coords": [96, 718, 172, 793],
+        "summary": "Coin-cell battery that maintains BIOS settings and system clock when the motherboard is powered off."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [638, 797, 698, 820],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [699, 797, 758, 819],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [759, 796, 822, 819],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [824, 799, 880, 820],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [640, 822, 697, 845],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [699, 823, 759, 842],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [762, 821, 819, 842],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "sata_ports",
+        "name": "SATA port",
+        "coords": [822, 821, 881, 842],
+        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+      },
+      {
+        "id": "m2_slots",
+        "name": "M.2 Slots",
+        "coords": [546, 460, 597, 550],
+        "summary": "High-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
+      },
+      {
+        "id": "m2_slots",
+        "name": "M.2 Slots",
+        "coords": [596, 606, 643, 690],
+        "summary": "High-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
+      },
+      {
+        "id": "m2_slots",
+        "name": "M.2 Slots",
+        "coords": [425, 734, 465, 818],
+        "summary": "High-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
+      },
+      {
+        "id": "pcie_x4_1",
+        "name": "PCIe x4",
+        "coords": [189, 634, 330, 661],
+        "summary": "PCIe x4 expansion slot for mid-bandwidth add-in cards or additional storage controllers."
+      },
+      {
+        "id": "pcie_x4_2",
+        "name": "PCIe x4",
+        "coords": [191, 774, 329, 804],
+        "summary": "PCIe x4 expansion slot for mid-bandwidth add-in cards or additional storage controllers."
+      },
+      {
+        "id": "m2_slot_rear",
+        "name": "M.2 Slot",
+        "coords": [803, 545, 846, 629],
+        "summary": "Rear-mounted high-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
+      },
+      {
+        "id": "io_ports",
+        "name": "I/O Ports",
+        "coords": [25, 19, 133, 551],
+        "summary": "Rear I/O panel with USB ports, audio jacks, Ethernet, and other external connectivity options."
       }
     ]
   }

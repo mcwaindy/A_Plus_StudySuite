@@ -1,0 +1,99 @@
+# ✅ Flashcards Word Wrap Fixed!
+
+## The Issue
+Text was wrapping by **character** instead of by **word**, causing words to be split awkwardly across lines.
+
+**Before:**
+```
+❌ Small Outline Dual In-line Mem
+ory Module. A compact memory f
+orm factor used in laptops, ro
+ughly half the physical length.
+```
+
+**After:**
+```
+✅ Small Outline Dual In-line
+Memory Module. A compact memory
+form factor used in laptops,
+roughly half the physical length.
+```
+
+---
+
+## The Fix
+
+### Changed From
+- CTkTextbox widget (character wrapping)
+
+### Changed To
+- CTkLabel widget with `wraplength` parameter (word wrapping)
+
+### Key Improvements
+✅ **Word wrapping** — Text breaks at word boundaries  
+✅ **Dynamic width** — Adjusts to window size automatically  
+✅ **Cleaner code** — Simpler and more maintainable  
+✅ **Better appearance** — Professional text flow  
+
+---
+
+## How It Works
+
+```python
+# Label with word wrapping enabled
+self.text_card = ctk.CTkLabel(
+	text_wrapper_frame,
+	text="",
+	font=ctk.CTkFont(size=18, weight="bold"),
+	wraplength=500,   # ← Enables word wrapping
+	justify="left",   # ← Left-aligned
+)
+
+# Dynamic adjustment based on available width
+def _adjust_wrap_length(self):
+	width = self.text_wrapper_frame.winfo_width()
+	if width > 100:
+		wrap_length = max(width - 60, 200)
+		self.text_card.configure(wraplength=wrap_length)
+```
+
+---
+
+## Responsive Behavior
+
+### Narrow Window
+```
+Words wrap at natural
+breaks to fit the
+available space.
+```
+
+### Wide Window
+```
+More words fit per line with proper spacing and word breaks.
+```
+
+---
+
+## Testing Status
+
+✅ **Syntax:** Validated  
+✅ **Imports:** Successful  
+✅ **Ready:** For GUI testing  
+
+Launch the application and test the flashcards to see proper word wrapping in action!
+
+---
+
+## Files Modified
+
+- `modules/flashcards_view.py`
+  - Changed card widget from textbox to label
+  - Updated `update_card_display()` method
+  - Added `_adjust_wrap_length()` for dynamic sizing
+
+---
+
+**Status:** ✅ Complete and Ready  
+**Next Step:** Test in the application GUI
+
