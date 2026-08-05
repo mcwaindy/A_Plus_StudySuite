@@ -212,11 +212,18 @@ class GameView(ctk.CTkFrame):
         """Combines motherboard nodes and standalone hardware images into a shuffled game deck."""
         self.round_deck = []
 
-        # 1. Add Motherboard Components
+        # 1. Add Motherboard Components (from ALL available boards, excluding IO boards)
         if self.selected_category in (self.MIXED_CATEGORY, self.BOARD_CATEGORY):
-            mb_info = self.all_boards_data.get("modern_atx", {})
-            for comp in mb_info.get("components", []):
-                self.round_deck.append({"type": "motherboard", "data": comp})
+            # Iterate through all available boards, skip IO cluster boards (rendering issues)
+            for board_id, mb_info in self.all_boards_data.items():
+                # Skip IO boards (they render too large)
+                if "_io" in board_id.lower():
+                    continue
+                for comp in mb_info.get("components", []):
+                    # Include board_id in the data so we know which board to render
+                    comp_data = comp.copy()
+                    comp_data["board_id"] = board_id
+                    self.round_deck.append({"type": "motherboard", "data": comp_data})
 
         # 2. Add Standalone Image Items (Cables, Printers, etc.)
         if self.selected_category != self.BOARD_CATEGORY:
@@ -256,14 +263,17 @@ class GameView(ctk.CTkFrame):
             text=f"🎯 CLICK ON THE BOARD: {comp_data.get('name', 'Unknown')}"
         )
 
-        board_info = self.all_boards_data.get("modern_atx", {})
+        # Get the board_id from component data (added during build_round_deck)
+        board_id = comp_data.get("board_id", "modern_atx")
+        board_info = self.all_boards_data.get(board_id, {})
         canvas_widget = DiagramCanvasWidget(
             self.viewport_frame,
             on_component_selected=self.on_board_click_answer,
         )
         canvas_widget.pack(fill="both", expand=True)
         canvas_widget.debug_mode = False
-        canvas_widget.load_board(board_info, zoom_level=1.0)
+        # Game view should show boards at full size (no display_scale)
+        canvas_widget.load_board(board_info, zoom_level=1.0, apply_display_scale=False)
 
     # --- RENDERER 2: STANDALONE HARDWARE IMAGE ROUND --- #
     def render_standalone_image_round(self, item_data):

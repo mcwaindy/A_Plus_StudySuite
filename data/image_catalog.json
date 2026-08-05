@@ -1,88 +1,1779 @@
 {
   "_readme": "Shared image catalog for both the Notes viewer and the Hardware Identification game. 'file' is relative to assets/images/<category>/ -- never write a full path. Set 'quiz' to null for reference diagrams that should be readable in notes but never appear as a guessing-game prompt. See assets/notes/_TEMPLATE.md for how notes reference these images.",
-
   "categories": [
-    { "key": "cables",      "label": "Cables & Connectors" },
-    { "key": "motherboard", "label": "Motherboards & Boards" },
-    { "key": "cpu",         "label": "CPUs & Sockets" },
-    { "key": "memory",      "label": "RAM & Memory" },
-    { "key": "storage",     "label": "Storage Devices" },
-    { "key": "expansion",   "label": "Expansion Cards" },
-    { "key": "power",       "label": "Power Supplies" },
-    { "key": "cooling",     "label": "Cooling" },
-    { "key": "printers",    "label": "Printer Components" },
-    { "key": "networking",  "label": "Network Devices" },
-    { "key": "tools",       "label": "Tools & Test Equipment" },
-    { "key": "mobile",      "label": "Mobile & Laptop Parts" },
-    { "key": "display",     "label": "Displays & Video" }
+    {
+      "key": "cables",
+      "label": "Cables & Connectors"
+    },
+    {
+      "key": "motherboard",
+      "label": "Motherboards & Boards"
+    },
+    {
+      "key": "cpu",
+      "label": "CPUs & Sockets"
+    },
+    {
+      "key": "memory",
+      "label": "RAM & Memory"
+    },
+    {
+      "key": "storage",
+      "label": "Storage Devices"
+    },
+    {
+      "key": "expansion",
+      "label": "Expansion Cards"
+    },
+    {
+      "key": "power",
+      "label": "Power Supplies"
+    },
+    {
+      "key": "cooling",
+      "label": "Cooling"
+    },
+    {
+      "key": "printers",
+      "label": "Printer Components"
+    },
+    {
+      "key": "networking",
+      "label": "Network Devices"
+    },
+    {
+      "key": "tools",
+      "label": "Tools & Test Equipment"
+    },
+    {
+      "key": "mobile",
+      "label": "Mobile & Laptop Parts"
+    },
+    {
+      "key": "display",
+      "label": "Displays & Video"
+    }
   ],
-
   "images": [
     {
-      "id": "connector_rj45",
+      "id": "cable_atx_24pin",
       "category": "cables",
-      "file": "RJ45.jpg",
-      "name": "RJ-45 Modular Connector",
-      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
+      "file": "atx_24_pin_power_cable.png",
+      "name": "ATX 24-Pin Power Cable",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
       "quiz": {
         "options": [
-          "RJ-11 Connector",
-          "RJ-45 Connector",
-          "F-Type Connector",
-          "LC Fiber Connector"
+          "12-pin EPS connector for legacy systems",
+          "24-pin ATX main power supply connector",
+          "8-pin PCIe GPU power connector",
+          "4-pin Molex legacy power connector"
         ],
         "correct_index": 1,
-        "explanation": "RJ-45 is an 8-position, 8-contact (8P8C) modular connector used for Ethernet. RJ-11 is the narrower 6-position connector used for telephone lines."
+        "explanation": "The 24-pin ATX connector (also called 20+4) is the primary power connector for modern motherboards, providing +12V, +5V, +3.3V, and ground to the system."
       }
     },
     {
-      "id": "diagram_utp_stp",
+      "id": "cable_coaxial_rg6",
       "category": "cables",
-      "file": "UTP_STP.png",
-      "name": "UTP vs STP Cross-Section",
-      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
-      "quiz": null
-    },
-    {
-      "id": "diagram_rj_comparison",
-      "category": "cables",
-      "file": "rj_comparisons.png",
-      "name": "RJ-45 vs RJ-11 Comparison",
-      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
-      "quiz": null
-    },
-    {
-      "id": "cable_cat6a",
-      "category": "cables",
-      "file": "cat6a_cable.png",
-      "name": "Cat 6a Ethernet Cable",
-      "objectives": ["Core 1 - 2.5 Network Cables & Connectors"],
+      "file": "coaxial_rg6_cable.png",
+      "name": "Coaxial RG-6 Cable",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
       "quiz": {
         "options": [
-          "Cat 5e Cable",
-          "Cat 6a Cable",
-          "RG-6 Coaxial",
-          "Single-Mode Fiber"
+          "RG-59 75Ω coax",
+          "RG-6 cable TV",
+          "Cat 6 Ethernet",
+          "RG-213 military RF"
         ],
         "correct_index": 1,
-        "explanation": "Cat 6a features thicker shielding and tighter twists to support 10 Gbps speeds up to 100 meters."
+        "explanation": "RG-6 is commonly used for cable television, satellite, and broadband internet. It has better shielding than RG-59 and lower attenuation over longer distances."
+      }
+    },
+    {
+      "id": "cable_displayport",
+      "category": "cables",
+      "file": "displayport_cable.png",
+      "name": "DisplayPort Cable",
+      "objectives": [
+        "Core 1 - 2.1 Display Cables"
+      ],
+      "quiz": {
+        "options": [
+          "Thunderbolt 3 (USB-C with video)",
+          "DisplayPort (digital video)",
+          "Mini-HDMI adapter",
+          "USB-C Alt Mode video"
+        ],
+        "correct_index": 1,
+        "explanation": "DisplayPort supports higher resolutions and refresh rates than HDMI, with bandwidth up to 32.4 Gbps. It uses a distinctive latch connector."
+      }
+    },
+    {
+      "id": "cable_dvi_d",
+      "category": "cables",
+      "file": "dvi_d_cable.png",
+      "name": "DVI-D Cable",
+      "objectives": [
+        "Core 1 - 2.1 Display Cables"
+      ],
+      "quiz": {
+        "options": [
+          "DVI-A analog",
+          "DVI-D dual-link digital video connector",
+          "DVI-I integrated",
+          "D-Sub DB-15 VGA analog video standard"
+        ],
+        "correct_index": 1,
+        "explanation": "DVI-D carries digital-only video signals. The dual-link variant can support higher resolutions. DVI-I combines both analog and digital on one connector."
+      }
+    },
+    {
+      "id": "cable_eps_8pin_cpu",
+      "category": "cables",
+      "file": "eps_8_pin_cpu_power_cable.png",
+      "name": "EPS 8-Pin CPU Power Cable",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "12V CPU power (150W)",
+          "PCIe 8-pin GPU power",
+          "Molex legacy",
+          "SATA power (multi)"
+        ],
+        "correct_index": 0,
+        "explanation": "The 8-pin EPS connector (or 4+4 pin) provides +12V power exclusively to the CPU, ensuring stable overclocking headroom. It can supply up to 150W."
+      }
+    },
+    {
+      "id": "cable_fiber_optic_lc_sc",
+      "category": "cables",
+      "file": "firber_optic_patch_lc_to_sc_cable.png",
+      "name": "Fiber Optic LC-to-SC Patch Cable",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Multi-mode fiber LC-to-SC patch",
+          "Single-mode fiber long-distance",
+          "Duplex LC bidirectional",
+          "SC APC angled connector"
+        ],
+        "correct_index": 1,
+        "explanation": "This patch cable uses multi-mode fiber (OM3/OM4) with LC (small form factor) on one end and SC (snap/slide) on the other for data center interconnects."
+      }
+    },
+    {
+      "id": "cable_hdmi",
+      "category": "cables",
+      "file": "hdmi_cable.png",
+      "name": "HDMI Cable",
+      "objectives": [
+        "Core 1 - 2.1 Display Cables"
+      ],
+      "quiz": {
+        "options": [
+          "HDMI 1.4 (4K@30Hz, 10.2 Gbps)",
+          "HDMI 2.1 (8K@60Hz, 48 Gbps)",
+          "Mini-HDMI compact",
+          "MHL mobile alternative"
+        ],
+        "correct_index": 1,
+        "explanation": "HDMI 2.1 is the newest standard with significantly higher bandwidth, supporting 8K resolution and 120 Hz refresh rates with enhanced color depth."
+      }
+    },
+    {
+      "id": "cable_molex_power",
+      "category": "cables",
+      "file": "molex_power_cable.png",
+      "name": "Molex Power Cable",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "Legacy Molex 4-pin connector",
+          "Modern SATA power connector",
+          "Laptop docking proprietary",
+          "Industrial Amphenol connector"
+        ],
+        "correct_index": 0,
+        "explanation": "The Molex connector is a classic 4-pin power connector used in older systems. It provides +12V and +5V to legacy devices. Many newer adapters convert to SATA."
+      }
+    },
+    {
+      "id": "cable_pcie_gpu_power",
+      "category": "cables",
+      "file": "pcie_gpu_power_cable.png",
+      "name": "PCIe GPU Power Cable (6+2 Pin)",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "PCIe 6-pin (75W older GPUs)",
+          "Dual PCIe 8-pin (high-end)",
+          "6+2 pin PCIe (adaptable)",
+          "Proprietary NVIDIA GPU power"
+        ],
+        "correct_index": 2,
+        "explanation": "The 6+2 pin PCIe connector can be configured as either 6-pin (75W) or 8-pin (150W) depending on modular cable routing. High-end cards may need dual 8-pin connections."
+      }
+    },
+    {
+      "id": "cable_rj11_phone",
+      "category": "cables",
+      "file": "rj_11_phone_cable.png",
+      "name": "RJ-11 Phone Cable",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "RJ-11 (6-position, phone)",
+          "RJ-45 (8-position, Ethernet)",
+          "RJ-14 (4-position, dual-line)",
+          "RJ-12 (6-position, high-power)"
+        ],
+        "correct_index": 0,
+        "explanation": "RJ-11 is the standard 6-position modular connector for analog telephone lines. It's physically similar to but smaller than RJ-45, with only 2-4 active contacts."
+      }
+    },
+    {
+      "id": "cable_rj45_ethernet",
+      "category": "cables",
+      "file": "rj_45_cable.png",
+      "name": "RJ-45 Ethernet Cable",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Cat 5 (100 Mbps)",
+          "Cat 6 (10 Gbps, better shielding)",
+          "Cat 7 (shielded, industrial)",
+          "Cat 8 (40 Gbps backbone)"
+        ],
+        "correct_index": 1,
+        "explanation": "Standard RJ-45 cables are typically Cat 5e or Cat 6. Cat 6 supports gigabit speeds reliably up to 100 meters with better shielding than Cat 5e."
+      }
+    },
+    {
+      "id": "cable_sata_data",
+      "category": "cables",
+      "file": "sata_data_cable.png",
+      "name": "SATA Data Cable",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "IDE/PATA 40-pin cable",
+          "SATA 1.0 (3 Gbps, legacy)",
+          "SATA 3.0 (6 Gbps, modern)",
+          "SAS connector (dual protocol)"
+        ],
+        "correct_index": 2,
+        "explanation": "SATA 3.0 (6 Gbps) is the current standard for connecting SSDs and mechanical drives. It replaced IDE/PATA with hot-swappable L-shaped connectors."
+      }
+    },
+    {
+      "id": "cable_usb_a",
+      "category": "cables",
+      "file": "usb_a_cable.png",
+      "name": "USB Type-A Cable",
+      "objectives": [
+        "Core 1 - 2.2 USB Specifications"
+      ],
+      "quiz": {
+        "options": [
+          "USB 2.0 (480 Mbps)",
+          "USB 3.0 (5 Gbps, blue connectors)",
+          "USB 3.1 Gen 2 Type-C",
+          "USB 3.2 (20 Gbps dual-lane)"
+        ],
+        "correct_index": 1,
+        "explanation": "USB 3.0 (SuperSpeed) uses Type-A connectors with distinctive blue inserts internally. It's 5 Gbps, 10x faster than USB 2.0, and backward compatible."
+      }
+    },
+    {
+      "id": "cable_usb_micro",
+      "category": "cables",
+      "file": "usb_a_to_micro_usb_cable.png",
+      "name": "USB Type-A to Micro-USB Cable",
+      "objectives": [
+        "Core 1 - 2.2 USB Specifications"
+      ],
+      "quiz": {
+        "options": [
+          "Micro-USB mobile charging",
+          "Mini-USB legacy mobile",
+          "USB-A to USB-C",
+          "Proprietary Lightning (Apple)"
+        ],
+        "correct_index": 0,
+        "explanation": "Micro-USB is a 5-pin connector standard on Android phones and many IoT devices. Type-A to Micro-USB cables are universal charging bridges."
+      }
+    },
+    {
+      "id": "cable_usb_b",
+      "category": "cables",
+      "file": "usb_a_to_usb_b_cable.png",
+      "name": "USB Type-A to Type-B Cable",
+      "objectives": [
+        "Core 1 - 2.2 USB Specifications"
+      ],
+      "quiz": {
+        "options": [
+          "Type-A to Type-B",
+          "Type-A to Mini-B",
+          "Type-A to Micro-B",
+          "Type-A proprietary dock"
+        ],
+        "correct_index": 0,
+        "explanation": "USB Type-B (square connector) is commonly used on printers, scanners, and older external drives. Type-A is the standard rectangular host connector."
+      }
+    },
+    {
+      "id": "cable_usb_c",
+      "category": "cables",
+      "file": "usb_c_cable.png",
+      "name": "USB Type-C Cable",
+      "objectives": [
+        "Core 1 - 2.2 USB Specifications"
+      ],
+      "quiz": {
+        "options": [
+          "USB 2.0 reversible (480 Mbps)",
+          "USB 3.1 (10 Gbps reversible)",
+          "Thunderbolt 3 (40 Gbps)",
+          "USB 4 (40 Gbps dual-lane)"
+        ],
+        "correct_index": 2,
+        "explanation": "USB-C is a 24-pin reversible connector supporting USB 3.1 (10 Gbps), Thunderbolt 3 (40 Gbps), and power delivery up to 240W depending on implementation."
+      }
+    },
+    {
+      "id": "cable_vga",
+      "category": "cables",
+      "file": "vga_cable.png",
+      "name": "VGA Cable (D-Sub 15-Pin)",
+      "objectives": [
+        "Core 1 - 2.1 Display Cables"
+      ],
+      "quiz": {
+        "options": [
+          "D-Sub 15-pin VGA",
+          "D-Sub 15-pin AUI",
+          "D-Sub 25-pin parallel",
+          "DIN 5-pin connector"
+        ],
+        "correct_index": 0,
+        "explanation": "VGA (Video Graphics Array) is a 15-pin D-Sub analog connector carrying red, green, blue, horizontal/vertical sync, and ground. It's largely obsolete but still found in some environments."
+      }
+    },
+    {
+      "id": "cooling_aio_cpu",
+      "category": "cooling",
+      "file": "aio_cpu_cooler.png",
+      "name": "All-in-One (AIO) CPU Cooler",
+      "objectives": [
+        "Core 1 - 3.5 Cooling and Thermal Management"
+      ],
+      "quiz": {
+        "options": [
+          "Passive heatsink (air cooled)",
+          "All-in-One (AIO) liquid cooler",
+          "Peltier thermoelectric cooling",
+          "Vapor chamber passive"
+        ],
+        "correct_index": 1,
+        "explanation": "AIO coolers use a sealed liquid loop with a pump block, radiator, and fans. They offer superior cooling compared to air coolers and are popular for gaming/overclocking."
+      }
+    },
+    {
+      "id": "cooling_fan_splitter",
+      "category": "cooling",
+      "file": "fan_splitter_pwm_cable.png",
+      "name": "PWM Fan Splitter Cable",
+      "objectives": [
+        "Core 1 - 3.5 Cooling and Thermal Management"
+      ],
+      "quiz": {
+        "options": [
+          "Single fan header multiplied",
+          "Temperature sensor for control",
+          "PWM to DC voltage converter",
+          "ARGB RGB light controller"
+        ],
+        "correct_index": 0,
+        "explanation": "A PWM splitter allows connecting multiple 4-pin PWM fans to a single motherboard header. The motherboard controls all fans together with common PWM signal."
+      }
+    },
+    {
+      "id": "cooling_m2_heatsink",
+      "category": "cooling",
+      "file": "m2_ssd_heatsink.png",
+      "name": "M.2 SSD Heatsink",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "Passive aluminum fins bonded",
+          "Active cooling fan attachment",
+          "Thermal pad replacement",
+          "Liquid nitrogen cooled pod"
+        ],
+        "correct_index": 0,
+        "explanation": "M.2 heatsinks are passive aluminum spreaders that dissipate NVMe heat through conduction. They prevent thermal throttling during sustained I/O load."
+      }
+    },
+    {
+      "id": "cooling_tower_cpu",
+      "category": "cooling",
+      "file": "tower_cpu_cooler.png",
+      "name": "Tower CPU Air Cooler",
+      "objectives": [
+        "Core 1 - 3.5 Cooling and Thermal Management"
+      ],
+      "quiz": {
+        "options": [
+          "Large vertical heatsink with fans",
+          "Compact low-profile cooler",
+          "Dual-tower dual-fan extreme",
+          "Copper contact block direct-die"
+        ],
+        "correct_index": 0,
+        "explanation": "Tower coolers are tall air-cooled heatsinks with aluminum fins and copper heatpipes. They offer excellent cooling performance comparable to AIO at lower cost and noise."
+      }
+    },
+    {
+      "id": "cooling_vrm_heatsink",
+      "category": "cooling",
+      "file": "vrm_heatsink.png",
+      "name": "VRM Heatsink",
+      "objectives": [
+        "Core 1 - 3.5 Cooling and Thermal Management"
+      ],
+      "quiz": {
+        "options": [
+          "Integrated MOSFETs and chokes",
+          "Passive aluminum heatsink",
+          "Active cooling fan for chipset",
+          "Ferrite core filter for audio"
+        ],
+        "correct_index": 1,
+        "explanation": "VRM (Voltage Regulator Module) heatsinks dissipate heat from MOSFETs and inductors. Better heatsinks improve stability and longevity during overclocking."
+      }
+    },
+    {
+      "id": "cpu_die_delidded",
+      "category": "cpu",
+      "file": "cpu_die_delidded.png",
+      "name": "Delidded CPU Die",
+      "objectives": [
+        "Core 1 - 3.1 CPU Identification and Installation"
+      ],
+      "quiz": {
+        "options": [
+          "Exposed silicon die (IHS removed)",
+          "3D V-Cache stacked chiplet",
+          "Silicon carbide substrate",
+          "Quantum computing qubit array"
+        ],
+        "correct_index": 0,
+        "explanation": "Delidding exposes the bare silicon die by removing the IHS (Integrated Heat Spreader). Enthusiasts delid for better cooling contact, but voids warranty and risks damage."
+      }
+    },
+    {
+      "id": "cpu_ihs",
+      "category": "cpu",
+      "file": "cpu_integrated_heat_spreader.png",
+      "name": "CPU Integrated Heat Spreader (IHS)",
+      "objectives": [
+        "Core 1 - 3.1 CPU Identification and Installation"
+      ],
+      "quiz": {
+        "options": [
+          "Copper/nickel cap soldered",
+          "Lapped aluminum plate",
+          "TIM pre-applied substrate",
+          "Thermal paste guide and gauge"
+        ],
+        "correct_index": 0,
+        "explanation": "The IHS is the metal cap (usually copper/nickel) soldered to the CPU die. It protects the silicon and provides a surface for cooler contact and thermal transfer."
+      }
+    },
+    {
+      "id": "cpu_lga_1700",
+      "category": "cpu",
+      "file": "lga_1700_cpu_socket.png",
+      "name": "LGA 1700 CPU Socket",
+      "objectives": [
+        "Core 1 - 3.1 CPU Identification and Installation"
+      ],
+      "quiz": {
+        "options": [
+          "Intel LGA socket (pins on MB)",
+          "AMD PGA socket (pins on CPU)",
+          "Legacy slot-based connector",
+          "Mobile soldered BGA"
+        ],
+        "correct_index": 0,
+        "explanation": "LGA 1700 (Land Grid Array with 1700 pins) is Intel's socket for 12th and 13th gen Core processors (Alder Lake, Raptor Lake). Pins are on the motherboard, not CPU."
+      }
+    },
+    {
+      "id": "cpu_lga_generic",
+      "category": "cpu",
+      "file": "lga_cpu.png",
+      "name": "Land Grid Array (LGA) CPU",
+      "objectives": [
+        "Core 1 - 3.1 CPU Identification and Installation"
+      ],
+      "quiz": {
+        "options": [
+          "Grid of contact pads (LGA)",
+          "Pin-based insertion (PGA)",
+          "Cartridge form edge connector",
+          "BGA solder balls"
+        ],
+        "correct_index": 0,
+        "explanation": "LGA processors have flat contact pads on the bottom. The motherboard socket has pins that make contact. LGA is more fragile than PGA but allows denser packaging."
+      }
+    },
+    {
+      "id": "cpu_pga",
+      "category": "cpu",
+      "file": "pga_cpu.png",
+      "name": "Pin Grid Array (PGA) CPU",
+      "objectives": [
+        "Core 1 - 3.1 CPU Identification and Installation"
+      ],
+      "quiz": {
+        "options": [
+          "Grid of pins extending (PGA)",
+          "Flat contact pad array (LGA)",
+          "Soldered directly via BGA",
+          "Slot-based cartridge connector"
+        ],
+        "correct_index": 0,
+        "explanation": "PGA (Pin Grid Array) processors have pins on the bottom that insert into socket holes. Used by AMD (AM4/AM5) and older Intel. More robust than LGA during installation."
+      }
+    },
+    {
+      "id": "mem_ddr3_dimm",
+      "category": "memory",
+      "file": "ddr3_dimm_module.png",
+      "name": "DDR3 DIMM Module",
+      "objectives": [
+        "Core 1 - 3.4 Memory Installation and Configuration"
+      ],
+      "quiz": {
+        "options": [
+          "DDR2 (400-667 MHz, 240-pin)",
+          "DDR3 (1600 MHz, 240-pin)",
+          "DDR5 (4800+ MHz with UDIMM)",
+          "NVDIMM hybrid RAM with NAND"
+        ],
+        "correct_index": 1,
+        "explanation": "DDR3 uses a 240-pin DIMM form factor with 1.5V operating voltage. Common speeds range 1333-1866 MHz. Succeeded DDR2 and preceded DDR4."
+      }
+    },
+    {
+      "id": "mem_ddr4_dimm",
+      "category": "memory",
+      "file": "ddr4_dimm_module.png",
+      "name": "DDR4 DIMM Module",
+      "objectives": [
+        "Core 1 - 3.4 Memory Installation and Configuration"
+      ],
+      "quiz": {
+        "options": [
+          "DDR3 lower latency overclocking",
+          "DDR4 (288-pin, 1.2V voltage)",
+          "GDDR6 graphics cards only",
+          "HBM high bandwidth memory"
+        ],
+        "correct_index": 1,
+        "explanation": "DDR4 runs at 2133-4000+ MHz with a 288-pin DIMM. It has lower voltage (1.2V vs 1.5V for DDR3), but higher latency. Standard for desktop/server 2013-2021."
+      }
+    },
+    {
+      "id": "mem_ddr5_dimm",
+      "category": "memory",
+      "file": "ddr5_dimm_module.png",
+      "name": "DDR5 DIMM Module",
+      "objectives": [
+        "Core 1 - 3.4 Memory Installation and Configuration"
+      ],
+      "quiz": {
+        "options": [
+          "DDR4 successor (half-speed)",
+          "DDR5 (4800+ MHz, 288-pin)",
+          "GDDR6X GPU memory",
+          "HBM stacked memory"
+        ],
+        "correct_index": 1,
+        "explanation": "DDR5 operates at 4800+ MHz with 288 pins (same physical size as DDR4 but incompatible). Key feature: each DIMM has its own Power Delivery Module (PDM)."
+      }
+    },
+    {
+      "id": "mem_so_dimm",
+      "category": "memory",
+      "file": "so_dimm_module.png",
+      "name": "SO-DIMM Module (Laptop RAM)",
+      "objectives": [
+        "Core 1 - 3.4 Memory Installation and Configuration"
+      ],
+      "quiz": {
+        "options": [
+          "Full-size 288-pin DIMM desktop",
+          "Small Outline (204/260-pin)",
+          "Micro-DIMM ultrabook (half-size)",
+          "Mini-ITIMM proprietary laptop"
+        ],
+        "correct_index": 1,
+        "explanation": "SO-DIMM (Small Outline DIMM) is compact memory for laptops. DDR3 SO-DIMM has 204 pins, while DDR4/DDR5 have 260 pins. Same speed grades as desktop equivalents."
+      }
+    },
+    {
+      "id": "storage_25_sata_ssd",
+      "category": "storage",
+      "file": "2.5_inch_sata_ssd.png",
+      "name": "2.5\" SATA SSD",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "3.5-inch mechanical HDD with 7200 RPM",
+          "2.5-inch SATA SSD with 6 Gbps interface",
+          "M.2 NVMe PCIe",
+          "CompactFlash ATA"
+        ],
+        "correct_index": 1,
+        "explanation": "2.5\" SATA SSDs are common in laptops and budget builds. They connect via SATA (6 Gbps) and run much faster than mechanical drives but slower than NVMe."
+      }
+    },
+    {
+      "id": "storage_35_hdd",
+      "category": "storage",
+      "file": "3.5_inch_hdd.png",
+      "name": "3.5\" Mechanical HDD",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "HDD 7200 RPM",
+          "SSD flash memory",
+          "Laptop 5400 RPM drive with 16MB cache",
+          "SCSI-2 50-pin"
+        ],
+        "correct_index": 0,
+        "explanation": "Standard 3.5\" HDDs spin at 7200 RPM with 64MB cache. Despite slower random access than SSDs, they offer high capacity at lowest cost for bulk storage."
+      }
+    },
+    {
+      "id": "storage_compact_flash",
+      "category": "storage",
+      "file": "compactflash_card.png",
+      "name": "CompactFlash Memory Card",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "CompactFlash PCMCIA",
+          "SD card standard",
+          "USB stick with Type-A connector",
+          "microSD card for mobile and IoT devices"
+        ],
+        "correct_index": 0,
+        "explanation": "CompactFlash (CF) was popular in cameras and industrial equipment with ATA/IDE interface. Capacities reached 256GB. Now obsolete, replaced by SD family."
+      }
+    },
+    {
+      "id": "storage_external_usb_hdd",
+      "category": "storage",
+      "file": "external_usb_hdd.png",
+      "name": "External USB HDD",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "3.5\" HDD external",
+          "2.5\" SSD USB-C",
+          "NAS multi-drive",
+          "Tape backup"
+        ],
+        "correct_index": 0,
+        "explanation": "External HDDs pair a 3.5\" or 2.5\" drive with USB adapter for portable storage. They offer large capacity for backups. USB provides both data and power."
+      }
+    },
+    {
+      "id": "storage_m2_nvme",
+      "category": "storage",
+      "file": "m2_nvme_ssd.png",
+      "name": "M.2 NVMe SSD",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "M.2 2280 SATA",
+          "M.2 NVMe (PCIe)",
+          "mSATA mini form",
+          "DDR5 SO-DIMM RAM"
+        ],
+        "correct_index": 1,
+        "explanation": "M.2 NVMe SSDs use PCIe lanes directly, bypassing SATA bottleneck. PCIe 4.0 reaches ~7 GB/s, 10x faster than SATA. Standard form factors: 2242, 2260, 2280."
+      }
+    },
+    {
+      "id": "storage_m2_sata",
+      "category": "storage",
+      "file": "m2_sata_ssd.png",
+      "name": "M.2 SATA SSD",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "M.2 SATA (6 Gbps max)",
+          "NVMe full PCIe bandwidth",
+          "2.5\" SATA with adapter",
+          "Hybrid SSD/HDD drive"
+        ],
+        "correct_index": 0,
+        "explanation": "M.2 SATA SSDs use the compact M.2 physical form but limit throughput to SATA's 6 Gbps. These are slower than NVMe but cheaper than true NVMe drives."
+      }
+    },
+    {
+      "id": "storage_raid_array",
+      "category": "storage",
+      "file": "raid_array_unit.png",
+      "name": "RAID Array Unit",
+      "objectives": [
+        "Core 1 - 3.3 Storage Devices"
+      ],
+      "quiz": {
+        "options": [
+          "RAID array (0/1/5/6)",
+          "Single SSD with mirroring",
+          "Tape library archival",
+          "SAN Fibre Channel storage"
+        ],
+        "correct_index": 0,
+        "explanation": "RAID arrays combine multiple drives: RAID 0 (striping/speed), RAID 1 (mirroring/redundancy), RAID 5/6 (striped parity). Used in servers and NAS."
+      }
+    },
+    {
+      "id": "display_backlight_inverter",
+      "category": "display",
+      "file": "backlight_inverter_board.png",
+      "name": "Laptop Backlight Inverter Board",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "CCFL inverter (600V)",
+          "LED PWM brightness",
+          "LVDS signal repeater",
+          "Thermal sensor"
+        ],
+        "correct_index": 0,
+        "explanation": "The inverter converts DC to high-frequency AC (600-1000V) to power CCFL backlight lamps. Modern laptops use LED backlights with simpler drivers instead."
+      }
+    },
+    {
+      "id": "display_dvi_port",
+      "category": "display",
+      "file": "dvI_port.png",
+      "name": "DVI Display Port",
+      "objectives": [
+        "Core 1 - 2.1 Display Cables"
+      ],
+      "quiz": {
+        "options": [
+          "DVI-A analog output",
+          "DVI-D/I digital",
+          "DisplayPort Mini DP on compact displays",
+          "HDMI 2.1 (4K)"
+        ],
+        "correct_index": 1,
+        "explanation": "DVI ports on monitors and GPUs carry digital (DVI-D) or mixed (DVI-I) signals. DVI-D has 24 pins, DVI-I has 27 with integrated analog support."
+      }
+    },
+    {
+      "id": "display_lvds_cable",
+      "category": "display",
+      "file": "laptop_lvds_cable.png",
+      "name": "Laptop LVDS Display Cable",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Low-Voltage Differential Signaling",
+          "mDP Mini DisplayPort cable",
+          "MIPI CSI camera ribbon",
+          "USB-C Alt Mode video bridge"
+        ],
+        "correct_index": 0,
+        "explanation": "LVDS is a low-voltage differential standard for laptop displays. Modern laptops increasingly use eDP (embedded DisplayPort) or USB-C video instead."
+      }
+    },
+    {
+      "id": "display_lcd_monitor",
+      "category": "display",
+      "file": "lcd_monitor.png",
+      "name": "LCD Monitor",
+      "objectives": [
+        "Core 1 - 2.3 Display Devices"
+      ],
+      "quiz": {
+        "options": [
+          "CRT (electron beam, obsolete)",
+          "LCD (LED backlight + TFT)",
+          "Plasma (gas ionization)",
+          "E-ink (reflective e-reader)"
+        ],
+        "correct_index": 1,
+        "explanation": "LCD monitors use a TFT backlight (LED nowadays) behind liquid crystal cells. They replaced CRTs due to lower power, smaller size, and better image quality."
+      }
+    },
+    {
+      "id": "display_oled",
+      "category": "display",
+      "file": "oled.png",
+      "name": "OLED Display",
+      "objectives": [
+        "Core 1 - 2.3 Display Devices"
+      ],
+      "quiz": {
+        "options": [
+          "Self-emissive pixels (OLED)",
+          "Quantum dot QLED enhanced",
+          "Mini-LED local dimming",
+          "MicroLED array external"
+        ],
+        "correct_index": 0,
+        "explanation": "OLED pixels emit their own light, eliminating backlight. Benefits: perfect blacks, high contrast, thin profile. Drawbacks: burn-in risk, lower peak brightness than LCD."
+      }
+    },
+    {
+      "id": "display_touchscreen",
+      "category": "display",
+      "file": "touchscreen_digitizer.png",
+      "name": "Touchscreen Digitizer",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Resistive layer pressure-based",
+          "Capacitive touch sensing",
+          "Infrared LED edge sensors",
+          "Ultrasonic SAW technology"
+        ],
+        "correct_index": 1,
+        "explanation": "Almost all modern touchscreens use capacitive sensing. They detect the electrical properties of a conductive (finger) touch. Resistive screens required pressure."
+      }
+    },
+    {
+      "id": "display_vga_port",
+      "category": "display",
+      "file": "vga_port.png",
+      "name": "VGA Display Port",
+      "objectives": [
+        "Core 1 - 2.1 Display Cables"
+      ],
+      "quiz": {
+        "options": [
+          "D-Sub 15-pin analog VGA",
+          "DVI-D digital 24/29-pin",
+          "HDMI 2.0 (4K@60Hz)",
+          "Thunderbolt 3 Alt Mode"
+        ],
+        "correct_index": 0,
+        "explanation": "VGA (Video Graphics Array) is the classic 15-pin D-Sub analog port. Carries RGB + sync signals. Largely obsolete, replaced by DVI/HDMI/DisplayPort."
+      }
+    },
+    {
+      "id": "expansion_m2_adapter",
+      "category": "expansion",
+      "file": "m2_nvme_expansion_card.png",
+      "name": "M.2 NVMe Expansion Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "PCIe-to-M.2 NVMe adapter",
+          "USB 3.0 RAID controller",
+          "Laptop docking extension",
+          "SATA multiplier adapter"
+        ],
+        "correct_index": 0,
+        "explanation": "M.2 adapter cards add NVMe slots to systems with limited M.2 ports. They use PCIe x4 or x8 lanes and appear as additional NVMe devices."
+      }
+    },
+    {
+      "id": "expansion_capture_card",
+      "category": "expansion",
+      "file": "pcie_capture_card.png",
+      "name": "PCIe Capture Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "HDMI/SDI capture for streaming",
+          "7.1 surround sound card",
+          "Dual-band WiFi card",
+          "Fiber optic network adapter"
+        ],
+        "correct_index": 0,
+        "explanation": "Video capture cards digitize HDMI/SDI signals in real-time. Used for streaming, recording, and video production. Can support 4K depending on specs."
+      }
+    },
+    {
+      "id": "expansion_riser_card",
+      "category": "expansion",
+      "file": "pcie_riser_card.png",
+      "name": "PCIe Riser/Adapter Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "Passive PCIe extension/adapter",
+          "Dual-slot connectivity",
+          "Active PCIe repeater",
+          "Hot-swap backplane"
+        ],
+        "correct_index": 0,
+        "explanation": "PCIe risers and adapters help fit graphics cards or other expansion cards in space-constrained builds like small form factor or mining rigs."
+      }
+    },
+    {
+      "id": "expansion_sound_card",
+      "category": "expansion",
+      "file": "pcie_sound_card.png",
+      "name": "PCIe Sound Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "Dedicated high-fidelity DAC",
+          "Integrated HDA codec",
+          "USB DAC external solution",
+          "Built-in amplifier module"
+        ],
+        "correct_index": 0,
+        "explanation": "Sound cards provide superior audio with dedicated DAC and amplifiers. Mostly obsolete for consumer, but pro audio still uses dedicated interfaces."
+      }
+    },
+    {
+      "id": "expansion_wifi_card",
+      "category": "expansion",
+      "file": "pcie_wifi_card.png",
+      "name": "PCIe WiFi Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "Dual-band 802.11ac/WiFi 6E",
+          "Gigabit Ethernet NIC",
+          "Thunderbolt dock integrated",
+          "4G/5G cellular modem"
+        ],
+        "correct_index": 0,
+        "explanation": "WiFi cards add or upgrade wireless connectivity. Modern cards support WiFi 6 (802.11ax) with faster speeds. Some boards have built-in WiFi."
+      }
+    },
+    {
+      "id": "expansion_gpu_x16",
+      "category": "expansion",
+      "file": "pcie_x16_gpu.png",
+      "name": "PCIe x16 Graphics Card (GPU)",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "Discrete GPU (PCIe x16)",
+          "Integrated GPU on CPU",
+          "PCIe x4 limited GPU",
+          "CUDA-only compute card"
+        ],
+        "correct_index": 0,
+        "explanation": "Discrete GPUs slot into PCIe x16 with full bandwidth. Modern high-end cards need dual 8-pin power connectors. Support PCIe 3.0/4.0/5.0 standards."
+      }
+    },
+    {
+      "id": "expansion_network_card_x16",
+      "category": "expansion",
+      "file": "pcie_x16_network_card.png",
+      "name": "PCIe x16 Network Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "10+ Gigabit Ethernet card",
+          "Single port Gigabit NIC",
+          "WiFi USB adapter",
+          "Power over Ethernet injector"
+        ],
+        "correct_index": 0,
+        "explanation": "High-speed network cards (10 GbE, 25 GbE) use PCIe x16 for adequate bandwidth. Commonly found in servers and workstations, not consumer desktops."
+      }
+    },
+    {
+      "id": "expansion_pci_legacy",
+      "category": "expansion",
+      "file": "pci_card_legacy_network.png",
+      "name": "Legacy PCI Network Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "Legacy 32-bit PCI (1990s-2000s)",
+          "PCIe backward compatible",
+          "Industrial real-time board",
+          "Proprietary ISA 386 card"
+        ],
+        "correct_index": 0,
+        "explanation": "PCI (not PCIe) is a legacy 32-bit bus running 33 MHz max: 133 MB/s. It's functionally obsolete but some older machines still have PCI slots."
+      }
+    },
+    {
+      "id": "expansion_raid_controller",
+      "category": "expansion",
+      "file": "raid_controller_card.png",
+      "name": "RAID Controller Card",
+      "objectives": [
+        "Core 1 - 5.1 Expansion Cards"
+      ],
+      "quiz": {
+        "options": [
+          "Dedicated RAID processor",
+          "Onboard SATA multiplier",
+          "SAS HBA no RAID",
+          "Firmware update utility"
+        ],
+        "correct_index": 0,
+        "explanation": "RAID controllers have dedicated processors and cache RAM for RAID parity calculations. Improves performance vs. software RAID by offloading CPU."
+      }
+    },
+    {
+      "id": "mobile_battery",
+      "category": "mobile",
+      "file": "lithium_ion_battery.png",
+      "name": "Lithium-Ion Battery",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Li-ion (1000+ cycles)",
+          "NiMH rechargeable",
+          "Li-poly pouches",
+          "Solid-state ceramic"
+        ],
+        "correct_index": 0,
+        "explanation": "Lithium-ion batteries dominate mobile/laptop due to high energy density (150+ Wh/kg) and lack of memory effect. Degradation occurs over time/heat cycles."
+      }
+    },
+    {
+      "id": "mobile_microsd",
+      "category": "mobile",
+      "file": "micro_sd.png",
+      "name": "MicroSD Memory Card",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Micro-sized card (phones)",
+          "Full-size SD card",
+          "CompactFlash legacy",
+          "UHS-II dual-row"
+        ],
+        "correct_index": 0,
+        "explanation": "MicroSD (microSecure Digital) is tiny flash storage common in Android phones and IoT devices. Supports UHS speeds and capacities to 1TB."
+      }
+    },
+    {
+      "id": "mobile_sim_card",
+      "category": "mobile",
+      "file": "sim_card.png",
+      "name": "SIM Card",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Subscriber Identity Module chip",
+          "Secure Element NFC payment",
+          "eSIM embedded virtual",
+          "UICC universal chip"
+        ],
+        "correct_index": 0,
+        "explanation": "SIM cards authenticate to cellular networks. Modern phones switch to eSIM (embedded). SIM sizes: Full \u00e2\u2020\u2019 Mini \u00e2\u2020\u2019 Micro \u00e2\u2020\u2019 Nano (current standard)."
+      }
+    },
+    {
+      "id": "mobile_sim_tray",
+      "category": "mobile",
+      "file": "sim_card_tray.png",
+      "name": "SIM Card Tray/Slot",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Tray holding SIM and microSD",
+          "Soldered motherboard socket",
+          "Spring-loaded CD-ROM drive",
+          "Hybrid dual-SIM tray"
+        ],
+        "correct_index": 0,
+        "explanation": "The SIM tray slides out with an ejection tool, holding nano-SIM and optionally microSD. Improves serviceability vs. soldered modules."
+      }
+    },
+    {
+      "id": "mobile_motherboard",
+      "category": "mobile",
+      "file": "smartphone_motherboard.png",
+      "name": "Smartphone Motherboard",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "Integrated SoC (CPU/GPU/modem)",
+          "Modular discrete components",
+          "Separate CPU and GPU",
+          "FPGA reconfigurable"
+        ],
+        "correct_index": 0,
+        "explanation": "Modern smartphone SoCs integrate CPU, GPU, modem, memory controllers, and NPU on a single chip. Examples: Snapdragon, Apple A-series, Exynos."
+      }
+    },
+    {
+      "id": "network_access_point",
+      "category": "networking",
+      "file": "access_point.png",
+      "name": "WiFi Access Point",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "WiFi AP standalone",
+          "WiFi router (routing + AP)",
+          "Managed PoE switch",
+          "Bridge repeater"
+        ],
+        "correct_index": 0,
+        "explanation": "Access points provide WiFi coverage without routing. Used in enterprise settings behind a switch. Consumer routers combine AP, switch, and firewall."
+      }
+    },
+    {
+      "id": "network_fiber_sfp",
+      "category": "networking",
+      "file": "fiber_spf_module.png",
+      "name": "Fiber SFP Module",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Multi-mode Fiber SFP",
+          "SFP+ 10 Gigabit",
+          "QSFP 40 Gig module",
+          "Mini-SAS SFF-8088"
+        ],
+        "correct_index": 0,
+        "explanation": "SFP (1 Gig) transceivers plug into switch ports, converting electrical to optical. SFP+ (10G) and QSFP (40G/100G) are higher-bandwidth variants."
+      }
+    },
+    {
+      "id": "network_patch_panel",
+      "category": "networking",
+      "file": "patch_panel.png",
+      "name": "Patch Panel",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "RJ-45 port wall panel",
+          "Managed switching DHCP",
+          "Repeater hub (obsolete)",
+          "PoE power injector"
+        ],
+        "correct_index": 0,
+        "explanation": "Patch panels terminate wall runs and connect to switches via short patch cables. Enables organized, rearrangeable network cabling in data centers."
+      }
+    },
+    {
+      "id": "network_poe_injector",
+      "category": "networking",
+      "file": "poe_injector.png",
+      "name": "PoE Injector",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Power + Ethernet data",
+          "Gigabit switch only",
+          "Surge protector with RJ-45",
+          "Signal reflection terminator"
+        ],
+        "correct_index": 0,
+        "explanation": "Power over Ethernet (PoE) injectors combine data and power on one cable per 802.3at/bt standards. Eliminates separate power runs to cameras/APs."
+      }
+    },
+    {
+      "id": "network_rj45_keystone",
+      "category": "networking",
+      "file": "rj45_keystone_jack.png",
+      "name": "RJ-45 Keystone Jack",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Modular RJ-45 insert",
+          "Punched-down terminal",
+          "Quick-connect snap-on",
+          "Fiber optic ferrule"
+        ],
+        "correct_index": 0,
+        "explanation": "Keystone jacks insert into wall plates and patch panels. Cat6/Cat6a keystones support different wiring standards (T568A/T568B)."
+      }
+    },
+    {
+      "id": "network_router",
+      "category": "networking",
+      "file": "router.png",
+      "name": "WiFi Router",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Router (routing + AP + switch)",
+          "Layer 2 switch forwarding",
+          "Backbone gateway only",
+          "Wireless-only AP"
+        ],
+        "correct_index": 0,
+        "explanation": "Home WiFi routers integrate NAT routing, DHCP, firewall, wireless AP, and Ethernet switch. Enterprise deployments separate these functions."
+      }
+    },
+    {
+      "id": "network_switch",
+      "category": "networking",
+      "file": "switch.png",
+      "name": "Ethernet Switch",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Layer 2 MAC forwarding",
+          "Hub retransmitting all (obsolete)",
+          "Bridge limited ports",
+          "Router Layer 3 IP forwarding"
+        ],
+        "correct_index": 0,
+        "explanation": "Switches are Layer 2 devices learning MAC addresses and forwarding frames efficiently. Managed switches offer VLAN, PoE, and monitoring. Unmanaged are plug-and-play."
+      }
+    },
+    {
+      "id": "power_24pin_connector",
+      "category": "power",
+      "file": "24pin_psu_connector.jpg",
+      "name": "24-Pin ATX Power Connector",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "24-pin (20+4) ATX connector",
+          "PCIe 8-pin GPU proprietary",
+          "EPS 4-pin legacy CPU",
+          "Mini-ITX 20-pin"
+        ],
+        "correct_index": 0,
+        "explanation": "The 24-pin ATX connector delivers +12V, +5V, +3.3V to the motherboard. Modular PSUs often split it 20+4 for adaptability to both old and new boards."
+      }
+    },
+    {
+      "id": "power_atx_psu",
+      "category": "power",
+      "file": "atx_psu.png",
+      "name": "ATX Power Supply",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "ATX PSU (150-1200W)",
+          "Laptop DC brick",
+          "Industrial UPS",
+          "Server redundant PSU"
+        ],
+        "correct_index": 0,
+        "explanation": "Typical ATX desktop PSUs range 450-850W with 80+ certification (Bronze/Gold/Platinum). They convert AC mains to 12V, 5V, 3.3V rails."
+      }
+    },
+    {
+      "id": "power_laptop_adapter",
+      "category": "power",
+      "file": "laptop_ac_adapter.png",
+      "name": "Laptop AC Adapter",
+      "objectives": [
+        "Core 1 - Mobile Device Components"
+      ],
+      "quiz": {
+        "options": [
+          "DC power brick (19-20V)",
+          "USB-C Power Delivery",
+          "Barrel connector fixed",
+          "Wireless inductive charging"
+        ],
+        "correct_index": 0,
+        "explanation": "Laptop adapters output DC (typically 19-20V). Modern laptops increasingly use USB-C PD (up to 240W), replacing proprietary connectors."
+      }
+    },
+    {
+      "id": "power_molex_connector",
+      "category": "power",
+      "file": "molex_connector.png",
+      "name": "Molex Power Connector",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "Legacy Molex 4-pin",
+          "Mini-Molex 4-pin floppy",
+          "Dell proprietary barrel",
+          "PowerPC 4-pin industrial"
+        ],
+        "correct_index": 0,
+        "explanation": "Molex 4-pin delivers +12V (two pins) and +5V (two pins). Once common for HDDs and peripherals. Now mostly obsolete, replaced by SATA."
+      }
+    },
+    {
+      "id": "power_inverter",
+      "category": "power",
+      "file": "power_inverter.png",
+      "name": "Power Inverter",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "DC-to-AC converter",
+          "AC voltage step-up",
+          "Switching buck converter",
+          "PWM LED dimmer"
+        ],
+        "correct_index": 0,
+        "explanation": "Car inverters convert DC battery to AC for running laptops/tools in vehicles. Home/grid inverters do the reverse (solar DC to AC grid)."
+      }
+    },
+    {
+      "id": "power_sata_connector",
+      "category": "power",
+      "file": "sata_power_connector.png",
+      "name": "SATA Power Connector",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "SATA power 15-pin L-shaped",
+          "7-pin SATA data connector",
+          "Molex 4-pin legacy",
+          "Mini-Molex floppy"
+        ],
+        "correct_index": 0,
+        "explanation": "SATA power is 15-pin with three +12V rails, three +5V rails, and three GND pins. It replaced Molex for modern SSDs and mechanical drives."
+      }
+    },
+    {
+      "id": "power_ups_backup",
+      "category": "power",
+      "file": "ups_backup.png",
+      "name": "UPS Battery Backup",
+      "objectives": [
+        "Core 1 - 3.2 Power Supplies"
+      ],
+      "quiz": {
+        "options": [
+          "Battery + conditioner (UPS)",
+          "Surge protector outlets",
+          "Voltage regulator 5%",
+          "Capacitor bank ripple"
+        ],
+        "correct_index": 0,
+        "explanation": "UPS systems provide backup power during outages and condition AC (remove spikes). Common on servers for graceful shutdown time."
+      }
+    },
+    {
+      "id": "tools_anti_static_strap",
+      "category": "tools",
+      "file": "anti_static_wrist_strap.png",
+      "name": "Anti-Static Wrist Strap",
+      "objectives": [
+        "Core 1 - 1.1 Safety and Professionalism"
+      ],
+      "quiz": {
+        "options": [
+          "ESD grounding strap",
+          "Thermal imaging sensor",
+          "Cable management band",
+          "CPU bracket tool"
+        ],
+        "correct_index": 0,
+        "explanation": "ESD wrist straps dissipate static from your body through a 1M\u00ce\u00a9 resistor to ground. Essential when handling sensitive components like RAM and CPUs."
+      }
+    },
+    {
+      "id": "tools_bios_post_card",
+      "category": "tools",
+      "file": "bios_post_card.png",
+      "name": "BIOS POST Card",
+      "objectives": [
+        "Core 1 - 1.5 Troubleshooting"
+      ],
+      "quiz": {
+        "options": [
+          "Diagnostic hex code display",
+          "USB bootable firmware",
+          "Serial terminal emulator",
+          "Infrared thermal sensor"
+        ],
+        "correct_index": 0,
+        "explanation": "POST cards plug into ISA/PCI slot and display 2-digit hex codes during boot. Helps diagnose hang issues without display output."
+      }
+    },
+    {
+      "id": "tools_cable_tester",
+      "category": "tools",
+      "file": "cable_tester.png",
+      "name": "Cable Tester",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "RJ-45 continuity tester",
+          "TDR length measurement",
+          "OTDR optical testing",
+          "Voltage multimeter"
+        ],
+        "correct_index": 0,
+        "explanation": "Cable testers verify Ethernet cables for breaks and wiring faults. Advanced models show wire pairings and pin assignments."
+      }
+    },
+    {
+      "id": "tools_crimping_tool",
+      "category": "tools",
+      "file": "crimping_tool.png",
+      "name": "Crimping Tool",
+      "objectives": [
+        "Core 1 - 2.5 Network Cables & Connectors"
+      ],
+      "quiz": {
+        "options": [
+          "Hand crimper for RJ-45",
+          "Punch-down keystone tool",
+          "Wire stripper combo",
+          "Coax cable strapper"
+        ],
+        "correct_index": 0,
+        "explanation": "Crimpers press the metal contacts inside RJ-45 connectors. Proper technique requires correct wire order and full conductor seating."
+      }
+    },
+    {
+      "id": "tools_multimeter",
+      "category": "tools",
+      "file": "multimeter.png",
+      "name": "Multimeter",
+      "objectives": [
+        "Core 1 - 1.5 Troubleshooting"
+      ],
+      "quiz": {
+        "options": [
+          "Voltage/resistance meter",
+          "Power supply tester",
+          "Logic waveform analyzer",
+          "Oscilloscope real-time"
+        ],
+        "correct_index": 0,
+        "explanation": "Multimeters measure voltage, current, and resistance. Essential for diagnosing power supply issues or testing continuity on cables/components."
+      }
+    },
+    {
+      "id": "tools_thermal_paste_spreader",
+      "category": "tools",
+      "file": "thermal_paste_spreader.png",
+      "name": "Thermal Paste Applicator",
+      "objectives": [
+        "Core 1 - 3.5 Cooling and Thermal Management"
+      ],
+      "quiz": {
+        "options": [
+          "Plastic even application",
+          "Silicone heat-conductive",
+          "Pre-applied paste pads",
+          "Liquid metal gallium"
+        ],
+        "correct_index": 0,
+        "explanation": "Quality thermal paste application requires even coverage without air pockets. Spreaders help avoid excessive paste that degrades over time."
+      }
+    },
+    {
+      "id": "tools_torx_screwdriver",
+      "category": "tools",
+      "file": "torx_screwdriver_bit.png",
+      "name": "Torx Screwdriver Bit",
+      "objectives": [
+        "Core 1 - 1.1 Safety and Professionalism"
+      ],
+      "quiz": {
+        "options": [
+          "Torx 6-point security",
+          "Phillips + cross pattern",
+          "Slotted flat-head",
+          "Tri-Wing triangular"
+        ],
+        "correct_index": 0,
+        "explanation": "Torx T5/T6 bits are standard for laptop and server chassis. The 6-point design reduces cam-out compared to Phillips head."
+      }
+    },
+    {
+      "id": "printer_drum_unit",
+      "category": "printers",
+      "file": "drum_unit.png",
+      "name": "Laser Printer Drum Unit",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": {
+        "options": [
+          "Photosensitive cylinder",
+          "Transfer roller surface",
+          "Corona wire static",
+          "Toner reservoir"
+        ],
+        "correct_index": 0,
+        "explanation": "The drum is the core component where toner sticks via static charge. It rotates and transfers the image to paper via the transfer roller."
       }
     },
     {
       "id": "printer_fuser",
       "category": "printers",
-      "file": "laser_fuser.png",
+      "file": "fuser_assembly.png",
       "name": "Laser Printer Fuser Assembly",
-      "objectives": ["Core 1 - 3.7 Printer Consumables"],
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
       "quiz": {
         "options": [
-          "Transfer Roller",
-          "Primary Corona Wire",
-          "Fuser Assembly",
-          "Pickup Roller"
+          "High-heat rollers fuse",
+          "Cold lamination press",
+          "Pre-printed pattern",
+          "Waste toner container"
         ],
-        "correct_index": 2,
-        "explanation": "The fuser uses pressure and high heat to melt toner powder directly onto the paper."
+        "correct_index": 0,
+        "explanation": "The fuser applies heat (200\u00c2\u00b0C+) and pressure to permanently bond toner powder to paper. Common failure point requiring replacement."
+      }
+    },
+    {
+      "id": "printer_impact_ribbon",
+      "category": "printers",
+      "file": "impact_printer_ribbon.png",
+      "name": "Impact Printer Ribbon",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": {
+        "options": [
+          "Inked ribbon (dot-matrix)",
+          "Thermal transfer label",
+          "35mm film advance",
+          "Pinch roller belt"
+        ],
+        "correct_index": 0,
+        "explanation": "Impact ribbons spool continuously, being struck by pins to transfer ink. Still used in industrial/POS systems for reliability and multi-part forms."
+      }
+    },
+    {
+      "id": "printer_inkjet",
+      "category": "printers",
+      "file": "inket_printer.png",
+      "name": "Inkjet Printer",
+      "objectives": [
+        "Core 1 - 3.7 Printer Devices"
+      ],
+      "quiz": {
+        "options": [
+          "Spray ink (thermal/piezo)",
+          "Laser toner fusing",
+          "Impact pin ribbon",
+          "Thermal heating only"
+        ],
+        "correct_index": 0,
+        "explanation": "Inkjet printers spray microscopic droplets. Thermal heads use heat to create bubbles; piezo heads use crystals. Lower cost but slower and higher per-page cost."
+      }
+    },
+    {
+      "id": "printer_inkjet_diagram",
+      "category": "printers",
+      "file": "inket_printer_diagram.png",
+      "name": "Inkjet Printer Diagram",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": null
+    },
+    {
+      "id": "printer_inkjet_head",
+      "category": "printers",
+      "file": "inkjet_print_head.png",
+      "name": "Inkjet Print Head",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": {
+        "options": [
+          "Nozzles + heating (cartridge)",
+          "Fixed head ribbon move",
+          "Solid-state laser diode",
+          "Electrostatic deflection"
+        ],
+        "correct_index": 0,
+        "explanation": "Print head cartridges integrate ink supply, heating elements/crystals, and micro-nozzles (100+ per color). They're the most expensive consumable."
+      }
+    },
+    {
+      "id": "printer_laser",
+      "category": "printers",
+      "file": "laser_printer.png",
+      "name": "Laser Printer",
+      "objectives": [
+        "Core 1 - 3.7 Printer Devices"
+      ],
+      "quiz": {
+        "options": [
+          "Laser + toner fusing",
+          "Ink spray technology",
+          "Impact dot-matrix",
+          "Thermal transfer label"
+        ],
+        "correct_index": 0,
+        "explanation": "Laser printers use a laser beam to charge the drum electrostatically, then toner adheres and fuses. Fast (40+ ppm) and economical per-page."
+      }
+    },
+    {
+      "id": "printer_laser_diagram",
+      "category": "printers",
+      "file": "laser_printer_diagram.png",
+      "name": "Laser Printer Diagram",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": null
+    },
+    {
+      "id": "printer_thermal",
+      "category": "printers",
+      "file": "thermal_printer.png",
+      "name": "Thermal Printer",
+      "objectives": [
+        "Core 1 - 3.7 Printer Devices"
+      ],
+      "quiz": {
+        "options": [
+          "Heat-sensitive paper",
+          "Liquid ink spray high-color",
+          "Mechanical impact ribbon",
+          "Solid wax sublimation"
+        ],
+        "correct_index": 0,
+        "explanation": "Thermal printers use heating elements on special paper. No toner/ink means low cost per page. Used for receipts, shipping labels, ID cards."
+      }
+    },
+    {
+      "id": "printer_thermal_diagram",
+      "category": "printers",
+      "file": "thermal_printer_diagram.png",
+      "name": "Thermal Printer Diagram",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": null
+    },
+    {
+      "id": "printer_toner_cartridge",
+      "category": "printers",
+      "file": "toner_cartridge.png",
+      "name": "Toner Cartridge",
+      "objectives": [
+        "Core 1 - 3.7 Printer Consumables"
+      ],
+      "quiz": {
+        "options": [
+          "Powder toner + OPC drum",
+          "Liquid ink bottle",
+          "Thermal paper roll",
+          "Wax stick sublimation"
+        ],
+        "correct_index": 0,
+        "explanation": "Toner cartridges are complex assemblies: OPC drum, developer roller, blade cleaner, and waste toner storage. They last 1000-10000+ pages."
+      }
+    },
+    {
+      "id": "printer_transfer_belt",
+      "category": "printers",
+      "file": "transfer_belt.png",
+      "name": "Laser Printer Transfer Belt",
+      "objectives": [
+        "Core 1 - 3.7 Printer Components"
+      ],
+      "quiz": {
+        "options": [
+          "Transfers toner to paper",
+          "Moves paper hot fuser",
+          "Rotates photosensitive",
+          "Corona static discharge"
+        ],
+        "correct_index": 0,
+        "explanation": "The transfer belt (or transfer roller) moves paper under the charged drum, attracting toner. It requires occasional cleaning or replacement."
       }
     }
   ]

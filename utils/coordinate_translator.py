@@ -4,14 +4,35 @@ class CoordinateTranslator:
     and display canvas viewports across arbitrary zoom levels.
     """
 
-    def __init__(self, native_res=(908, 871), base_display_res=(680, 650)):
+    def __init__(self, native_res=(908, 871), base_display_res=(680, 600)):
         self.orig_w, self.orig_h = native_res
         self.base_w, self.base_h = base_display_res
 
+    def set_base_height(self, height):
+        """Dynamically set the base display height for responsive scaling.
+
+        This allows the translator to adapt to actual container dimensions
+        rather than using hardcoded values. Call this with the available
+        container height before rendering.
+
+        Args:
+            height: The actual available display height in pixels
+        """
+        if height > 0:
+            self.base_h = int(height)
+            # Maintain aspect ratio for width
+            aspect_ratio = self.orig_w / self.orig_h if self.orig_h > 0 else 1.0
+            self.base_w = int(self.base_h * aspect_ratio)
+
     def get_display_dimensions(self, zoom_level=1.0):
-        """Calculates current pixel width and height based on zoom level."""
-        disp_w = int(self.base_w * zoom_level)
+        """Calculates current pixel width and height based on zoom level, preserving aspect ratio."""
+        # Calculate display dimensions while maintaining aspect ratio
+        aspect_ratio = self.orig_w / self.orig_h if self.orig_h > 0 else 1.0
+
+        # Start with base height and calculate width to maintain aspect ratio
         disp_h = int(self.base_h * zoom_level)
+        disp_w = int(disp_h * aspect_ratio)
+
         return disp_w, disp_h
 
     def get_scale_factors(self, zoom_level=1.0):

@@ -1,141 +1,1152 @@
 {
-  "modern_atx": {
-    "title": "Modern Micro ATX Board",
+  "micro_atx": {
+    "title": "Micro ATX Board",
     "image_path": "assets/images/motherboard/modern_eatx_908x871.png",
+    "resolution": [
+      908,
+      871
+    ],
+    "display_scale": 1.0,
     "components": [
       {
         "id": "cpu_socket",
-        "name": "LGA 1700 CPU Socket",
-        "coords": [363, 179, 526, 410],
-        "summary": "Land Grid Array socket designed for modern desktop processors. Connecting pins are located on the socket rather than the CPU."
+        "name": "CPU Socket",
+        "coords": [
+          365,
+          180,
+          540,
+          426
+        ],
+        "summary": "Central Processing Unit socket for connecting the CPU to the motherboard.",
+        "svg_label": "micro_cpu_socket"
       },
       {
-        "id": "dimm_slots",
-        "name": "DDR5 RAM Slots",
-        "coords": [645, 4, 710, 538],
-        "summary": "Dual In-Line Memory Module slots operating in dual-channel mode for DDR5 system memory."
+        "id": "ram_slots",
+        "name": "RAM Slots",
+        "coords": [
+          651,
+          18,
+          703,
+          533
+        ],
+        "summary": "DIMM slots for installing system memory modules.",
+        "svg_label": "micro_dimm_ram_1"
       },
       {
-        "id": "dimm_slots",
-        "name": "DDR5 RAM Slots",
-        "coords": [754, 4, 818, 538],
-        "summary": "Dual In-Line Memory Module slots operating in dual-channel mode for DDR5 system memory."
+        "id": "ram_slots",
+        "name": "RAM Slots",
+        "coords": [
+          758,
+          18,
+          810,
+          533
+        ],
+        "summary": "DIMM slots for installing system memory modules.",
+        "svg_label": "micro_dimm_ram_2"
       },
-
+      {
+        "id": "io_ports",
+        "name": "IO Ports",
+        "coords": [
+          18,
+          13,
+          120,
+          555
+        ],
+        "summary": "Rear panel IO connections including USB, audio, and network ports.",
+        "svg_label": "micro_io_ports"
+      },
       {
         "id": "pcie_x16",
-        "name": "PCIe 4.0 x16 Slot",
-        "coords": [188, 700, 508, 728],
-        "summary": "Dual In-Line Memory Module slots operating in dual-channel mode for system memory."
+        "name": "PCIe x16 Slot",
+        "coords": [
+          189,
+          562,
+          500,
+          588
+        ],
+        "summary": "Primary high-bandwidth expansion slot for graphics cards and add-in cards.",
+        "svg_label": "micro_pciex16_1"
       },
       {
         "id": "pcie_x16",
-        "name": "PCIe 4.0 x16 Slot",
-        "coords": [188, 561, 508, 588],
-        "summary": "Primary high-bandwidth expansion slot used for dedicated graphics cards or high-speed add-in cards."
+        "name": "PCIe x16 Slot",
+        "coords": [
+          190,
+          703,
+          501,
+          729
+        ],
+        "summary": "Primary high-bandwidth expansion slot for graphics cards and add-in cards.",
+        "svg_label": "micro_pciex16_2"
+      },
+      {
+        "id": "pcie_x4",
+        "name": "PCIe x4 Slot",
+        "coords": [
+          189,
+          634,
+          329,
+          659
+        ],
+        "summary": "Secondary expansion slot for high-speed peripherals.",
+        "svg_label": "micro_pciex4_1"
+      },
+      {
+        "id": "pcie_x4",
+        "name": "PCIe x4 Slot",
+        "coords": [
+          187,
+          774,
+          328,
+          806
+        ],
+        "summary": "Secondary expansion slot for high-speed peripherals.",
+        "svg_label": "micro_pciex4_2"
+      },
+      {
+        "id": "m2_slot",
+        "name": "M.2 Slot",
+        "coords": [
+          537,
+          465,
+          591,
+          546
+        ],
+        "summary": "Slot for NVMe SSDs and other M.2 form factor devices.",
+        "svg_label": "micro_m2_1"
+      },
+      {
+        "id": "m2_slot",
+        "name": "M.2 Slot",
+        "coords": [
+          801,
+          553,
+          844,
+          630
+        ],
+        "summary": "Slot for NVMe SSDs and other M.2 form factor devices.",
+        "svg_label": "micro_m2_2"
+      },
+      {
+        "id": "m2_slot",
+        "name": "M.2 Slot",
+        "coords": [
+          593,
+          606,
+          642,
+          690
+        ],
+        "summary": "Slot for NVMe SSDs and other M.2 form factor devices.",
+        "svg_label": "micro_m2_3"
+      },
+      {
+        "id": "m2_slot",
+        "name": "M.2 Slot",
+        "coords": [
+          425,
+          738,
+          462,
+          821
+        ],
+        "summary": "Slot for NVMe SSDs and other M.2 form factor devices.",
+        "svg_label": "micro_m2_4"
       },
       {
         "id": "atx_power",
         "name": "24-Pin ATX Main Power",
-        "coords": [843, 158, 893, 347],
-        "summary": "Primary power connector delivering +3.3V, +5V, +12V, and -12V DC power from the PSU to the motherboard."
+        "coords": [
+          849,
+          161,
+          887,
+          346
+        ],
+        "summary": "Primary power connector delivering +3.3V, +5V, +12V, and -12V DC power from the PSU.",
+        "svg_label": "micro_24pin_power"
+      },
+      {
+        "id": "sata_cluster",
+        "name": "SATA Port Cluster",
+        "coords": [
+          641,
+          800,
+          882,
+          843
+        ],
+        "summary": "Multiple Serial ATA ports for connecting storage devices.",
+        "svg_label": "micro_sata_ports_cluster"
       },
       {
         "id": "cmos_battery",
         "name": "CMOS Battery",
-        "coords": [96, 718, 172, 793],
-        "summary": "Coin-cell battery that maintains BIOS settings and system clock when the motherboard is powered off."
+        "coords": [
+          97,
+          722,
+          166,
+          793
+        ],
+        "summary": "Coin-cell battery maintaining BIOS settings and clock when powered off.",
+        "svg_label": "micro_cmos_battery"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [638, 797, 698, 820],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+        "id": "cpu_power",
+        "name": "8-Pin CPU Power",
+        "coords": [
+          265,
+          25,
+          334,
+          64
+        ],
+        "summary": "Supplemental power connector for the CPU, providing additional power for stable operation.",
+        "svg_label": "micro_8pin_cpu_power"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [699, 797, 758, 819],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+        "id": "fan_header",
+        "name": "Fan Power Header",
+        "coords": [
+          504,
+          28,
+          541,
+          52
+        ],
+        "summary": "Connector for attaching cooling fans to the motherboard.",
+        "svg_label": "micro_fan_power_1"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [759, 796, 822, 819],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+        "id": "fan_header",
+        "name": "Fan Power Header",
+        "coords": [
+          568,
+          30,
+          609,
+          50
+        ],
+        "summary": "Connector for attaching cooling fans to the motherboard.",
+        "svg_label": "micro_fan_power_2"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [824, 799, 880, 820],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+        "id": "fan_header",
+        "name": "Fan Power Header",
+        "coords": [
+          246,
+          32,
+          263,
+          65
+        ],
+        "summary": "Connector for attaching cooling fans to the motherboard.",
+        "svg_label": "micro_fan_power_3"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [640, 822, 697, 845],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+        "id": "audio_connector",
+        "name": "Audio Connector",
+        "coords": [
+          61,
+          684,
+          105,
+          701
+        ],
+        "summary": "Header for connecting front panel audio connectors.",
+        "svg_label": "micro_audio_connector"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [699, 823, 759, 842],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
+        "id": "heatsink",
+        "name": "Heatsink",
+        "coords": [
+          647,
+          650,
+          781,
+          780
+        ],
+        "summary": "Chipset cooling solution for thermal management.",
+        "svg_label": "micro_heatsink"
       },
       {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [762, 821, 819, 842],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
-      },
-      {
-        "id": "sata_ports",
-        "name": "SATA port",
-        "coords": [822, 821, 881, 842],
-        "summary": "Serial ATA port for connecting SATA storage devices. Each motherboard has multiple ports for drives and SSDs."
-      },
-      {
-        "id": "m2_slots",
-        "name": "M.2 Slots",
-        "coords": [546, 460, 597, 550],
-        "summary": "High-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
-      },
-      {
-        "id": "m2_slots",
-        "name": "M.2 Slots",
-        "coords": [596, 606, 643, 690],
-        "summary": "High-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
-      },
-      {
-        "id": "m2_slots",
-        "name": "M.2 Slots",
-        "coords": [425, 734, 465, 818],
-        "summary": "High-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
-      },
-      {
-        "id": "pcie_x4_1",
-        "name": "PCIe x4",
-        "coords": [189, 634, 330, 661],
-        "summary": "PCIe x4 expansion slot for mid-bandwidth add-in cards or additional storage controllers."
-      },
-      {
-        "id": "pcie_x4_2",
-        "name": "PCIe x4",
-        "coords": [191, 774, 329, 804],
-        "summary": "PCIe x4 expansion slot for mid-bandwidth add-in cards or additional storage controllers."
-      },
-      {
-        "id": "m2_slot_rear",
-        "name": "M.2 Slot",
-        "coords": [803, 545, 846, 629],
-        "summary": "Rear-mounted high-speed M.2 slot for NVMe SSDs. Supports PCIe 4.0 for ultra-fast storage speeds."
-      },
-      {
-        "id": "io_ports",
-        "name": "I/O Ports",
-        "coords": [25, 19, 133, 551],
-        "summary": "Rear I/O panel with USB ports, audio jacks, Ethernet, and other external connectivity options."
+        "id": "usb_header",
+        "name": "USB Header",
+        "coords": [
+          859,
+          478,
+          883,
+          557
+        ],
+        "summary": "Internal connection point for front panel USB ports.",
+        "svg_label": "micro_usb_header"
       }
-    ]
+    ],
+    "flipped": false
+  },
+  "modern_atx": {
+    "title": "Modern ATX Board",
+    "image_path": "assets/images/motherboard/modern_atx.png",
+    "resolution": [
+      3820,
+      3820
+    ],
+    "display_scale": 1.0,
+    "components": [
+      {
+        "id": "atx_ram",
+        "name": "DIMM RAM Slot",
+        "coords": [
+          1078,
+          78,
+          1320,
+          2025
+        ],
+        "summary": "Memory slot for modern systems.",
+        "svg_label": "atx_dimm_ram_1"
+      },
+      {
+        "id": "atx_ram",
+        "name": "DIMM RAM Slot",
+        "coords": [
+          2768,
+          100,
+          2973,
+          1831
+        ],
+        "summary": "Memory slot for modern systems.",
+        "svg_label": "atx_dimm_ram_2"
+      },
+      {
+        "id": "atx_power",
+        "name": "24-Pin ATX Power",
+        "coords": [
+          3238,
+          1223,
+          3368,
+          1857
+        ],
+        "summary": "Main motherboard power connector.",
+        "svg_label": "atx_24_pin_power"
+      },
+      {
+        "id": "atx_cpu",
+        "name": "CPU Socket",
+        "coords": [
+          1671,
+          660,
+          2462,
+          1604
+        ],
+        "summary": "Modern processor socket (LGA 1700/1150/etc).",
+        "svg_label": "atx_cpu_socket"
+      },
+      {
+        "id": "atx_io",
+        "name": "IO Ports Cluster",
+        "coords": [
+          317,
+          11,
+          656,
+          1891
+        ],
+        "summary": "Rear panel IO connections (USB, audio, network).",
+        "svg_label": "atx_io_ports"
+      },
+      {
+        "id": "atx_pcie_x16",
+        "name": "PCIe x16 Slot",
+        "coords": [
+          914,
+          1977,
+          2055,
+          2078
+        ],
+        "summary": "Primary high-speed slot for graphics cards.",
+        "svg_label": "atx_pcie_x16_1"
+      },
+      {
+        "id": "atx_pcie_x16",
+        "name": "PCIe x16 Slot",
+        "coords": [
+          910,
+          2481,
+          2051,
+          2581
+        ],
+        "summary": "Primary high-speed slot for graphics cards.",
+        "svg_label": "atx_pcie_x16_2"
+      },
+      {
+        "id": "atx_pcie_x16",
+        "name": "PCIe x16 Slot",
+        "coords": [
+          895,
+          2973,
+          2051,
+          3085
+        ],
+        "summary": "Primary high-speed slot for graphics cards.",
+        "svg_label": "atx_pcie_x16_3"
+      },
+      {
+        "id": "atx_pcie_x16",
+        "name": "PCIe x16 Slot",
+        "coords": [
+          889,
+          3498,
+          1999,
+          3601
+        ],
+        "summary": "Primary high-speed slot for graphics cards.",
+        "svg_label": "atx_pcie_x16_4"
+      },
+      {
+        "id": "atx_pcie_x16",
+        "name": "PCIe x16 Slot",
+        "coords": [
+          831,
+          3239,
+          1909,
+          3350
+        ],
+        "summary": "Primary high-speed slot for graphics cards.",
+        "svg_label": "atx_pcie_x16_5"
+      },
+      {
+        "id": "atx_pcie_x2",
+        "name": "PCIe x2 Slot",
+        "coords": [
+          902,
+          2730,
+          1232,
+          2822
+        ],
+        "summary": "Secondary expansion slot.",
+        "svg_label": "atx_pcie_x2_1"
+      },
+      {
+        "id": "atx_pcie_x2",
+        "name": "PCIe x2 Slot",
+        "coords": [
+          907,
+          2223,
+          1224,
+          2324
+        ],
+        "summary": "Secondary expansion slot.",
+        "svg_label": "atx_pcie_x2_2"
+      },
+      {
+        "id": "atx_cmos",
+        "name": "CMOS Battery",
+        "coords": [
+          1242,
+          2179,
+          1514,
+          2405
+        ],
+        "summary": "Battery for BIOS retention.",
+        "svg_label": "atx_cmos_battery"
+      },
+      {
+        "id": "atx_audio",
+        "name": "Audio Connector",
+        "coords": [
+          575,
+          3637,
+          788,
+          3746
+        ],
+        "summary": "Front panel audio header.",
+        "svg_label": "atx_audio_connector"
+      },
+      {
+        "id": "atx_front_usb",
+        "name": "Front Panel USB",
+        "coords": [
+          2202,
+          3656,
+          2382,
+          3746
+        ],
+        "summary": "Front panel USB header.",
+        "svg_label": "atx_f_usb_1"
+      },
+      {
+        "id": "atx_front_usb",
+        "name": "Front Panel USB",
+        "coords": [
+          1909,
+          3645,
+          2089,
+          3740
+        ],
+        "summary": "Front panel USB header.",
+        "svg_label": "atx_f_usb_2"
+      },
+      {
+        "id": "atx_front_usb",
+        "name": "Front Panel USB",
+        "coords": [
+          1619,
+          3651,
+          1796,
+          3748
+        ],
+        "summary": "Front panel USB header.",
+        "svg_label": "atx_f_usb_3"
+      },
+      {
+        "id": "atx_tpm",
+        "name": "TPM Connector",
+        "coords": [
+          1250,
+          3651,
+          1609,
+          3751
+        ],
+        "summary": "Trusted Platform Module security connector.",
+        "svg_label": "atx_tpm_connector"
+      },
+      {
+        "id": "atx_sata",
+        "name": "SATA Ports",
+        "coords": [
+          2419,
+          3672,
+          2835,
+          3769
+        ],
+        "summary": "Serial ATA connections for storage devices.",
+        "svg_label": "atx_sata_ports"
+      },
+      {
+        "id": "atx_front_panel",
+        "name": "Front Panel Connector",
+        "coords": [
+          2859,
+          3651,
+          3215,
+          3761
+        ],
+        "summary": "Power/reset/LED connections for case front panel.",
+        "svg_label": "atx_f_panel"
+      },
+      {
+        "id": "atx_esata",
+        "name": "eSATA Port",
+        "coords": [
+          3242,
+          2258,
+          3424,
+          3070
+        ],
+        "summary": "External Serial ATA port.",
+        "svg_label": "atx_exterior_sata"
+      },
+      {
+        "id": "atx_cpu_power",
+        "name": "CPU Power Connector",
+        "coords": [
+          1340,
+          47,
+          1577,
+          163
+        ],
+        "summary": "Supplemental power for processor.",
+        "svg_label": "atx_cpu_power"
+      },
+      {
+        "id": "atx_cpu_fan",
+        "name": "CPU Fan Connector",
+        "coords": [
+          896,
+          65,
+          1031,
+          134
+        ],
+        "summary": "Processor cooling fan header.",
+        "svg_label": "atx_cpu_fan"
+      },
+      {
+        "id": "atx_sys_fan",
+        "name": "System Fan Connector",
+        "coords": [
+          894,
+          166,
+          1039,
+          245
+        ],
+        "summary": "Case cooling system fan header.",
+        "svg_label": "atx_sys_fan_1"
+      },
+      {
+        "id": "atx_sys_fan",
+        "name": "System Fan Connector",
+        "coords": [
+          3284,
+          722,
+          3366,
+          862
+        ],
+        "summary": "Case cooling system fan header.",
+        "svg_label": "atx_sys_fan_2"
+      },
+      {
+        "id": "atx_sys_fan",
+        "name": "System Fan Connector",
+        "coords": [
+          3207,
+          3682,
+          3339,
+          3764
+        ],
+        "summary": "Case cooling system fan header.",
+        "svg_label": "atx_sys_fan_3"
+      },
+      {
+        "id": "atx_sys_fan",
+        "name": "System Fan Connector",
+        "coords": [
+          1115,
+          3682,
+          1208,
+          3761
+        ],
+        "summary": "Case cooling system fan header.",
+        "svg_label": "atx_sys_fan_4"
+      },
+      {
+        "id": "atx_heatsink",
+        "name": "Chipset Heatsink",
+        "coords": [
+          2297,
+          2128,
+          3036,
+          3405
+        ],
+        "summary": "North/South bridge cooling solution.",
+        "svg_label": "atx_heatsink"
+      },
+      {
+        "id": "atx_usb30",
+        "name": "USB 3.0 Header",
+        "coords": [
+          3115,
+          1588,
+          3184,
+          1873
+        ],
+        "summary": "High-speed USB 3.0 internal connector.",
+        "svg_label": "atx_usb30"
+      }
+    ],
+    "flipped": false
+  },
+  "mini_itx": {
+    "title": "Mini-ITX Board",
+    "image_path": "assets/images/motherboard/mini_itx.png",
+    "resolution": [
+      1000,
+      944
+    ],
+    "display_scale": 1.0,
+    "components": [
+      {
+        "id": "mini_itx_ram",
+        "name": "DIMM Slot",
+        "coords": [
+          189,
+          86,
+          992,
+          180
+        ],
+        "summary": "Memory slot for Mini-ITX configuration.",
+        "svg_label": "mini_itx_dimm"
+      },
+      {
+        "id": "mini_itx_cpu",
+        "name": "CPU Socket",
+        "coords": [
+          419,
+          288,
+          681,
+          599
+        ],
+        "summary": "Processor socket for Mini-ITX boards.",
+        "svg_label": "mini_itx_cpu_socket"
+      },
+      {
+        "id": "mini_itx_heatsink",
+        "name": "Heatsink",
+        "coords": [
+          706,
+          681,
+          855,
+          830
+        ],
+        "summary": "Chipset cooling solution.",
+        "svg_label": "mini_itx_heatsink"
+      },
+      {
+        "id": "mini_itx_sata",
+        "name": "SATA Ports",
+        "coords": [
+          892,
+          587,
+          970,
+          776
+        ],
+        "summary": "Serial ATA storage connections.",
+        "svg_label": "mini_itx_sata_ports"
+      },
+      {
+        "id": "mini_itx_power",
+        "name": "24-Pin ATX Power",
+        "coords": [
+          626,
+          23,
+          904,
+          76
+        ],
+        "summary": "Main power connector.",
+        "svg_label": "mini_itx_24_pin_power"
+      },
+      {
+        "id": "mini_itx_pcie",
+        "name": "PCIe x16 Slot",
+        "coords": [
+          290,
+          876,
+          848,
+          917
+        ],
+        "summary": "High-bandwidth expansion slot for graphics.",
+        "svg_label": "mini_itx_pcie_x16"
+      },
+      {
+        "id": "mini_itx_usb",
+        "name": "USB Connector",
+        "coords": [
+          522,
+          815,
+          647,
+          849
+        ],
+        "summary": "Internal USB header.",
+        "svg_label": "mini_itx_usb_connector"
+      }
+    ],
+    "flipped": false
+  },
+  "lpx": {
+    "title": "LPX Board",
+    "image_path": "assets/images/motherboard/LPX.png",
+    "resolution": [
+      3932,
+      2792
+    ],
+    "display_scale": 1.0,
+    "components": [
+      {
+        "id": "lpx_pcie",
+        "name": "PCIe LPX Slot",
+        "coords": [
+          306,
+          1200,
+          2284,
+          1321
+        ],
+        "summary": "Legacy PCIe expansion slot.",
+        "svg_label": "lpx_pcie_lpx"
+      },
+      {
+        "id": "lpx_ram_slot",
+        "name": "DIMM RAM Slot",
+        "coords": [
+          2500,
+          506,
+          3851,
+          949
+        ],
+        "summary": "Single DIMM slot for system memory."
+      },
+      {
+        "id": "lpx_cmos",
+        "name": "CMOS Battery",
+        "coords": [
+          2799,
+          224,
+          3028,
+          414
+        ],
+        "summary": "Coin-cell battery maintaining BIOS settings.",
+        "svg_label": "lpx_cmos_battery"
+      },
+      {
+        "id": "lpx_cpu_socket",
+        "name": "CPU Socket 7",
+        "coords": [
+          2952,
+          1977,
+          3781,
+          2654
+        ],
+        "summary": "Socket 7 processor slot used in older systems.",
+        "svg_label": "lpx_cpu_socket7"
+      },
+      {
+        "id": "lpx_power",
+        "name": "20-Pin Power Connector",
+        "coords": [
+          874,
+          143,
+          1410,
+          311
+        ],
+        "summary": "Main power input connector (older ATX standard).",
+        "svg_label": "lpx_20_pin_power"
+      },
+      {
+        "id": "lpx_ide",
+        "name": "IDE/PATA Connector",
+        "coords": [
+          2245,
+          196,
+          2345,
+          871
+        ],
+        "summary": "Parallel ATA connector for legacy hard drives and CD-ROM drives.",
+        "svg_label": "lpx_ide_pata_connector"
+      },
+      {
+        "id": "lpx_floppy",
+        "name": "38-Pin Diskette Connector",
+        "coords": [
+          2375,
+          193,
+          2468,
+          799
+        ],
+        "summary": "Floppy disk drive connector.",
+        "svg_label": "lpx_38_pin_ribbon_diskette_connector"
+      },
+      {
+        "id": "lpx_io",
+        "name": "IO Cluster",
+        "coords": [
+          55,
+          501,
+          324,
+          2756
+        ],
+        "summary": "Rear panel IO connections.",
+        "svg_label": "lpx_IO_cluster"
+      }
+    ],
+    "flipped": false
+  },
+  "modern_atx_io": {
+    "title": "Modern ATX IO Ports",
+    "image_path": "assets/images/motherboard/modern_atx_IO.png",
+    "resolution": [
+      876,
+      248
+    ],
+    "display_scale": 0.355,
+    "components": [
+      {
+        "id": "ext_audio_in",
+        "name": "External Audio In (Blue)",
+        "coords": [
+          789,
+          36,
+          828,
+          76
+        ],
+        "summary": "External audio input on IO cluster."
+      },
+      {
+        "id": "front_speakers",
+        "name": "Front Speakers / Headphone Out (Green)",
+        "coords": [
+          787,
+          98,
+          831,
+          134
+        ],
+        "summary": "Front speaker or headphone output connector."
+      },
+      {
+        "id": "mic_in_pink",
+        "name": "Microphone In (Pink)",
+        "coords": [
+          790,
+          157,
+          825,
+          188
+        ],
+        "summary": "Microphone input connector on IO cluster."
+      },
+      {
+        "id": "rear_speakers",
+        "name": "Rear Speakers / Surround (Black)",
+        "coords": [
+          724,
+          97,
+          763,
+          131
+        ],
+        "summary": "Rear surround speaker connector."
+      },
+      {
+        "id": "center_subwoofer",
+        "name": "Center / Subwoofer (Orange)",
+        "coords": [
+          724,
+          41,
+          764,
+          75
+        ],
+        "summary": "Center channel and subwoofer connector."
+      },
+      {
+        "id": "side_speakers",
+        "name": "Side Speakers 7.1 (White)",
+        "coords": [
+          730,
+          157,
+          765,
+          191
+        ],
+        "summary": "Side speaker connector for 7.1 surround sound."
+      },
+      {
+        "id": "gigabit_ethernet",
+        "name": "Gigabit Ethernet Port",
+        "coords": [
+          601,
+          52,
+          681,
+          110
+        ],
+        "summary": "RJ45 Gigabit Ethernet connector on IO cluster."
+      },
+      {
+        "id": "usb_2_0_legacy",
+        "name": "Legacy USB 2.0",
+        "coords": [
+          602,
+          126,
+          677,
+          202
+        ],
+        "summary": "USB 2.0 connector on exterior IO cluster."
+      },
+      {
+        "id": "usb_3_0_hs",
+        "name": "High-Speed USB 3.0",
+        "coords": [
+          241,
+          82,
+          433,
+          163
+        ],
+        "summary": "USB 3.0 connector on exterior IO cluster."
+      },
+      {
+        "id": "usb_3_2_plus",
+        "name": "USB 3.2 SuperSpeed+ Ports",
+        "coords": [
+          487,
+          126,
+          554,
+          202
+        ],
+        "summary": "USB 3.2 SuperSpeed+ external connectors."
+      },
+      {
+        "id": "spdif_coax",
+        "name": "Coaxial S/PDIF Port (Yellow)",
+        "coords": [
+          161,
+          158,
+          194,
+          198
+        ],
+        "summary": "Digital audio S/PDIF coaxial connector."
+      },
+      {
+        "id": "ps_2_io",
+        "name": "PS/2 Combo Port",
+        "coords": [
+          58,
+          152,
+          105,
+          195
+        ],
+        "summary": "PS/2 connector for legacy keyboard/mouse on IO cluster."
+      },
+      {
+        "id": "usb_3_2_plus_2",
+        "name": "USB 3.2 SuperSpeed+ Ports (Secondary)",
+        "coords": [
+          756,
+          48,
+          829,
+          133
+        ],
+        "summary": "Secondary USB 3.2 SuperSpeed+ external connectors.",
+        "svg_label": "usb_3.2_superspeed+_red_2"
+      },
+      {
+        "id": "spdif_optical",
+        "name": "Optical S/PDIF Port (Grey)",
+        "coords": [
+          155,
+          85,
+          200,
+          120
+        ],
+        "summary": "Digital audio S/PDIF optical connector."
+      },
+      {
+        "id": "esata_ports",
+        "name": "eSATA Ports (Blue)",
+        "coords": [
+          239,
+          179,
+          441,
+          206
+        ],
+        "summary": "External SATA connectors for external drives."
+      }
+    ],
+    "flipped": false
+  },
+  "mini_itx_io": {
+    "title": "Mini-ITX IO Ports",
+    "image_path": "assets/images/motherboard/miniITX_IO.png",
+    "resolution": [
+      1200,
+      369
+    ],
+    "display_scale": 0.334,
+    "components": [
+      {
+        "id": "ps_2",
+        "name": "PS/2 Combo Port",
+        "coords": [
+          30,
+          231,
+          105,
+          298
+        ],
+        "summary": "PS/2 connector for legacy keyboard/mouse."
+      },
+      {
+        "id": "usb_2_0_black",
+        "name": "USB 2.0 Ports (Black)",
+        "coords": [
+          12,
+          83,
+          117,
+          201
+        ],
+        "summary": "USB 2.0 external connectors."
+      },
+      {
+        "id": "vga",
+        "name": "VGA Port",
+        "coords": [
+          197,
+          67,
+          443,
+          163
+        ],
+        "summary": "15-pin D-Sub VGA video connector."
+      },
+      {
+        "id": "dvi_d",
+        "name": "DVI-D Port",
+        "coords": [
+          176,
+          248,
+          457,
+          322
+        ],
+        "summary": "DVI-D digital video connector."
+      },
+      {
+        "id": "hdmi",
+        "name": "HDMI Port",
+        "coords": [
+          529,
+          280,
+          648,
+          326
+        ],
+        "summary": "High-Definition Multimedia Interface video connector."
+      },
+      {
+        "id": "ethernet",
+        "name": "Ethernet Port",
+        "coords": [
+          912,
+          78,
+          1045,
+          180
+        ],
+        "summary": "RJ45 Gigabit Ethernet connector."
+      },
+      {
+        "id": "usb_2_0",
+        "name": "USB 2.0 Ports",
+        "coords": [
+          921,
+          199,
+          1036,
+          319
+        ],
+        "summary": "Universal Serial Bus 2.0 external connectors."
+      },
+      {
+        "id": "audio_line_in",
+        "name": "Audio Line In (Blue)",
+        "coords": [
+          1119,
+          60,
+          1172,
+          108
+        ],
+        "summary": "Analog audio line input connector."
+      },
+      {
+        "id": "audio_line_out",
+        "name": "Audio Line Out (Green)",
+        "coords": [
+          1118,
+          152,
+          1175,
+          205
+        ],
+        "summary": "Analog audio line output/speaker connector."
+      },
+      {
+        "id": "mic_input",
+        "name": "Microphone Input",
+        "coords": [
+          1121,
+          250,
+          1169,
+          294
+        ],
+        "summary": "Microphone input connector."
+      },
+      {
+        "id": "usb_3_0",
+        "name": "USB 3.0 Ports",
+        "coords": [
+          708,
+          203,
+          816,
+          327
+        ],
+        "summary": ""
+      }
+    ],
+    "flipped": false
   }
 }
