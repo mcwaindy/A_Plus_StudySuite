@@ -3,6 +3,7 @@ from customtkinter import CTkFont
 
 # --- MODULES --- #
 from modules.flashcards_view import FlashcardView
+from modules.flashcard_setup_view import FlashcardSetupView
 from modules.notes_view import NotesView
 from modules.diagram_view import DiagramView
 from modules.exam_view import ExamView
@@ -80,7 +81,7 @@ class App(ctk.CTk):
             fg_color="transparent",
             text_color=("gray10", "gray90"),
             hover_color=("gray70", "gray30"),
-            command=lambda: self.switch_frame(FlashcardView)
+            command=self.start_flashcards_setup
         )
         btn_flashcards.grid(row=4, column=0, padx=10, pady=2, sticky="ew")
 
@@ -128,6 +129,30 @@ class App(ctk.CTk):
             command=lambda: self.switch_frame(GameView)
         )
         btn_guessing.grid(row=9, column=0, padx=10, pady=2, sticky="ew")
+
+    def start_flashcards_setup(self):
+        """
+        Display the flashcard setup screen instead of directly loading flashcards.
+        """
+        if self.current_frame is not None:
+            self.current_frame.destroy()
+
+        self.current_frame = FlashcardSetupView(
+            self,
+            on_start_callback=self.start_flashcard_session
+        )
+        self.current_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
+
+    def start_flashcard_session(self, config):
+        """
+        Start the actual flashcard session with the provided configuration.
+        :param config: dict with 'exam', 'objectives', 'card_limit' keys
+        """
+        if self.current_frame is not None:
+            self.current_frame.destroy()
+
+        self.current_frame = FlashcardView(self, config=config)
+        self.current_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
 
     def switch_frame(self, new_frame_class, *args, **kwargs):
         """

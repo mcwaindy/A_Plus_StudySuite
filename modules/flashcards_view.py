@@ -8,20 +8,39 @@ class FlashcardView(ctk.CTkFrame):
     Interactive Flashcard View for CompTIA A+ study terms.
     """
 
-    def __init__(self, parent):
+    def __init__(self, parent, config=None):
         super().__init__(parent)
+
+        # Load configuration from setup screen or use defaults
+        if config:
+            self.selected_exam = config.get("exam", "All")
+            self.selected_objectives = config.get("objectives", ["All"])
+            self.card_limit = config.get("card_limit", None)
+        else:
+            self.selected_exam = "All"
+            self.selected_objectives = ["All"]
+            self.card_limit = None
 
         # State variables
         self.all_cards = self.load_data()
         self.cards = self.all_cards[:]  # Make a copy for filtering
+
+        # Filter by exam and objectives from config
+        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objectives)
         random.shuffle(self.cards)  # Shuffle on initial load
+
         self.current_index = 0
         self.is_flipped = False
         self.score_known = 0
         self.score_review = 0
         self.start_with_definition = False # Toggle for term vs definition start
-        self.selected_exam = "All"  # Track selected exam (All, Core 1, Core 2)
-        self.selected_objective = "All"  # Track selected objective
+
+        # Card limit and review tracking
+        self.reviewed_cards = []  # List of cards marked as "needs review"
+        self.cards_studied = []  # List of all cards studied in this session
+        self.session_active = False  # Track if currently in a study session
+        self._in_review_mode = False  # Track if currently displaying review screen
+        self._objective_dialog = None  # Track objective selector dialog to prevent multiples
 
         # Configure Grid Layout (Row 1 expands to hold the card)
         self.grid_columnconfigure(0, weight=1)
@@ -57,6 +76,145 @@ class FlashcardView(ctk.CTkFrame):
                 "definition": "Check that data/flashcards.json exists and contains valid JSON."
             }
         ]
+
+    def save_review(self):
+        """
+        Save the current review session to persistent storage.
+        """
+        review_data = {
+            "timestamp": str(Path("data").cwd()),  # Will use current time
+            "exam": self.selected_exam,
+            "objectives": self.selected_objectives,  # Changed to list
+            "cards_studied": len(self.cards_studied),
+            "cards_reviewed": [
+                {
+                    "id": card.get("id"),
+                    "term": card.get("term"),
+                    "objective": card.get("objective")
+                }
+                for card in self.reviewed_cards
+            ]
+        }
+
+        # Load existing reviews
+        review_path = Path("data/review_history.json")
+        reviews = []
+        if review_path.exists():
+            try:
+                with open(review_path, "r", encoding="utf-8") as f:
+                    reviews = json.load(f)
+            except:
+                reviews = []
+
+        # Add new review
+        reviews.append(review_data)
+
+        # Save back
+        with open(review_path, "w", encoding="utf-8") as f:
+            json.dump(reviews, f, indent=2, ensure_ascii=False)
+
+    def load_reviews(self):
+        """
+        Load all past review sessions.
+        :return: list of review data
+        """
+        review_path = Path("data/review_history.json")
+        if review_path.exists():
+            try:
+                with open(review_path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except:
+                return []
+        return []
+
+    def show_review_history_dialog(self):
+        """
+        Display a dialog showing past review sessions in a collapsible format.
+        """
+        reviews = self.load_reviews()
+
+        if not reviews:
+            # Show simple message if no reviews
+            dialog = ctk.CTkToplevel(self)
+            dialog.title("Review History")
+            dialog.geometry("400x200")
+            dialog.resizable(False, False)
+
+            label = ctk.CTkLabel(
+                dialog,
+                text="No past reviews yet.\n\nComplete a flashcard session with\na card limit to create your first review!",
+                font=ctk.CTkFont(size=13),
+                text_color="gray"
+            )
+            label.pack(pady=20)
+            return
+
+        # Create main dialog window
+        dialog = ctk.CTkToplevel(self)
+        dialog.title("Review History")
+        dialog.geometry("600x500")
+        dialog.resizable(True, True)
+
+        # Main scrollable frame
+        scrollable_frame = ctk.CTkScrollableFrame(dialog, fg_color="transparent")
+        scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+        # Display each review session
+        for idx, review in enumerate(reversed(reviews)):  # Newest first
+            session_frame = ctk.CTkFrame(scrollable_frame, fg_color=("gray85", "gray20"))
+            session_frame.pack(fill="x", pady=5)
+
+            # Header with session info
+            exam = review.get("exam", "All")
+            objectives = review.get("objectives", review.get("objective", ["All"]))  # Handle both old and new format
+            if isinstance(objectives, str):  # For backwards compatibility with old single-objective format
+                objectives = [objectives]
+            objectives_str = ", ".join(objectives) if objectives != ["All"] else "All"
+            cards_studied = review.get("cards_studied", 0)
+            cards_reviewed = len(review.get("cards_reviewed", []))
+
+            header_text = f"Session {len(reviews) - idx} - {exam} | Obj: {objectives_str} | Studied: {cards_studied} | Needs Review: {cards_reviewed}"
+            header_label = ctk.CTkLabel(
+                session_frame,
+                text=header_text,
+                font=ctk.CTkFont(size=12, weight="bold"),
+                text_color=("gray10", "gray90")
+            )
+            header_label.pack(fill="x", padx=10, pady=(8, 4))
+
+            # Cards to review list
+            if review.get("cards_reviewed"):
+                by_objective = {}
+                for card in review["cards_reviewed"]:
+                    obj = card.get("objective", "Unknown")
+                    if obj not in by_objective:
+                        by_objective[obj] = []
+                    by_objective[obj].append(card.get("term", "Unknown"))
+
+                cards_text = ""
+                for obj in sorted(by_objective.keys()):
+                    cards_text += f"{obj}: {', '.join(by_objective[obj][:3])}"
+                    if len(by_objective[obj]) > 3:
+                        cards_text += f" (+{len(by_objective[obj]) - 3} more)"
+                    cards_text += "\n"
+
+                cards_label = ctk.CTkLabel(
+                    session_frame,
+                    text=cards_text,
+                    font=ctk.CTkFont(size=10),
+                    text_color=("gray30", "gray70"),
+                    justify="left"
+                )
+                cards_label.pack(fill="x", padx=15, pady=(0, 8))
+
+        # Close button
+        close_btn = ctk.CTkButton(
+            dialog,
+            text="Close",
+            command=dialog.destroy,
+            width=100
+        )
+        close_btn.pack(pady=10)
 
     def get_available_objectives(self):
         """
@@ -119,73 +277,68 @@ class FlashcardView(ctk.CTkFrame):
                 filtered.append(card)
         return filtered
 
-    def filter_cards_by_exam_and_objective(self, exam, objective):
+    def filter_cards_by_exam_and_objective(self, exam, objectives):
         """
-        Filter flashcards by both exam and objective.
+        Filter flashcards by both exam and objectives.
         :param exam: exam name or "All"
-        :param objective: objective number or "All"
+        :param objectives: list of objective strings (full names) or ["All"]
         :return: filtered list of cards
         """
         filtered = self.filter_cards_by_exam(exam)
 
-        if objective == "All":
+        if "All" in objectives or objectives == ["All"]:
             return filtered
 
         result = []
         for card in filtered:
             obj_str = card.get("objective", "")
-            if obj_str:
-                main_obj = obj_str.split(".")[0].strip()
-                if main_obj == objective:
-                    result.append(card)
+            # Match exact objective string
+            if obj_str in objectives:
+                result.append(card)
         return result
     def create_header(self):
         """
-        Top section showing Exam selector, Objective selector, progress, and settings toggle.
+        Top section showing progress, card limit, and settings toggle.
         """
         header_frame = ctk.CTkFrame(self, fg_color="transparent")
         header_frame.grid(row=0, column=0, sticky="ew", padx=20, pady=(10, 5))
-        header_frame.grid_columnconfigure(3, weight=1)
+        header_frame.grid_columnconfigure(2, weight=1)
 
-        # Exam Selector Label
-        lbl_select_exam = ctk.CTkLabel(
+        # Current Selection Display (Left)
+        selection_text = f"{self.selected_exam} | Obj: {', '.join(self.selected_objectives)}"
+        if self.selected_objectives == ["All"]:
+            selection_text = f"{self.selected_exam} | All Objectives"
+
+        self.lbl_selection = ctk.CTkLabel(
             header_frame,
-            text="Exam:",
+            text=selection_text,
+            font=ctk.CTkFont(size=11),
+            text_color="gray"
+        )
+        self.lbl_selection.grid(row=0, column=0, sticky="w", padx=(0, 15))
+
+        # Card Limit Label
+        lbl_card_limit = ctk.CTkLabel(
+            header_frame,
+            text="Card Limit:",
             font=ctk.CTkFont(size=12, weight="bold"),
             text_color="gray",
         )
-        lbl_select_exam.grid(row=0, column=0, sticky="w", padx=(0, 5))
+        lbl_card_limit.grid(row=0, column=1, sticky="w", padx=(0, 5))
 
-        # Exam Dropdown Menu
-        available_exams = ["All"] + self.get_available_exams()
-        self.exam_menu = ctk.CTkOptionMenu(
+        # Card Limit Dropdown Menu
+        card_limit_options = ["All", "10", "20", "30", "50"]
+        self.card_limit_menu = ctk.CTkOptionMenu(
             header_frame,
-            values=available_exams,
-            command=self.on_exam_change,
-            width=100,
+            values=card_limit_options,
+            command=self.on_card_limit_change,
+            width=70,
         )
-        self.exam_menu.set("All")
-        self.exam_menu.grid(row=0, column=1, sticky="w", padx=(0, 15))
-
-        # Objective Selector Label
-        lbl_select_obj = ctk.CTkLabel(
-            header_frame,
-            text="Objective:",
-            font=ctk.CTkFont(size=12, weight="bold"),
-            text_color="gray",
-        )
-        lbl_select_obj.grid(row=0, column=2, sticky="w", padx=(0, 5))
-
-        # Objective Dropdown Menu
-        available_objs = ["All"] + [f"Objective {obj}" for obj in self.get_available_objectives()]
-        self.objective_menu = ctk.CTkOptionMenu(
-            header_frame,
-            values=available_objs,
-            command=self.on_objective_change,
-            width=120,
-        )
-        self.objective_menu.set("All")
-        self.objective_menu.grid(row=0, column=3, sticky="w", padx=(0, 15))
+        if self.card_limit:
+            self.card_limit_menu.set(str(self.card_limit))
+        else:
+            self.card_limit_menu.set("All")
+        self.card_limit_menu.grid(row=0, column=2, sticky="w", padx=(0, 15))
 
         # Objective Label (shows current subset info)
         self.lbl_objective = ctk.CTkLabel(
@@ -194,7 +347,7 @@ class FlashcardView(ctk.CTkFrame):
             font=ctk.CTkFont(size=14, weight="bold"),
             text_color="gray",
         )
-        self.lbl_objective.grid(row=0, column=4, sticky="w")
+        self.lbl_objective.grid(row=0, column=3, sticky="w")
 
         # Start Mode Switch (Term vs Definition)
         self.switch_start_side = ctk.CTkSwitch(
@@ -202,7 +355,7 @@ class FlashcardView(ctk.CTkFrame):
             text="Start with Definition",
             command=self.toggle_start_side,
         )
-        self.switch_start_side.grid(row=0, column=5, sticky="e", padx=(15, 0))
+        self.switch_start_side.grid(row=0, column=4, sticky="e", padx=(15, 0))
 
     def create_card_widget(self):
         """Main Flashcard display box with responsive text wrapping."""
@@ -325,7 +478,7 @@ class FlashcardView(ctk.CTkFrame):
             fg_color="#D32F2F",
             hover_color="#B71C1C",
             width=120,
-            command=lambda: self.record_answer(known=False),
+            command=self.on_btn_review_click,
         )
         self.btn_review.pack(side="left", padx=5)
 
@@ -335,9 +488,20 @@ class FlashcardView(ctk.CTkFrame):
             fg_color="#388E3C",
             hover_color="#1B5E20",
             width=120,
-            command=lambda: self.record_answer(known=True),
+            command=self.on_btn_know_click,
         )
         self.btn_know.pack(side="left", padx=5)
+
+        # Back to Setup Button
+        back_btn = ctk.CTkButton(
+            controls_frame,
+            text="⚙️ Back to Setup",
+            fg_color=("gray60", "gray40"),
+            hover_color=("gray70", "gray50"),
+            width=120,
+            command=self.on_back_to_setup,
+        )
+        back_btn.grid(row=0, column=3, sticky="e", padx=(5, 0))
 
     def update_card_display(self):
         """Refreshes text and status labels for the current card with responsive wrapping."""
@@ -355,10 +519,10 @@ class FlashcardView(ctk.CTkFrame):
 
         # Update progress header
         total = len(self.cards)
-        if self.selected_objective == "All":
+        if self.selected_objectives == ["All"]:
             obj_label = "All Objectives"
         else:
-            obj_label = f"Objective {self.selected_objective}"
+            obj_label = f"Objectives: {', '.join(self.selected_objectives)}"
 
         self.lbl_objective.configure(
             text=f"Card {self.current_index + 1} of {total} | {obj_label}"
@@ -424,7 +588,7 @@ class FlashcardView(ctk.CTkFrame):
         self.selected_exam = choice if choice != "All" else "All"
 
         # Re-filter cards and reset to first card
-        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objective)
+        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objectives)
         random.shuffle(self.cards)
         self.current_index = 0
         self.is_flipped = False
@@ -432,44 +596,285 @@ class FlashcardView(ctk.CTkFrame):
         self.score_review = 0
         self.update_card_display()
 
-    def on_objective_change(self, choice):
+    def show_objective_selector(self):
         """
-        Handler for objective dropdown menu selection.
-        :param choice: selected choice (e.g., "All" or "Objective 2")
+        Display a modal dialog for selecting multiple objectives.
         """
-        if choice == "All":
-            self.selected_objective = "All"
-        else:
-            # Extract just the number from "Objective 2"
-            self.selected_objective = choice.split()[-1]
+        # Prevent multiple dialogs from opening
+        if hasattr(self, '_objective_dialog') and self._objective_dialog is not None:
+            try:
+                self._objective_dialog.lift()  # Bring to front if already open
+                return
+            except:
+                self._objective_dialog = None
 
-        # Re-filter cards and reset to first card
-        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objective)
-        random.shuffle(self.cards)  # Shuffle the filtered cards
+        available_objs = self.get_available_objectives()
+
+        # Create modal dialog window
+        dialog = ctk.CTkToplevel(self)
+        self._objective_dialog = dialog  # Store reference to prevent multiple openings
+        dialog.title("Select Objectives")
+        dialog.geometry("350x400")
+        dialog.resizable(False, False)
+
+        # Make dialog modal and always on top
+        dialog.attributes('-topmost', True)
+        dialog.grab_set()
+
+        # Reduce UI artifacts by deferring rendering
+        dialog.update_idletasks()
+
+        # Header
+        header_label = ctk.CTkLabel(
+            dialog,
+            text="Select one or more objectives:",
+            font=ctk.CTkFont(size=13, weight="bold")
+        )
+        header_label.pack(pady=(10, 5), padx=10)
+
+        # Scrollable frame for checkboxes
+        scrollable_frame = ctk.CTkScrollableFrame(dialog, fg_color="transparent")
+        scrollable_frame.pack(fill="both", expand=True, padx=10, pady=5)
+
+        # Create checkbox for "All"
+        var_all = ctk.BooleanVar(value=self.selected_objectives == ["All"])
+        checkbox_all = ctk.CTkCheckBox(
+            scrollable_frame,
+            text="All Objectives",
+            variable=var_all,
+            font=ctk.CTkFont(size=12, weight="bold")
+        )
+        checkbox_all.pack(anchor="w", pady=3)
+
+        # Create checkboxes for each objective
+        checkbox_vars = {}
+        for obj in available_objs:
+            is_selected = obj in self.selected_objectives
+            var = ctk.BooleanVar(value=is_selected)
+            checkbox_vars[obj] = var
+
+            checkbox = ctk.CTkCheckBox(
+                scrollable_frame,
+                text=f"Objective {obj}",
+                variable=var,
+                font=ctk.CTkFont(size=11)
+            )
+            checkbox.pack(anchor="w", pady=2)
+
+        # Button frame
+        button_frame = ctk.CTkFrame(dialog, fg_color="transparent")
+        button_frame.pack(fill="x", padx=10, pady=10)
+
+        # Apply and Cancel buttons
+        apply_btn = ctk.CTkButton(
+            button_frame,
+            text="Apply",
+            command=lambda: self.apply_objective_selection(checkbox_vars, var_all, dialog),
+            width=100
+        )
+        apply_btn.pack(side="left", padx=5)
+
+        cancel_btn = ctk.CTkButton(
+            button_frame,
+            text="Cancel",
+            fg_color=("gray60", "gray40"),
+            hover_color=("gray70", "gray50"),
+            command=lambda: self.close_objective_dialog(dialog),
+            width=100
+        )
+        cancel_btn.pack(side="left", padx=5)
+
+        # Handle dialog close
+        def on_dialog_close():
+            self._objective_dialog = None
+
+        dialog.protocol("WM_DELETE_WINDOW", on_dialog_close)
+
+    def close_objective_dialog(self, dialog):
+        """Close the objective dialog and clean up reference."""
+        self._objective_dialog = None
+        dialog.destroy()
+
+    def apply_objective_selection(self, checkbox_vars, var_all, dialog):
+        """
+        Apply the selected objectives and close dialog.
+        """
+        if var_all.get():
+            self.selected_objectives = ["All"]
+        else:
+            selected = [obj for obj, var in checkbox_vars.items() if var.get()]
+            if not selected:
+                selected = ["All"]
+            self.selected_objectives = sorted(selected)
+
+        # Update button text
+        if self.selected_objectives == ["All"]:
+            self.obj_button.configure(text="All Objectives")
+        else:
+            button_text = "Obj: " + ", ".join(self.selected_objectives)
+            self.obj_button.configure(text=button_text)
+
+        # Re-filter cards
+        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objectives)
+        random.shuffle(self.cards)
         self.current_index = 0
         self.is_flipped = False
         self.score_known = 0
         self.score_review = 0
+        self.reviewed_cards = []
+        self.cards_studied = []
         self.update_card_display()
 
+        # Close dialog
+        self.close_objective_dialog(dialog)
+
+    def on_card_limit_change(self, choice):
+        """
+        Handler for card limit selection.
+        :param choice: selected limit (e.g., "All", "10", "20", etc.)
+        """
+        if choice == "All":
+            self.card_limit = None
+        else:
+            self.card_limit = int(choice)
+
+        # Reset current session
+        self.current_index = 0
+        self.is_flipped = False
+        self.score_known = 0
+        self.score_review = 0
+        self.reviewed_cards = []
+        self.cards_studied = []
+        self.update_card_display()
+
+    def on_back_to_setup(self):
+        """Go back to setup screen."""
+        # Get reference to main app window
+        root = self.winfo_toplevel()
+        # Call the app's start_flashcards_setup method
+        if hasattr(root, 'start_flashcards_setup'):
+            root.start_flashcards_setup()
+
+    def on_btn_review_click(self):
+        """Handle 'Needs Review' button - context aware."""
+        if hasattr(self, '_in_review_mode') and self._in_review_mode:
+            # On review screen: start new session
+            self.start_new_session()
+        else:
+            # During study: mark card as needs review
+            self.record_answer(known=False)
+
+    def on_btn_know_click(self):
+        """Handle 'Know It' button - context aware."""
+        if hasattr(self, '_in_review_mode') and self._in_review_mode:
+            # On review screen: done studying
+            self.exit_review_screen()
+        else:
+            # During study: mark card as known
+            self.record_answer(known=True)
+
+    def start_new_session(self):
+        """Start a fresh study session."""
+        self._in_review_mode = False
+        self.current_index = 0
+        self.is_flipped = False
+        self.score_known = 0
+        self.score_review = 0
+        self.reviewed_cards = []
+        self.cards_studied = []
+        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objectives)
+        random.shuffle(self.cards)
+        self.btn_review.configure(text="Needs Review ✗")
+        self.btn_know.configure(text="Know It ✓")
+        self.update_card_display()
+
+    def exit_review_screen(self):
+        """Exit the review screen and return to normal state."""
+        self._in_review_mode = False
+        self.btn_review.configure(text="Needs Review ✗")
+        self.btn_know.configure(text="Know It ✓")
+        self.start_new_session()
+
     def record_answer(self, known: bool):
-        """Tracks mastery score and advances to the next card."""
+        """Tracks mastery score, cards reviewed, and advances to next card."""
+        current_card = self.cards[self.current_index]
+        self.cards_studied.append(current_card)
+
         if known:
             self.score_known += 1
         else:
             self.score_review += 1
+            self.reviewed_cards.append(current_card)  # Track for review
 
         self.lbl_score.configure(
             text=f"Mastered: {self.score_known} | Needs Review: {self.score_review}"
         )
 
+        # Check if card limit reached
+        total_answered = self.score_known + self.score_review
+        if self.card_limit and total_answered >= self.card_limit:
+            # Show review screen instead of next card
+            self.show_review_screen()
+            return
+
         # Advance to next card or loop back
         self.current_index += 1
         if self.current_index >= len(self.cards):
-            self.current_index = 0  # Loop back to beginning (or present summary screen)
+            self.current_index = 0  # Loop back to beginning
 
         self.is_flipped = False
         self.update_card_display()
+
+    def show_review_screen(self):
+        """
+        Display review summary screen with collapsible objectives showing reviewed cards.
+        """
+        self._in_review_mode = True
+
+        # Save this review to history
+        self.save_review()
+
+        # Clear the card content area
+        self.text_card.configure(state="normal")
+        self.text_card.delete("1.0", "end")
+
+        # Create review summary
+        review_text = f"\n✓ REVIEW COMPLETE!\n\n"
+        review_text += f"Cards Studied: {len(self.cards_studied)}\n"
+        review_text += f"Mastered: {self.score_known}\n"
+        review_text += f"Needs Review: {self.score_review}\n\n"
+
+        if self.reviewed_cards:
+            review_text += "Cards to Review:\n"
+            review_text += "-" * 40 + "\n\n"
+
+            # Group by objective
+            by_objective = {}
+            for card in self.reviewed_cards:
+                obj = card.get("objective", "Unknown")
+                if obj not in by_objective:
+                    by_objective[obj] = []
+                by_objective[obj].append(card.get("term", "Unknown"))
+
+            for obj in sorted(by_objective.keys()):
+                review_text += f"\n[{obj}]\n"
+                for term in by_objective[obj]:
+                    review_text += f"  • {term}\n"
+
+        review_text += "\n\n" + "=" * 40
+        review_text += "\nClick 'New Review' to study again"
+        review_text += "\nor 'Done' to exit.\n"
+
+        self.text_card.insert("1.0", review_text)
+        self.text_card.configure(state="disabled")
+
+        # Hide progress label
+        self.lbl_objective.configure(text="")
+        self.lbl_card_side.configure(text="")
+
+        # Change button labels
+        self.btn_review.configure(text="New Review")
+        self.btn_know.configure(text="Done")
 
     def reshuffle_cards(self):
         """Reshuffle the current card deck."""

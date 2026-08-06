@@ -350,35 +350,10 @@ class NotesView(ctk.CTkFrame):
                             obj = card.get("objective", "")
                             if obj:
                                 review_objectives.add(obj)
-            except Exception as e:
-                pass
-
-        return review_objectives
-
-    def _load_review_details(self):
-        """Load detailed review info: {objective: [list of terms]}"""
-        from pathlib import Path
-        import json
-
-        review_details = {}
-        review_path = Path("data/review_history.json")
-
-        if review_path.exists():
-            try:
-                with open(review_path, "r", encoding="utf-8") as f:
-                    reviews = json.load(f)
-                    for review in reviews:
-                        for card in review.get("cards_reviewed", []):
-                            obj = card.get("objective", "")
-                            term = card.get("term", "")
-                            if obj and term:
-                                if obj not in review_details:
-                                    review_details[obj] = []
-                                review_details[obj].append(term)
             except:
                 pass
 
-        return review_details
+        return review_objectives
 
     def _generate_title_page_html(self):
         """Generate HTML for the title page with table of contents."""
@@ -386,7 +361,6 @@ class NotesView(ctk.CTkFrame):
         import json
 
         review_objectives = self._load_review_objectives()
-        review_details = self._load_review_details()  # Get detailed review info
 
         # Build the title page content
         content_parts = [
@@ -397,48 +371,17 @@ class NotesView(ctk.CTkFrame):
             '</div>',
         ]
 
-        # Review Material section - build list of objectives that need review
-        review_list_html = ""
-        if review_objectives:
-            # Build list with newlines and diamond bullets, each on its own non-wrapping line
-            review_items = []
-            for obj in sorted(review_details.keys()):
-                terms = review_details[obj]
-                # Extract just the objective number (e.g., "1.1" from "1.1 - Laptop Hardware...")
-                obj_num = obj.split(' - ')[0] if ' - ' in obj else obj
-                # Join first 3 terms with commas
-                terms_str = ", ".join(terms[:3])
-                if len(terms) > 3:
-                    terms_str += f" (+{len(terms) - 3} more)"
-                review_items.append(f'<nobr>◆ {obj_num}: {terms_str}</nobr>')
+        # Study statistics - minimal
+        written, total = library.count_written(self.sections)
+        progress_pct = int((written / total * 100)) if total > 0 else 0
 
-            # Join with actual line breaks
-            review_list_html = "<br>".join(review_items)
+        content_parts.append('<div class="progress-section">')
+        content_parts.append(f'<p class="progress-text">{written} of {total} sections · {progress_pct}% complete</p>')
+        content_parts.append(f'<div class="progress-bar"><div class="progress-fill" style="width: {progress_pct}%"></div></div>')
+        content_parts.append('</div>')
 
-        if review_list_html:
-            content_parts.append('<div class="review-material-section">')
-            content_parts.append('<details class="review-material-details">')
-            content_parts.append('<summary class="review-material-summary">Review Material</summary>')
-            content_parts.append(f'<div class="review-material-content">{review_list_html}</div>')
-            content_parts.append('</details>')
-            content_parts.append('</div>')
-
-        # Original progress section (kept but hidden if reviews exist)
-        if not review_objectives:
-            written, total = library.count_written(self.sections)
-            progress_pct = int((written / total * 100)) if total > 0 else 0
-
-            content_parts.append('<div class="progress-section">')
-            content_parts.append(f'<p class="progress-text">{written} of {total} sections · {progress_pct}% complete</p>')
-            content_parts.append(f'<div class="progress-bar"><div class="progress-fill" style="width: {progress_pct}%"></div></div>')
-            content_parts.append('</div>')
-
-        # Flatten all objectives with their section info, separated by exam
-        core1_objectives = []
-        core2_objectives = []
-        core1_num = 1
-        core2_num = 1
-
+        # Flatten all objectives with their section info
+        all_objectives = []
         for section in self.sections:
             section_name = section.get("name", "Unknown")
             section_label = section.get("label", section_name)
@@ -446,143 +389,73 @@ class NotesView(ctk.CTkFrame):
             for idx, note in enumerate(section.get("notes", [])):
                 note_id = note.get("id", "")
                 note_label = note.get("label", "Untitled")
-                note_objective_short = note.get("objective", "")  # e.g., "1.1"
-                note_title = note.get("title", "")  # e.g., "Laptop Hardware, Components & Physical Security"
+                note_objective = note.get("group_label", note_label)
                 is_empty = note.get("is_empty", False)
-                group_key = note.get("group_key", "")  # "core1", "core2", or ""
+                is_reviewed = note_objective in review_objectives
 
-                # Build full objective label matching review history format
-                # Review history uses: "1.1 - Laptop Hardware, Components & Physical Security"
-                if note_objective_short and note_title:
-                    full_objective = f"{note_objective_short} - {note_title}"
-                else:
-                    full_objective = note_objective_short or note_label
-
-                is_reviewed = full_objective in review_objectives
-
-                # If full objective doesn't match, try matching just the objective number with title validation
-                # This handles cases where the title text differs between notes and review history
-                if not is_reviewed and note_objective_short:
-                    # Check if any reviewed objective starts with this objective number
-                    for reviewed_obj in review_objectives:
-                        if reviewed_obj.startswith(note_objective_short):
-                            # Also check if there's significant title word overlap
-                            # Extract title part from reviewed objective (after the dash)
-                            reviewed_title = reviewed_obj.split(' - ')[1].lower() if ' - ' in reviewed_obj else ""
-                            note_title_lower = note_title.lower()
-
-                            # Check for keyword overlap (at least one common significant word)
-                            reviewed_words = set(word for word in reviewed_title.split() if len(word) > 3)
-                            note_words = set(word for word in note_title_lower.split() if len(word) > 3)
-
-                            if reviewed_words & note_words:  # If there's intersection
-                                is_reviewed = True
-                                full_objective = reviewed_obj
-                                break
-
-                obj_data = {
+                all_objectives.append({
                     'id': note_id,
                     'label': note_label,
-                    'objective': full_objective,
+                    'objective': note_objective,
                     'is_empty': is_empty,
                     'is_reviewed': is_reviewed,
                     'section': section_label,
-                    'group_key': group_key,
-                    'number': 0  # Will be set below based on group
-                }
-
-                if group_key == "core2":
-                    obj_data['number'] = core2_num
-                    core2_objectives.append(obj_data)
-                    core2_num += 1
-                else:
-                    # core1 or anything else (general) goes to core1
-                    obj_data['number'] = core1_num
-                    core1_objectives.append(obj_data)
-                    core1_num += 1
+                    'number': len(all_objectives) + 1
+                })
 
         # Display objectives in a 2-column layout (reading left-to-right)
         content_parts.append('<div class="objectives-container">')
+        content_parts.append('<div class="objectives-columns">')
 
-        # Helper function to render objectives
-        def render_objectives_section(objectives, section_title):
-            if not objectives:
-                return
+        # Create pairs of objectives that read left-to-right
+        for i in range(0, len(all_objectives), 2):
+            # Left item in the pair
+            obj = all_objectives[i]
+            review_class = " flagged" if obj['is_reviewed'] else ""
+            if obj['is_reviewed']:
+                status_icon = "▪"
+            elif not obj['is_empty']:
+                status_icon = "□"
+            else:
+                status_icon = ""
 
-            content_parts.append('<div class="objectives-section">')
-            content_parts.append(f'<div class="objectives-section-title">{section_title}</div>')
-            content_parts.append('<div class="objectives-columns">')
+            content_parts.append('<div class="objective-row">')
+            content_parts.append('<div class="objective-column">')
+            content_parts.append(f'<a href="note:{obj["id"]}" class="objective-entry{review_class}">')
+            content_parts.append(f'<div class="obj-number">{obj["number"]:02d}</div>')
+            content_parts.append('<div class="obj-text">')
+            content_parts.append(f'<div class="obj-title">{obj["label"]}</div>')
+            if status_icon:
+                content_parts.append(f'<div class="obj-indicator">{status_icon}</div>')
+            content_parts.append('</div>')
+            content_parts.append('</a>')
+            content_parts.append('</div>')
 
-            # Create pairs of objectives that read left-to-right
-            for i in range(0, len(objectives), 2):
-                # Left item in the pair
-                obj = objectives[i]
+            # Right item in the pair (if it exists)
+            if i + 1 < len(all_objectives):
+                obj = all_objectives[i + 1]
                 review_class = " flagged" if obj['is_reviewed'] else ""
+                if obj['is_reviewed']:
+                    status_icon = "▪"
+                elif not obj['is_empty']:
+                    status_icon = "□"
+                else:
+                    status_icon = ""
 
-                # Build tooltip content with review details
-                tooltip_text = ""
-                if obj['is_reviewed'] and obj['objective'] in review_details:
-                    terms = review_details[obj['objective']]
-                    tooltip_text = "\n".join(terms[:10])  # Limit to 10 terms
-                    if len(terms) > 10:
-                        tooltip_text += f"\n... and {len(terms) - 10} more"
-
-                content_parts.append('<div class="objective-row">')
                 content_parts.append('<div class="objective-column">')
                 content_parts.append(f'<a href="note:{obj["id"]}" class="objective-entry{review_class}">')
                 content_parts.append(f'<div class="obj-number">{obj["number"]:02d}</div>')
                 content_parts.append('<div class="obj-text">')
                 content_parts.append(f'<div class="obj-title">{obj["label"]}</div>')
-
-                # Show "Needs Review" for flagged items, dot for others
-                if obj['is_reviewed']:
-                    content_parts.append(f'<div class="obj-indicator flagged">Needs Review</div>')
-                elif not obj['is_empty']:
-                    content_parts.append('<div class="obj-indicator">·</div>')
-
+                if status_icon:
+                    content_parts.append(f'<div class="obj-indicator">{status_icon}</div>')
                 content_parts.append('</div>')
                 content_parts.append('</a>')
                 content_parts.append('</div>')
 
-                # Right item in the pair (if it exists)
-                if i + 1 < len(objectives):
-                    obj = objectives[i + 1]
-                    review_class = " flagged" if obj['is_reviewed'] else ""
-
-                    tooltip_text = ""
-                    if obj['is_reviewed'] and obj['objective'] in review_details:
-                        terms = review_details[obj['objective']]
-                        tooltip_text = "\n".join(terms[:10])
-                        if len(terms) > 10:
-                            tooltip_text += f"\n... and {len(terms) - 10} more"
-
-                    content_parts.append('<div class="objective-column">')
-                    content_parts.append(f'<a href="note:{obj["id"]}" class="objective-entry{review_class}">')
-                    content_parts.append(f'<div class="obj-number">{obj["number"]:02d}</div>')
-                    content_parts.append('<div class="obj-text">')
-                    content_parts.append(f'<div class="obj-title">{obj["label"]}</div>')
-
-                    # Show "Needs Review" for flagged items, dot for others
-                    if obj['is_reviewed']:
-                        content_parts.append(f'<div class="obj-indicator flagged">Needs Review</div>')
-                    elif not obj['is_empty']:
-                        content_parts.append('<div class="obj-indicator">·</div>')
-
-                    content_parts.append('</div>')
-                    content_parts.append('</a>')
-                    content_parts.append('</div>')
-
-                content_parts.append('</div>')
-
-            content_parts.append('</div>')
             content_parts.append('</div>')
 
-        # Render Core 1
-        render_objectives_section(core1_objectives, "Core 1")
-
-        # Render Core 2
-        render_objectives_section(core2_objectives, "Core 2")
-
+        content_parts.append('</div>')
         content_parts.append('</div>')
 
         # Enhanced CSS with better typography, borders, and visual hierarchy
@@ -644,67 +517,9 @@ class NotesView(ctk.CTkFrame):
             background: linear-gradient(90deg, #4da6ff 0%, #42a5f5 100%);
         }
 
-        /* Review Material Section */
-        .review-material-section {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .review-material-details {
-            display: inline-block;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .review-material-summary {
-            font-size: 1.05em;
-            color: #888;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: block;
-            cursor: pointer;
-        }
-
-        /* Remove default marker */
-        .review-material-details::marker {
-            display: none;
-        }
-
-        .review-material-details > summary::-webkit-details-marker {
-            display: none;
-        }
-
-        /* Content inside the expandable review section */
-        .review-material-content {
-            margin-top: 12px;
-            font-size: 0.9em;
-            color: #888;
-            line-height: 1.6;
-            white-space: normal;
-        }
-
         /* Objectives List Container */
         .objectives-container {
             margin-top: 20px;
-        }
-
-        /* Core section with header */
-        .objectives-section {
-            margin-bottom: 50px;
-        }
-
-        .objectives-section-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: #aaa;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #2a2a2a;
         }
 
         /* Two-column table layout */
@@ -800,20 +615,17 @@ class NotesView(ctk.CTkFrame):
             word-wrap: break-word;
         }
 
-        /* Status Indicator - small dot or "Needs Review" text */
+        /* Status Indicator */
         .obj-indicator {
-            font-size: 0.85em;
+            font-size: 0.9em;
             margin-left: 8px;
             font-weight: bold;
             color: #4da6ff;
             display: inline;
-            letter-spacing: 0.5px;
         }
 
-        .obj-indicator.flagged {
+        .objective-entry.flagged .obj-indicator {
             color: #ff6b6b;
-            font-style: italic;
-            font-weight: 700;
         }
 
         /* Responsive adjustments */

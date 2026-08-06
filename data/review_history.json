@@ -1,0 +1,33 @@
+[
+  {
+    "timestamp": "C:\\Users\\Dylan\\source\\repos\\A_Plus_StudySuite",
+    "exam": "All",
+    "objectives": [
+      "1.1 - Laptop Hardware, Components & Physical Security",
+      "1.4 - Windows Features & Admin Tools"
+    ],
+    "cards_studied": 10,
+    "cards_reviewed": [
+      {
+        "id": "fc_007",
+        "term": "DDR5 SO-DIMM Pin Count",
+        "objective": "1.1 - Laptop Hardware, Components & Physical Security"
+      },
+      {
+        "id": "fc_013",
+        "term": "Privacy Filter",
+        "objective": "1.1 - Laptop Hardware, Components & Physical Security"
+      },
+      {
+        "id": "fc_005",
+        "term": "Disk Cloning",
+        "objective": "1.1 - Laptop Hardware, Components & Physical Security"
+      },
+      {
+        "id": "c2_047",
+        "term": "Services Console (services.msc)",
+        "objective": "1.4 - Windows Features & Admin Tools"
+      }
+    ]
+  }
+]
