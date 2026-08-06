@@ -124,7 +124,7 @@ class NotesView(ctk.CTkFrame):
 
         ctk.CTkButton(
             size_box,
-            text="A−",
+            text="-",
             width=34,
             height=28,
             font=ctk.CTkFont(size=12, weight="bold"),
@@ -133,7 +133,7 @@ class NotesView(ctk.CTkFrame):
 
         ctk.CTkButton(
             size_box,
-            text="A+",
+            text="+",
             width=34,
             height=28,
             font=ctk.CTkFont(size=13, weight="bold"),

@@ -53,7 +53,7 @@ class FlashcardSetupView(ctk.CTkFrame):
         # Title
         title = ctk.CTkLabel(
             self,
-            text="?? Flashcard Study Setup",
+            text="Flashcard Study Setup",
             font=ctk.CTkFont(size=20, weight="bold")
         )
         title.grid(row=0, column=0, sticky="ew", pady=(0, 5))
@@ -99,7 +99,7 @@ class FlashcardSetupView(ctk.CTkFrame):
         # Start button
         btn_start = ctk.CTkButton(
             bottom_frame,
-            text="?? Start Study Session",
+            text=" Start Study Session",
             font=ctk.CTkFont(size=14, weight="bold"),
             fg_color="#388E3C",
             hover_color="#1B5E20",
@@ -111,7 +111,7 @@ class FlashcardSetupView(ctk.CTkFrame):
         # Review History button
         btn_review = ctk.CTkButton(
             bottom_frame,
-            text="?? Review History",
+            text=" Review History",
             font=ctk.CTkFont(size=12),
             fg_color="#5E35B1",
             hover_color="#4527A0",
@@ -130,7 +130,7 @@ class FlashcardSetupView(ctk.CTkFrame):
         # Review history header
         hist_header = ctk.CTkLabel(
             self.review_history_frame,
-            text="?? Review History",
+            text=" Review History",
             font=ctk.CTkFont(size=14, weight="bold")
         )
         hist_header.grid(row=0, column=0, sticky="ew", pady=(0, 10))
@@ -146,7 +146,7 @@ class FlashcardSetupView(ctk.CTkFrame):
         # Clear history button at bottom
         btn_clear = ctk.CTkButton(
             self.review_history_frame,
-            text="??? Clear History",
+            text="? Clear History",
             fg_color="#D32F2F",
             hover_color="#B71C1C",
             width=120,
@@ -255,7 +255,7 @@ class FlashcardSetupView(ctk.CTkFrame):
 
         limit_text = f"{self.selected_card_limit} cards" if self.selected_card_limit != "All" else "All available cards"
 
-        summary = f"?? {obj_text} | ?? {card_count} cards | {limit_text}"
+        summary = f"{obj_text} | {card_count} cards | {limit_text}"
         self.lbl_summary.configure(text=summary)
 
     def count_cards_for_selection(self):
@@ -429,3 +429,4 @@ class FlashcardSetupView(ctk.CTkFrame):
             command=do_clear
         )
         btn_confirm.grid(row=0, column=1, sticky="ew", padx=(5, 0))
+
