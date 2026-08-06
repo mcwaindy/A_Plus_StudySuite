@@ -1,664 +1,1558 @@
 [
-  {
-    "id": "fc_001",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "RJ-45",
-    "definition": "An 8-ping/8-position connector used primarily for Ethernet networking.",
-    "image_path": "assets/images/rj45_cable.png"
-  },
-  {
-    "id": "fc_002",
-    "objective": "2.1 - Networking Protocols",
-    "term": "DNS (Domain Name System)",
-    "definition": "Resolves human-readable hostnames (e.g., google.com) to IP addresses. Uses Port 53.",
-    "image_path": null
-  },
-  {
-    "id": "fc_003",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "SO-DIMM",
-    "definition": "Small Outline Dual In-line Memory Module. A compact memory form factor used in laptops, roughly half the physical length of desktop DIMMs."
-  },
-  {
-    "id": "fc_004",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "ZIF Connector",
-    "definition": "Zero Insertion Force connector. A ribbon cable connector that uses a locking latch to secure thin flex cables without requiring force."
-  },
-  {
-    "id": "fc_005",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "Disk Cloning",
-    "definition": "Creating a sector-by-sector duplicate of a hard drive onto another drive, preserving the OS, applications, and settings."
-  },
-  {
-    "id": "fc_006",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "DDR4 SO-DIMM Pin Count",
-    "definition": "DDR4 SO-DIMMs use 260 pins for laptop memory modules."
-  },
-  {
-    "id": "fc_007",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "DDR5 SO-DIMM Pin Count",
-    "definition": "DDR5 SO-DIMMs use 262 pins for laptop memory modules."
-  },
-  {
-    "id": "fc_008",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "M.2 2230 Form Factor",
-    "definition": "A wireless card form factor measuring 22mm wide by 30mm long, commonly used for Wi-Fi and Bluetooth modules in laptops."
-  },
-  {
-    "id": "fc_009",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "U.FL Connector",
-    "definition": "A miniature coaxial connector used to connect antenna cables to internal wireless cards in laptops."
-  },
-  {
-    "id": "fc_010",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "Biometric Authentication",
-    "definition": "Devices that measure biological characteristics (fingerprints, facial recognition) to authenticate user access to secure systems."
-  },
-  {
-    "id": "fc_011",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "Windows Hello",
-    "definition": "Microsoft's biometric authentication system using Infrared (IR) cameras for facial recognition, works regardless of ambient lighting."
-  },
-  {
-    "id": "fc_012",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "NFC/RFID Reader",
-    "definition": "A built-in proximity scanner in laptops that enables tap-to-authenticate functionality using employee smart badges and security tokens."
-  },
-  {
-    "id": "fc_013",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "Privacy Filter",
-    "definition": "A physical optical screen or electronic toggle (e.g., HP Sure View) that narrows viewing angles to defeat visual eavesdropping or 'shoulder surfing'."
-  },
-  {
-    "id": "fc_014",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "Lithium-Ion Battery (Li-ion)",
-    "definition": "The primary battery technology used in modern internal laptop batteries, secured by screws under the chassis cover."
-  },
-  {
-    "id": "fc_015",
-    "objective": "1.1 - Laptop Hardware, Components & Physical Security",
-    "term": "Swollen Battery Hazard",
-    "definition": "A chemical degradation condition in batteries that indicates they pose a fire/explosion risk and must be disposed of according to environmental and hazardous waste guidelines."
-  },
-  {
-    "id": "fc_016",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "LCD (Liquid Crystal Display)",
-    "definition": "A display technology using liquid crystal solution sandwiched between polarizing filters; requires an external LED backlight to produce visible images."
-  },
-  {
-    "id": "fc_017",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "IPS Panel (In-Plane Switching)",
-    "definition": "LCD panel where crystals align horizontally; offers excellent color accuracy and wide 178° viewing angles, used in professional graphics displays."
-  },
-  {
-    "id": "fc_018",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "TN Panel (Twisted Nematic)",
-    "definition": "LCD panel where crystals twist as current passes; offers fast response times and low cost, but poor color accuracy and narrow viewing angles."
-  },
-  {
-    "id": "fc_019",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "VA Panel (Vertical Alignment)",
-    "definition": "LCD panel where crystals align vertically when unpowered; offers deep black levels and high contrast, but slower response times than TN panels."
-  },
-  {
-    "id": "fc_020",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "OLED (Organic Light-Emitting Diode)",
-    "definition": "Self-illuminating display technology where each pixel generates its own light; provides true blacks, superior contrast, and requires no separate backlight."
-  },
-  {
-    "id": "fc_021",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "Digitizer",
-    "definition": "The transparent glass layer bonded to the front of a display panel that translates touch or stylus input into digital coordinates."
-  },
-  {
-    "id": "fc_022",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "Inverter Board",
-    "definition": "A high-voltage component used in legacy CCFL-backlit LCD screens to convert DC power to AC power. Modern LED displays do not require inverters."
-  },
-  {
-    "id": "fc_023",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "Self-Emissive Display",
-    "definition": "Display technology (like OLED) where each pixel generates its own light without requiring a background backlight source."
-  },
-  {
-    "id": "fc_024",
-    "objective": "1.2 - Mobile Device Display Components",
-    "term": "Image Retention / Burn-In",
-    "definition": "A permanent performance degradation in OLED displays caused by static images displayed at high brightness for extended periods."
-  },
-  {
-    "id": "fc_025",
-    "objective": "2.1 - Networking Protocols",
-    "term": "TCP (Transmission Control Protocol)",
-    "definition": "Connection-oriented, reliable transport layer protocol that uses a 3-way handshake and guarantees packet delivery in sequence order."
-  },
-  {
-    "id": "fc_026",
-    "objective": "2.1 - Networking Protocols",
-    "term": "UDP (User Datagram Protocol)",
-    "definition": "Connectionless, lightweight transport layer protocol designed for speed; delivers packets on a 'best effort' basis without guarantees or retransmission."
-  },
-  {
-    "id": "fc_027",
-    "objective": "2.1 - Networking Protocols",
-    "term": "Three-Way Handshake",
-    "definition": "The TCP process to establish a connection: SYN → SYN-ACK → ACK, which must complete before data transfer begins."
-  },
-  {
-    "id": "fc_028",
-    "objective": "2.1 - Networking Protocols",
-    "term": "HTTP (Hypertext Transfer Protocol)",
-    "definition": "TCP port 80 protocol that transfers unencrypted web pages across the World Wide Web."
-  },
-  {
-    "id": "fc_029",
-    "objective": "2.1 - Networking Protocols",
-    "term": "HTTPS (HTTP Secure)",
-    "definition": "TCP port 443 protocol that encrypts web traffic using TLS/SSL to secure sensitive web browsing and transactions."
-  },
-  {
-    "id": "fc_030",
-    "objective": "2.1 - Networking Protocols",
-    "term": "SSH (Secure Shell)",
-    "definition": "TCP port 22 protocol providing encrypted remote terminal connection for secure CLI administrative access."
-  },
-  {
-    "id": "fc_031",
-    "objective": "2.1 - Networking Protocols",
-    "term": "Telnet",
-    "definition": "TCP port 23 legacy protocol for unencrypted remote terminal access; transmits credentials and commands in plain text (insecure)."
-  },
-  {
-    "id": "fc_032",
-    "objective": "2.1 - Networking Protocols",
-    "term": "FTP (File Transfer Protocol)",
-    "definition": "TCP ports 20/21 protocol for transmitting files between client and server. Port 21 manages commands; Port 20 handles data transfer."
-  },
-  {
-    "id": "fc_033",
-    "objective": "2.1 - Networking Protocols",
-    "term": "SMB (Server Message Block)",
-    "definition": "TCP port 445 protocol used by Windows for sharing files, folders, and printers across a local network."
-  },
-  {
-    "id": "fc_034",
-    "objective": "2.1 - Networking Protocols",
-    "term": "AFP (Apple Filing Protocol)",
-    "definition": "TCP port 548 legacy proprietary file sharing protocol used by macOS devices."
-  },
-  {
-    "id": "fc_035",
-    "objective": "2.1 - Networking Protocols",
-    "term": "SMTP (Simple Mail Transfer Protocol)",
-    "definition": "TCP port 25 protocol that sends email from clients to servers or transfers mail between email servers."
-  },
-  {
-    "id": "fc_036",
-    "objective": "2.1 - Networking Protocols",
-    "term": "POP3 (Post Office Protocol v3)",
-    "definition": "TCP port 110 protocol that downloads email from a server to a single local device, typically deleting it from the server afterwards."
-  },
-  {
-    "id": "fc_037",
-    "objective": "2.1 - Networking Protocols",
-    "term": "IMAP (Internet Message Access Protocol)",
-    "definition": "TCP port 143 protocol that synchronizes email across multiple devices while keeping mail stored on the central server."
-  },
-  {
-    "id": "fc_039",
-    "objective": "2.1 - Networking Protocols",
-    "term": "DHCP (Dynamic Host Configuration Protocol)",
-    "definition": "UDP ports 67/68 protocol that automatically assigns IP addresses, subnet masks, default gateways, and DNS servers to network clients."
-  },
-  {
-    "id": "fc_040",
-    "objective": "2.1 - Networking Protocols",
-    "term": "SNMP (Simple Network Management Protocol)",
-    "definition": "UDP ports 161/162 protocol that monitors and gathers metrics from network devices. Queries use UDP 161; traps use UDP 162."
-  },
-  {
-    "id": "fc_041",
-    "objective": "2.1 - Networking Protocols",
-    "term": "LDAP (Lightweight Directory Access Protocol)",
-    "definition": "TCP port 389 protocol that queries and manages directory services like Microsoft Active Directory for network authentication."
-  },
-  {
-    "id": "fc_042",
-    "objective": "2.1 - Networking Protocols",
-    "term": "LDAPS (LDAP Secure)",
-    "definition": "TCP port 636 protocol that encrypts LDAP directory traffic over SSL/TLS."
-  },
-  {
-    "id": "fc_043",
-    "objective": "2.1 - Networking Protocols",
-    "term": "RDP (Remote Desktop Protocol)",
-    "definition": "TCP port 3389 Microsoft proprietary protocol enabling graphical view and remote control of a Windows desktop PC."
-  },
-  {
-    "id": "fc_044",
-    "objective": "2.1 - Networking Protocols",
-    "term": "NetBIOS",
-    "definition": "UDP ports 137/138, TCP port 139 legacy Windows protocol suite for hostname resolution, datagram services, and session handling."
-  },
-  {
-    "id": "fc_045",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Cat 5 Cable",
-    "definition": "Legacy Ethernet cable supporting maximum 100 Mbps over 100 meters at 100 MHz frequency."
-  },
-  {
-    "id": "fc_046",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Cat 5e Cable",
-    "definition": "Enhanced Ethernet cable supporting 1 Gbps (1000 Mbps) over 100 meters at 100 MHz frequency, standard for home and small office networks."
-  },
-  {
-    "id": "fc_047",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Cat 6 Cable",
-    "definition": "Ethernet cable supporting 10 Gbps up to 55 meters or 1 Gbps up to 100 meters at 250 MHz, includes internal plastic separator (spline)."
-  },
-  {
-    "id": "fc_048",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Cat 6a Cable",
-    "definition": "Augmented Ethernet cable supporting 10 Gbps up to 100 meters at 500 MHz frequency, used in enterprise 10-Gigabit Ethernet networks."
-  },
-  {
-    "id": "fc_049",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "UTP (Unshielded Twisted Pair)",
-    "definition": "Standard network cable without internal foil shielding; highly flexible and cost-effective but susceptible to strong external EMI."
-  },
-  {
-    "id": "fc_050",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "STP (Shielded Twisted Pair)",
-    "definition": "Network cable with internal foil wrapping around wire pairs; shields against heavy electromagnetic interference in industrial environments."
-  },
-  {
-    "id": "fc_051",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "RJ-45 Connector",
-    "definition": "8-position, 8-conductor (8P8C) modular connector used for Ethernet network cabling."
-  },
-  {
-    "id": "fc_052",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "RJ-11 Connector",
-    "definition": "6-position, 2-conductor (or 4-conductor) modular connector used for telephone lines and DSL modems."
-  },
-  {
-    "id": "fc_053",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "F-Type Connector",
-    "definition": "Threaded coaxial cable connector used for cable TV and cable internet modems with RG-6 or RG-59 cabling."
-  },
-  {
-    "id": "fc_054",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "T568A Wiring Standard",
-    "definition": "Ethernet pinout standard: White/Green, Green, White/Orange, Blue, White/Blue, Orange, White/Brown, Brown."
-  },
-  {
-    "id": "fc_055",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "T568B Wiring Standard",
-    "definition": "Ethernet pinout standard: White/Orange, Orange, White/Green, Blue, White/Blue, Green, White/Brown, Brown."
-  },
-  {
-    "id": "fc_056",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Straight-Through Cable",
-    "definition": "Ethernet cable using same standard (T568A or T568B) on both ends; connects unlike devices (e.g., PC to Switch)."
-  },
-  {
-    "id": "fc_057",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Crossover Cable",
-    "definition": "Ethernet cable using T568A on one end and T568B on the other; connects like devices (e.g., PC to PC). Modern devices support Auto-MDIX."
-  },
-  {
-    "id": "fc_058",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Single-Mode Fiber (SMF)",
-    "definition": "Fiber-optic cable with narrow core diameter (~9 microns) using laser light; supports exceptional distances (tens of kilometers) for WAN backbones."
-  },
-  {
-    "id": "fc_059",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Multi-Mode Fiber (MMF)",
-    "definition": "Fiber-optic cable with larger core diameter (~50-62.5 microns) using LED; supports shorter distances (up to ~500 meters) for LAN backbones."
-  },
-  {
-    "id": "fc_060",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "ST Connector (Fiber)",
-    "definition": "Round, bayonet-style twist-and-lock fiber connector (Set and Twist)."
-  },
-  {
-    "id": "fc_061",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "SC Connector (Fiber)",
-    "definition": "Square, push-pull snap-in fiber connector (Subscriber/Square Connector)."
-  },
-  {
-    "id": "fc_062",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "LC Connector (Fiber)",
-    "definition": "Small Form Factor (SFF) push-pull fiber connector with retaining latch (Little/Lucent Connector)."
-  },
-  {
-    "id": "fc_063",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Plenum-Rated Cable (CMP)",
-    "definition": "Cable with fire-retardant fluoropolymer jacket emitting minimal smoke/non-toxic fumes; mandatory for air handling ducts and drop ceilings."
-  },
-  {
-    "id": "fc_064",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "PVC / Non-Plenum Cable",
-    "definition": "Standard polyvinyl chloride jacket cable; flexible and inexpensive but emits toxic chlorine gas when burned. Prohibited in plenum spaces."
-  },
-  {
-    "id": "fc_065",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Plenum Space",
-    "definition": "An enclosed building area (above drop ceilings, below raised floors) used for environmental air distribution."
-  },
-  {
-    "id": "fc_066",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Crosstalk",
-    "definition": "Signal interference caused by magnetic fields bleeding between adjacent wire pairs inside a cable."
-  },
-  {
-    "id": "fc_067",
-    "objective": "2.5 - Network Cables & Connectors",
-    "term": "Auto-MDIX",
-    "definition": "Automatic Medium-Dependent Interface Crossover feature that automatically detects and configures proper cable connection type."
-  },
-  {
-    "id": "fc_068",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "DIMM (Dual In-line Memory Module)",
-    "definition": "Standard memory module form factor used in desktop PCs, workstations, and servers with electrically independent pins on opposite sides."
-  },
-  {
-    "id": "fc_069",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "SDRAM (Synchronous Dynamic RAM)",
-    "definition": "Memory that synchronizes its bus timing with the CPU system clock for coordinated data transfers."
-  },
-  {
-    "id": "fc_070",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "DDR (Double Data Rate)",
-    "definition": "Memory technology that transfers data twice per clock cycle, on both rising and falling clock edges, doubling throughput."
-  },
-  {
-    "id": "fc_071",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "DDR3 Module Specifications",
-    "definition": "Desktop DIMM: 240 pins; SO-DIMM: 204 pins; Voltage: 1.5V (1.35V Low Voltage); notch towards left center."
-  },
-  {
-    "id": "fc_072",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "DDR4 Module Specifications",
-    "definition": "Desktop DIMM: 288 pins; SO-DIMM: 260 pins; Voltage: 1.2V; features curved contact edge for easier insertion."
-  },
-  {
-    "id": "fc_073",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "DDR5 Module Specifications",
-    "definition": "Desktop DIMM: 288 pins; SO-DIMM: 262 pins; Voltage: 1.1V; includes on-module PMIC and dual 32-bit channels per module."
-  },
-  {
-    "id": "fc_074",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Single-Channel Memory",
-    "definition": "Memory controller communicates with all RAM over a single 64-bit bus (baseline memory bandwidth)."
-  },
-  {
-    "id": "fc_075",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Dual-Channel Memory",
-    "definition": "Two independent 64-bit channels (128-bit total throughput) using color-coded slots; requires matching pairs installed in specific slots."
-  },
-  {
-    "id": "fc_076",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Triple-Channel Memory",
-    "definition": "Three independent memory channels (192-bit total throughput) found on high-end desktop and workstation platforms; requires modules installed in sets of 3."
-  },
-  {
-    "id": "fc_077",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Quad-Channel Memory",
-    "definition": "Four independent memory channels (256-bit total throughput) standard on enterprise server/workstation platforms; requires modules installed in sets of 4."
-  },
-  {
-    "id": "fc_078",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "ECC RAM (Error-Correcting Code)",
-    "definition": "Specialized memory that detects and corrects single-bit errors in real time; crucial for financial, scientific, and enterprise server environments."
-  },
-  {
-    "id": "fc_079",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Non-ECC RAM",
-    "definition": "Standard desktop memory lacking error detection and correction; inexpensive and suitable for general consumer PCs."
-  },
-  {
-    "id": "fc_080",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Unbuffered (Unregistered) RAM",
-    "definition": "Standard memory where the memory controller directly addresses DRAM chips; offers lower latency for personal computers."
-  },
-  {
-    "id": "fc_081",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Registered (Buffered) RAM",
-    "definition": "Memory with onboard register chip between DRAM and controller; reduces electrical load allowing servers to support large quantities of RAM."
-  },
-  {
-    "id": "fc_082",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Windows Pagefile (pagefile.sys)",
-    "definition": "Reserved disk space where inactive memory pages are moved to free up physical RAM when virtual memory is needed."
-  },
-  {
-    "id": "fc_083",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "Virtual RAM / Paging",
-    "definition": "Operating system technique using secondary storage (HDD/SSD) as temporary memory when physical RAM is exhausted; significantly slower than DRAM."
-  },
-  {
-    "id": "fc_084",
-    "objective": "3.2 - RAM Types, Features & Configuration",
-    "term": "RAM Thrashing",
-    "definition": "Severe system slowdown caused by heavy reliance on virtual RAM, resulting in excessive disk I/O and poor overall performance."
-  },
-  {
-    "id": "fc_085",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "SaaS (Software as a Service)",
-    "definition": "Cloud service model delivering ready-to-use applications entirely over the web. CSP manages infrastructure; customer manages user access and configuration."
-  },
-  {
-    "id": "fc_086",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "PaaS (Platform as a Service)",
-    "definition": "Pre-configured development and deployment environment in the cloud. CSP manages hardware/OS/database; developers manage custom code and data."
-  },
-  {
-    "id": "fc_087",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "IaaS (Infrastructure as a Service)",
-    "definition": "On-demand access to fundamental computing resources (VMs, storage, networks). CSP manages data centers; customer configures OS and applications."
-  },
-  {
-    "id": "fc_088",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "XaaS (Anything as a Service)",
-    "definition": "Umbrella term for any service delivered over the cloud, including STaaS, NaaS, and SECaaS."
-  },
-  {
-    "id": "fc_089",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Public Cloud",
-    "definition": "Cloud infrastructure owned and operated by a third-party CSP in multi-tenant environment on public internet; high scalability, low costs."
-  },
-  {
-    "id": "fc_090",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Private Cloud",
-    "definition": "Cloud infrastructure dedicated exclusively to a single organization; hosted on-premise or off-site by third party; maximum control and privacy."
-  },
-  {
-    "id": "fc_091",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Hybrid Cloud",
-    "definition": "Combination of public and private cloud environments allowing data/applications to be shared between them based on business needs."
-  },
-  {
-    "id": "fc_092",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Community Cloud",
-    "definition": "Shared cloud infrastructure used jointly by several organizations with common goals, security protocols, or compliance requirements."
-  },
-  {
-    "id": "fc_093",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "On-Demand Self-Service",
-    "definition": "Cloud characteristic allowing consumers to automatically provision computing capabilities without requiring human interaction with the provider."
-  },
-  {
-    "id": "fc_094",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Rapid Elasticity",
-    "definition": "Cloud characteristic enabling automatic scaling up or down of resources to handle changing workload demand in real-time."
-  },
-  {
-    "id": "fc_095",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Scalability (Cloud)",
-    "definition": "The long-term capacity of cloud infrastructure to expand and handle growth in workload demand."
-  },
-  {
-    "id": "fc_096",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Multitenancy",
-    "definition": "Cloud architecture where multiple separate customers (tenants) share the same physical server hardware while remaining logically isolated."
-  },
-  {
-    "id": "fc_097",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Metered/Measured Services",
-    "definition": "Cloud services where resource usage is monitored and billed based on actual consumption (bandwidth, CPU hours, storage volume)."
-  },
-  {
-    "id": "fc_098",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Non-Metered Services",
-    "definition": "Cloud offerings provided for a flat rate or fixed monthly fee regardless of actual consumption metrics."
-  },
-  {
-    "id": "fc_099",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "VDI (Virtual Desktop Infrastructure)",
-    "definition": "Corporate desktop environments hosted on centralized virtual machines in a data center or private cloud, managed by enterprise administrators."
-  },
-  {
-    "id": "fc_100",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "DaaS (Desktop as a Service)",
-    "definition": "Cloud-hosted virtual desktops provided by third-party CSP on subscription basis, eliminating local server management."
-  },
-  {
-    "id": "fc_101",
-    "objective": "4.1 - Virtualization and Cloud Computing",
-    "term": "Shared Responsibility Model",
-    "definition": "Security framework defining which security tasks are managed by cloud provider vs. customer based on service model (IaaS, PaaS, SaaS)."
-  },
-  {
-    "id": "fc_102",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "CompTIA Troubleshooting Model",
-    "definition": "Standardized 6-step framework: Identify Problem → Establish Theory → Test Theory → Plan/Implement → Verify/Prevent → Document."
-  },
-  {
-    "id": "fc_103",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Identify the Problem (Step 1)",
-    "definition": "Gather information, examine the system, question the user, identify recent changes, perform backups, and review system logs."
-  },
-  {
-    "id": "fc_104",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Establish a Theory of Probable Cause (Step 2)",
-    "definition": "Brainstorm potential causes using simplest explanations first; consider top-bottom/bottom-up approach or divide-and-conquer strategy."
-  },
-  {
-    "id": "fc_105",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Test the Theory to Determine Cause (Step 3)",
-    "definition": "Validate hypothesis through targeted testing. If confirmed, proceed to Step 4. If disproved, establish new theory or escalate."
-  },
-  {
-    "id": "fc_106",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Establish a Plan of Action & Implement Solution (Step 4)",
-    "definition": "Develop structured repair strategy, refer to vendor documentation, consider potential side effects, and execute the fix."
-  },
-  {
-    "id": "fc_107",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Verify Full System Functionality & Implement Preventive Measures (Step 5)",
-    "definition": "Test thoroughly with end user, apply OS updates, install surge protectors, and implement policies to prevent future recurrences."
-  },
-  {
-    "id": "fc_108",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Document Findings, Actions, and Outcomes (Step 6)",
-    "definition": "Log all details in ticketing system: record issue/root cause, solution steps taken, and update network documentation as needed."
-  },
-  {
-    "id": "fc_109",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Question the Obvious",
-    "definition": "Troubleshooting practice of checking basic physical connections and power settings before testing complex underlying components."
-  },
-  {
-    "id": "fc_110",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Divide and Conquer",
-    "definition": "Troubleshooting approach that isolates problems by testing components halfway through system chain to determine which half contains the fault."
-  },
-  {
-    "id": "fc_111",
-    "objective": "5.1 - Troubleshooting Methodology",
-    "term": "Escalation (Troubleshooting)",
-    "definition": "Transferring a technical issue to higher-level technician or specialized vendor when standard troubleshooting theories fail to produce resolution."
-  }
+    {
+        "id":  "fc_001",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "RJ-45",
+        "definition":  "An 8-ping/8-position connector used primarily for Ethernet networking.",
+        "image_path":  "assets/images/rj45_cable.png",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_002",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "DNS (Domain Name System)",
+        "definition":  "Resolves human-readable hostnames (e.g., google.com) to IP addresses. Uses Port 53.",
+        "image_path":  null,
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_003",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "SO-DIMM",
+        "definition":  "Small Outline Dual In-line Memory Module. A compact memory form factor used in laptops, roughly half the physical length of desktop DIMMs.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_004",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "ZIF Connector",
+        "definition":  "Zero Insertion Force connector. A ribbon cable connector that uses a locking latch to secure thin flex cables without requiring force.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_005",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "Disk Cloning",
+        "definition":  "Creating a sector-by-sector duplicate of a hard drive onto another drive, preserving the OS, applications, and settings.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_006",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "DDR4 SO-DIMM Pin Count",
+        "definition":  "DDR4 SO-DIMMs use 260 pins for laptop memory modules.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_007",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "DDR5 SO-DIMM Pin Count",
+        "definition":  "DDR5 SO-DIMMs use 262 pins for laptop memory modules.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_008",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "M.2 2230 Form Factor",
+        "definition":  "A wireless card form factor measuring 22mm wide by 30mm long, commonly used for Wi-Fi and Bluetooth modules in laptops.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_009",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "U.FL Connector",
+        "definition":  "A miniature coaxial connector used to connect antenna cables to internal wireless cards in laptops.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_010",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "Biometric Authentication",
+        "definition":  "Devices that measure biological characteristics (fingerprints, facial recognition) to authenticate user access to secure systems.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_011",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "Windows Hello",
+        "definition":  "Microsoft\u0027s biometric authentication system using Infrared (IR) cameras for facial recognition, works regardless of ambient lighting.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_012",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "NFC/RFID Reader",
+        "definition":  "A built-in proximity scanner in laptops that enables tap-to-authenticate functionality using employee smart badges and security tokens.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_013",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "Privacy Filter",
+        "definition":  "A physical optical screen or electronic toggle (e.g., HP Sure View) that narrows viewing angles to defeat visual eavesdropping or \u0027shoulder surfing\u0027.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_014",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "Lithium-Ion Battery (Li-ion)",
+        "definition":  "The primary battery technology used in modern internal laptop batteries, secured by screws under the chassis cover.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_015",
+        "objective":  "1.1 - Laptop Hardware, Components \u0026 Physical Security",
+        "term":  "Swollen Battery Hazard",
+        "definition":  "A chemical degradation condition in batteries that indicates they pose a fire/explosion risk and must be disposed of according to environmental and hazardous waste guidelines.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_016",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "LCD (Liquid Crystal Display)",
+        "definition":  "A display technology using liquid crystal solution sandwiched between polarizing filters; requires an external LED backlight to produce visible images.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_017",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "IPS Panel (In-Plane Switching)",
+        "definition":  "LCD panel where crystals align horizontally; offers excellent color accuracy and wide 178° viewing angles, used in professional graphics displays.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_018",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "TN Panel (Twisted Nematic)",
+        "definition":  "LCD panel where crystals twist as current passes; offers fast response times and low cost, but poor color accuracy and narrow viewing angles.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_019",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "VA Panel (Vertical Alignment)",
+        "definition":  "LCD panel where crystals align vertically when unpowered; offers deep black levels and high contrast, but slower response times than TN panels.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_020",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "OLED (Organic Light-Emitting Diode)",
+        "definition":  "Self-illuminating display technology where each pixel generates its own light; provides true blacks, superior contrast, and requires no separate backlight.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_021",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "Digitizer",
+        "definition":  "The transparent glass layer bonded to the front of a display panel that translates touch or stylus input into digital coordinates.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_022",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "Inverter Board",
+        "definition":  "A high-voltage component used in legacy CCFL-backlit LCD screens to convert DC power to AC power. Modern LED displays do not require inverters.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_023",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "Self-Emissive Display",
+        "definition":  "Display technology (like OLED) where each pixel generates its own light without requiring a background backlight source.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_024",
+        "objective":  "1.2 - Mobile Device Display Components",
+        "term":  "Image Retention / Burn-In",
+        "definition":  "A permanent performance degradation in OLED displays caused by static images displayed at high brightness for extended periods.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_025",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "TCP (Transmission Control Protocol)",
+        "definition":  "Connection-oriented, reliable transport layer protocol that uses a 3-way handshake and guarantees packet delivery in sequence order.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_026",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "UDP (User Datagram Protocol)",
+        "definition":  "Connectionless, lightweight transport layer protocol designed for speed; delivers packets on a \u0027best effort\u0027 basis without guarantees or retransmission.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_027",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "Three-Way Handshake",
+        "definition":  "The TCP process to establish a connection: SYN → SYN-ACK → ACK, which must complete before data transfer begins.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_028",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "HTTP (Hypertext Transfer Protocol)",
+        "definition":  "TCP port 80 protocol that transfers unencrypted web pages across the World Wide Web.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_029",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "HTTPS (HTTP Secure)",
+        "definition":  "TCP port 443 protocol that encrypts web traffic using TLS/SSL to secure sensitive web browsing and transactions.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_030",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "SSH (Secure Shell)",
+        "definition":  "TCP port 22 protocol providing encrypted remote terminal connection for secure CLI administrative access.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_031",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "Telnet",
+        "definition":  "TCP port 23 legacy protocol for unencrypted remote terminal access; transmits credentials and commands in plain text (insecure).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_032",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "FTP (File Transfer Protocol)",
+        "definition":  "TCP ports 20/21 protocol for transmitting files between client and server. Port 21 manages commands; Port 20 handles data transfer.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_033",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "SMB (Server Message Block)",
+        "definition":  "TCP port 445 protocol used by Windows for sharing files, folders, and printers across a local network.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_034",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "AFP (Apple Filing Protocol)",
+        "definition":  "TCP port 548 legacy proprietary file sharing protocol used by macOS devices.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_035",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "SMTP (Simple Mail Transfer Protocol)",
+        "definition":  "TCP port 25 protocol that sends email from clients to servers or transfers mail between email servers.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_036",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "POP3 (Post Office Protocol v3)",
+        "definition":  "TCP port 110 protocol that downloads email from a server to a single local device, typically deleting it from the server afterwards.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_037",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "IMAP (Internet Message Access Protocol)",
+        "definition":  "TCP port 143 protocol that synchronizes email across multiple devices while keeping mail stored on the central server.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_039",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "DHCP (Dynamic Host Configuration Protocol)",
+        "definition":  "UDP ports 67/68 protocol that automatically assigns IP addresses, subnet masks, default gateways, and DNS servers to network clients.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_040",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "SNMP (Simple Network Management Protocol)",
+        "definition":  "UDP ports 161/162 protocol that monitors and gathers metrics from network devices. Queries use UDP 161; traps use UDP 162.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_041",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "LDAP (Lightweight Directory Access Protocol)",
+        "definition":  "TCP port 389 protocol that queries and manages directory services like Microsoft Active Directory for network authentication.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_042",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "LDAPS (LDAP Secure)",
+        "definition":  "TCP port 636 protocol that encrypts LDAP directory traffic over SSL/TLS.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_043",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "RDP (Remote Desktop Protocol)",
+        "definition":  "TCP port 3389 Microsoft proprietary protocol enabling graphical view and remote control of a Windows desktop PC.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_044",
+        "objective":  "2.1 - Networking Protocols",
+        "term":  "NetBIOS",
+        "definition":  "UDP ports 137/138, TCP port 139 legacy Windows protocol suite for hostname resolution, datagram services, and session handling.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_045",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Cat 5 Cable",
+        "definition":  "Legacy Ethernet cable supporting maximum 100 Mbps over 100 meters at 100 MHz frequency.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_046",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Cat 5e Cable",
+        "definition":  "Enhanced Ethernet cable supporting 1 Gbps (1000 Mbps) over 100 meters at 100 MHz frequency, standard for home and small office networks.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_047",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Cat 6 Cable",
+        "definition":  "Ethernet cable supporting 10 Gbps up to 55 meters or 1 Gbps up to 100 meters at 250 MHz, includes internal plastic separator (spline).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_048",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Cat 6a Cable",
+        "definition":  "Augmented Ethernet cable supporting 10 Gbps up to 100 meters at 500 MHz frequency, used in enterprise 10-Gigabit Ethernet networks.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_049",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "UTP (Unshielded Twisted Pair)",
+        "definition":  "Standard network cable without internal foil shielding; highly flexible and cost-effective but susceptible to strong external EMI.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_050",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "STP (Shielded Twisted Pair)",
+        "definition":  "Network cable with internal foil wrapping around wire pairs; shields against heavy electromagnetic interference in industrial environments.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_051",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "RJ-45 Connector",
+        "definition":  "8-position, 8-conductor (8P8C) modular connector used for Ethernet network cabling.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_052",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "RJ-11 Connector",
+        "definition":  "6-position, 2-conductor (or 4-conductor) modular connector used for telephone lines and DSL modems.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_053",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "F-Type Connector",
+        "definition":  "Threaded coaxial cable connector used for cable TV and cable internet modems with RG-6 or RG-59 cabling.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_054",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "T568A Wiring Standard",
+        "definition":  "Ethernet pinout standard: White/Green, Green, White/Orange, Blue, White/Blue, Orange, White/Brown, Brown.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_055",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "T568B Wiring Standard",
+        "definition":  "Ethernet pinout standard: White/Orange, Orange, White/Green, Blue, White/Blue, Green, White/Brown, Brown.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_056",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Straight-Through Cable",
+        "definition":  "Ethernet cable using same standard (T568A or T568B) on both ends; connects unlike devices (e.g., PC to Switch).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_057",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Crossover Cable",
+        "definition":  "Ethernet cable using T568A on one end and T568B on the other; connects like devices (e.g., PC to PC). Modern devices support Auto-MDIX.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_058",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Single-Mode Fiber (SMF)",
+        "definition":  "Fiber-optic cable with narrow core diameter (~9 microns) using laser light; supports exceptional distances (tens of kilometers) for WAN backbones.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_059",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Multi-Mode Fiber (MMF)",
+        "definition":  "Fiber-optic cable with larger core diameter (~50-62.5 microns) using LED; supports shorter distances (up to ~500 meters) for LAN backbones.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_060",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "ST Connector (Fiber)",
+        "definition":  "Round, bayonet-style twist-and-lock fiber connector (Set and Twist).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_061",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "SC Connector (Fiber)",
+        "definition":  "Square, push-pull snap-in fiber connector (Subscriber/Square Connector).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_062",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "LC Connector (Fiber)",
+        "definition":  "Small Form Factor (SFF) push-pull fiber connector with retaining latch (Little/Lucent Connector).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_063",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Plenum-Rated Cable (CMP)",
+        "definition":  "Cable with fire-retardant fluoropolymer jacket emitting minimal smoke/non-toxic fumes; mandatory for air handling ducts and drop ceilings.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_064",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "PVC / Non-Plenum Cable",
+        "definition":  "Standard polyvinyl chloride jacket cable; flexible and inexpensive but emits toxic chlorine gas when burned. Prohibited in plenum spaces.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_065",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Plenum Space",
+        "definition":  "An enclosed building area (above drop ceilings, below raised floors) used for environmental air distribution.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_066",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Crosstalk",
+        "definition":  "Signal interference caused by magnetic fields bleeding between adjacent wire pairs inside a cable.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_067",
+        "objective":  "2.5 - Network Cables \u0026 Connectors",
+        "term":  "Auto-MDIX",
+        "definition":  "Automatic Medium-Dependent Interface Crossover feature that automatically detects and configures proper cable connection type.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_068",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "DIMM (Dual In-line Memory Module)",
+        "definition":  "Standard memory module form factor used in desktop PCs, workstations, and servers with electrically independent pins on opposite sides.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_069",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "SDRAM (Synchronous Dynamic RAM)",
+        "definition":  "Memory that synchronizes its bus timing with the CPU system clock for coordinated data transfers.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_070",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "DDR (Double Data Rate)",
+        "definition":  "Memory technology that transfers data twice per clock cycle, on both rising and falling clock edges, doubling throughput.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_071",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "DDR3 Module Specifications",
+        "definition":  "Desktop DIMM: 240 pins; SO-DIMM: 204 pins; Voltage: 1.5V (1.35V Low Voltage); notch towards left center.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_072",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "DDR4 Module Specifications",
+        "definition":  "Desktop DIMM: 288 pins; SO-DIMM: 260 pins; Voltage: 1.2V; features curved contact edge for easier insertion.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_073",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "DDR5 Module Specifications",
+        "definition":  "Desktop DIMM: 288 pins; SO-DIMM: 262 pins; Voltage: 1.1V; includes on-module PMIC and dual 32-bit channels per module.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_074",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Single-Channel Memory",
+        "definition":  "Memory controller communicates with all RAM over a single 64-bit bus (baseline memory bandwidth).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_075",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Dual-Channel Memory",
+        "definition":  "Two independent 64-bit channels (128-bit total throughput) using color-coded slots; requires matching pairs installed in specific slots.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_076",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Triple-Channel Memory",
+        "definition":  "Three independent memory channels (192-bit total throughput) found on high-end desktop and workstation platforms; requires modules installed in sets of 3.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_077",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Quad-Channel Memory",
+        "definition":  "Four independent memory channels (256-bit total throughput) standard on enterprise server/workstation platforms; requires modules installed in sets of 4.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_078",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "ECC RAM (Error-Correcting Code)",
+        "definition":  "Specialized memory that detects and corrects single-bit errors in real time; crucial for financial, scientific, and enterprise server environments.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_079",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Non-ECC RAM",
+        "definition":  "Standard desktop memory lacking error detection and correction; inexpensive and suitable for general consumer PCs.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_080",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Unbuffered (Unregistered) RAM",
+        "definition":  "Standard memory where the memory controller directly addresses DRAM chips; offers lower latency for personal computers.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_081",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Registered (Buffered) RAM",
+        "definition":  "Memory with onboard register chip between DRAM and controller; reduces electrical load allowing servers to support large quantities of RAM.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_082",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Windows Pagefile (pagefile.sys)",
+        "definition":  "Reserved disk space where inactive memory pages are moved to free up physical RAM when virtual memory is needed.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_083",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "Virtual RAM / Paging",
+        "definition":  "Operating system technique using secondary storage (HDD/SSD) as temporary memory when physical RAM is exhausted; significantly slower than DRAM.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_084",
+        "objective":  "3.2 - RAM Types, Features \u0026 Configuration",
+        "term":  "RAM Thrashing",
+        "definition":  "Severe system slowdown caused by heavy reliance on virtual RAM, resulting in excessive disk I/O and poor overall performance.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_085",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "SaaS (Software as a Service)",
+        "definition":  "Cloud service model delivering ready-to-use applications entirely over the web. CSP manages infrastructure; customer manages user access and configuration.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_086",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "PaaS (Platform as a Service)",
+        "definition":  "Pre-configured development and deployment environment in the cloud. CSP manages hardware/OS/database; developers manage custom code and data.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_087",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "IaaS (Infrastructure as a Service)",
+        "definition":  "On-demand access to fundamental computing resources (VMs, storage, networks). CSP manages data centers; customer configures OS and applications.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_088",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "XaaS (Anything as a Service)",
+        "definition":  "Umbrella term for any service delivered over the cloud, including STaaS, NaaS, and SECaaS.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_089",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Public Cloud",
+        "definition":  "Cloud infrastructure owned and operated by a third-party CSP in multi-tenant environment on public internet; high scalability, low costs.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_090",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Private Cloud",
+        "definition":  "Cloud infrastructure dedicated exclusively to a single organization; hosted on-premise or off-site by third party; maximum control and privacy.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_091",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Hybrid Cloud",
+        "definition":  "Combination of public and private cloud environments allowing data/applications to be shared between them based on business needs.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_092",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Community Cloud",
+        "definition":  "Shared cloud infrastructure used jointly by several organizations with common goals, security protocols, or compliance requirements.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_093",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "On-Demand Self-Service",
+        "definition":  "Cloud characteristic allowing consumers to automatically provision computing capabilities without requiring human interaction with the provider.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_094",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Rapid Elasticity",
+        "definition":  "Cloud characteristic enabling automatic scaling up or down of resources to handle changing workload demand in real-time.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_095",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Scalability (Cloud)",
+        "definition":  "The long-term capacity of cloud infrastructure to expand and handle growth in workload demand.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_096",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Multitenancy",
+        "definition":  "Cloud architecture where multiple separate customers (tenants) share the same physical server hardware while remaining logically isolated.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_097",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Metered/Measured Services",
+        "definition":  "Cloud services where resource usage is monitored and billed based on actual consumption (bandwidth, CPU hours, storage volume).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_098",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Non-Metered Services",
+        "definition":  "Cloud offerings provided for a flat rate or fixed monthly fee regardless of actual consumption metrics.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_099",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "VDI (Virtual Desktop Infrastructure)",
+        "definition":  "Corporate desktop environments hosted on centralized virtual machines in a data center or private cloud, managed by enterprise administrators.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_100",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "DaaS (Desktop as a Service)",
+        "definition":  "Cloud-hosted virtual desktops provided by third-party CSP on subscription basis, eliminating local server management.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_101",
+        "objective":  "4.1 - Virtualization and Cloud Computing",
+        "term":  "Shared Responsibility Model",
+        "definition":  "Security framework defining which security tasks are managed by cloud provider vs. customer based on service model (IaaS, PaaS, SaaS).",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_102",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "CompTIA Troubleshooting Model",
+        "definition":  "Standardized 6-step framework: Identify Problem → Establish Theory → Test Theory → Plan/Implement → Verify/Prevent → Document.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_103",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Identify the Problem (Step 1)",
+        "definition":  "Gather information, examine the system, question the user, identify recent changes, perform backups, and review system logs.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_104",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Establish a Theory of Probable Cause (Step 2)",
+        "definition":  "Brainstorm potential causes using simplest explanations first; consider top-bottom/bottom-up approach or divide-and-conquer strategy.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_105",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Test the Theory to Determine Cause (Step 3)",
+        "definition":  "Validate hypothesis through targeted testing. If confirmed, proceed to Step 4. If disproved, establish new theory or escalate.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_106",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Establish a Plan of Action \u0026 Implement Solution (Step 4)",
+        "definition":  "Develop structured repair strategy, refer to vendor documentation, consider potential side effects, and execute the fix.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_107",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Verify Full System Functionality \u0026 Implement Preventive Measures (Step 5)",
+        "definition":  "Test thoroughly with end user, apply OS updates, install surge protectors, and implement policies to prevent future recurrences.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_108",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Document Findings, Actions, and Outcomes (Step 6)",
+        "definition":  "Log all details in ticketing system: record issue/root cause, solution steps taken, and update network documentation as needed.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_109",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Question the Obvious",
+        "definition":  "Troubleshooting practice of checking basic physical connections and power settings before testing complex underlying components.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_110",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Divide and Conquer",
+        "definition":  "Troubleshooting approach that isolates problems by testing components halfway through system chain to determine which half contains the fault.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "fc_111",
+        "objective":  "5.1 - Troubleshooting Methodology",
+        "term":  "Escalation (Troubleshooting)",
+        "definition":  "Transferring a technical issue to higher-level technician or specialized vendor when standard troubleshooting theories fail to produce resolution.",
+        "exam":  "Core 1"
+    },
+    {
+        "id":  "c2_001",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "Windows OS",
+        "definition":  "General-purpose desktop OS for business, gaming, enterprise domains. Supports Active Directory integration and extensive applications. Common editions: Home, Pro, Pro for Workstations, Enterprise."
+    },
+    {
+        "id":  "c2_002",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "Linux",
+        "definition":  "Open-source OS used for servers, security tools, and development. Highly customizable with strong CLI tools. Wide distribution variety (Ubuntu, Fedora, Debian). Used in web servers, penetration testing (Kali), and embedded systems."
+    },
+    {
+        "id":  "c2_003",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "macOS",
+        "definition":  "Apple\u0027s workstation OS for Mac desktops and laptops. Known for tight hardware/software integration, strong multimedia workflows, and UNIX-based stability. Only runs on Apple hardware."
+    },
+    {
+        "id":  "c2_004",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "Chrome OS",
+        "definition":  "Lightweight cloud-centric OS built around the Chrome browser. Fast boot, low resource usage, ideal for education and web-based workflows. Limited offline capability; relies heavily on Google services."
+    },
+    {
+        "id":  "c2_005",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "NTFS (New Technology File System)",
+        "definition":  "Windows filesystem supporting permissions, encryption (EFS), compression, large file support, and journaling."
+    },
+    {
+        "id":  "c2_006",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "FAT32 Limitations",
+        "definition":  "Maximum file size of 4 GB and maximum partition size of 2 TB. Used on legacy systems and removable drives."
+    },
+    {
+        "id":  "c2_007",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "exFAT",
+        "definition":  "Extensible File Allocation Table used for cross-platform removable storage. Supports large files; ideal for SD cards and USB drives."
+    },
+    {
+        "id":  "c2_008",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "ext4 Filesystem",
+        "definition":  "Most common Linux filesystem. Features journaling, large volume support, stable and widely adopted."
+    },
+    {
+        "id":  "c2_009",
+        "exam":  "Core 2",
+        "objective":  "1.1 - Operating System Types \u0026 Their Purposes",
+        "term":  "APFS (Apple File System)",
+        "definition":  "Used on macOS, iOS, and iPadOS. Features snapshots, strong encryption, and optimization for SSDs."
+    },
+    {
+        "id":  "c2_010",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Bollards",
+        "definition":  "Heavy posts preventing vehicle access. Used outside buildings to stop ramming attacks."
+    },
+    {
+        "id":  "c2_011",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Access Control Vestibule (Mantrap)",
+        "definition":  "Two-door system controlling entry. Prevents tailgating and unauthorized access."
+    },
+    {
+        "id":  "c2_012",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Badge Reader",
+        "definition":  "Uses RFID or NFC badges for controlled entry. Logs access events for audit trails."
+    },
+    {
+        "id":  "c2_013",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Principle of Least Privilege",
+        "definition":  "Users receive only the access necessary to perform their job. Reduces risk of misuse or compromise."
+    },
+    {
+        "id":  "c2_014",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Zero Trust Model",
+        "definition":  "Security philosophy that assumes no trust by default. Requires continuous authentication and authorization for all access."
+    },
+    {
+        "id":  "c2_015",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Multifactor Authentication (MFA)",
+        "definition":  "Requires two or more authentication factors such as email, hardware token, authenticator app, SMS, voice call, TOTP, or OTP."
+    },
+    {
+        "id":  "c2_016",
+        "exam":  "Core 2",
+        "objective":  "2.1 - Security Measures \u0026 Their Purposes",
+        "term":  "Single Sign-On (SSO)",
+        "definition":  "One login grants access to multiple systems. Reduces password fatigue and improves security."
+    },
+    {
+        "id":  "c2_017",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Trojan",
+        "definition":  "Disguised as legitimate software. Delivers malicious payload once executed. Often used to install backdoors or steal data."
+    },
+    {
+        "id":  "c2_018",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Rootkit",
+        "definition":  "Hides processes, files, or system changes. Grants persistent, stealthy administrative access. Difficult to detect without specialized tools."
+    },
+    {
+        "id":  "c2_019",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Ransomware",
+        "definition":  "Encrypts files and demands payment for decryption. Can spread laterally across networks. Major business-impacting threat."
+    },
+    {
+        "id":  "c2_020",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Spyware",
+        "definition":  "Monitors user activity. Captures browsing habits, keystrokes, or credentials. Often bundled with PUPs or malicious downloads."
+    },
+    {
+        "id":  "c2_021",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Keylogger",
+        "definition":  "Records keystrokes. Used to steal passwords, credit card numbers, and sensitive data."
+    },
+    {
+        "id":  "c2_022",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Cryptominer",
+        "definition":  "Uses system resources to mine cryptocurrency. Causes performance degradation and high power usage."
+    },
+    {
+        "id":  "c2_023",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Fileless Malware",
+        "definition":  "Operates in memory without writing files to disk. Uses legitimate tools like PowerShell and WMI to avoid detection."
+    },
+    {
+        "id":  "c2_024",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Endpoint Detection and Response (EDR)",
+        "definition":  "Real-time monitoring and behavioral analysis. Detects advanced threats like fileless malware. Provides automated response actions."
+    },
+    {
+        "id":  "c2_025",
+        "exam":  "Core 2",
+        "objective":  "2.4 - Malware Types \u0026 Detection/Removal Methods",
+        "term":  "Managed Detection and Response (MDR)",
+        "definition":  "Outsourced security monitoring. Security analysts investigate alerts and respond to threats."
+    },
+    {
+        "id":  "c2_026",
+        "exam":  "Core 2",
+        "objective":  "3.1 - Troubleshooting Common Windows OS Issues",
+        "term":  "Blue Screen of Death (BSOD)",
+        "definition":  "Sudden system crash with error code. Causes include faulty drivers, hardware failure, corrupt system files, overheating, or malware. Fix: Check Event Viewer, update drivers, run memory diagnostics, use sfc /scannow and DISM."
+    },
+    {
+        "id":  "c2_027",
+        "exam":  "Core 2",
+        "objective":  "3.1 - Troubleshooting Common Windows OS Issues",
+        "term":  "Degraded Performance",
+        "definition":  "Slow apps, lag, freezing. Causes: too many startup apps, low RAM, malware, disk fragmentation, high CPU usage. Fix: Task Manager to identify heavy processes, disable startup apps, run malware scan, check disk health."
+    },
+    {
+        "id":  "c2_028",
+        "exam":  "Core 2",
+        "objective":  "3.1 - Troubleshooting Common Windows OS Issues",
+        "term":  "sfc /scannow",
+        "definition":  "System File Checker command that scans and repairs corrupted system files in Windows."
+    },
+    {
+        "id":  "c2_029",
+        "exam":  "Core 2",
+        "objective":  "3.1 - Troubleshooting Common Windows OS Issues",
+        "term":  "DISM (Deployment Image Servicing and Management)",
+        "definition":  "Windows tool for repairing system image and component store corruption. Used alongside sfc for thorough system repairs."
+    },
+    {
+        "id":  "c2_030",
+        "exam":  "Core 2",
+        "objective":  "4.1 - Documentation \u0026 Support Systems Information Management",
+        "term":  "Ticketing System Components",
+        "definition":  "Include user information, device information, issue description, category, severity level, escalation levels (Tier 1/2/3), clear written communication, progress notes, and issue resolution documentation."
+    },
+    {
+        "id":  "c2_031",
+        "exam":  "Core 2",
+        "objective":  "4.1 - Documentation \u0026 Support Systems Information Management",
+        "term":  "Severity Levels in IT Support",
+        "definition":  "Low (minor inconvenience), Medium (impacts productivity), High (critical system failure), Urgent (outage affecting multiple users)."
+    },
+    {
+        "id":  "c2_032",
+        "exam":  "Core 2",
+        "objective":  "4.1 - Documentation \u0026 Support Systems Information Management",
+        "term":  "Configuration Management Database (CMDB)",
+        "definition":  "Centralized database storing hardware details, software versions, network configurations, and relationships between systems."
+    },
+    {
+        "id":  "c2_033",
+        "exam":  "Core 2",
+        "objective":  "4.2 - Change Management Procedures",
+        "term":  "Rollback Plan",
+        "definition":  "Defines how to revert changes if issues occur. Must be tested, documented, and ready before implementation."
+    },
+    {
+        "id":  "c2_034",
+        "exam":  "Core 2",
+        "objective":  "4.2 - Change Management Procedures",
+        "term":  "Sandbox Testing",
+        "definition":  "Testing changes in an isolated environment before production deployment. Prevents production impact and used for software updates, configuration changes, and new deployments."
+    },
+    {
+        "id":  "c2_035",
+        "exam":  "Core 2",
+        "objective":  "4.2 - Change Management Procedures",
+        "term":  "Change Management Approval Process",
+        "definition":  "Identifies responsible staff members including who performs the change and who approves the change before implementation."
+    },
+    {
+        "id":  "c2_036",
+        "exam":  "Core 2",
+        "objective":  "1.2 - OS Installations \u0026 Upgrades",
+        "term":  "Clean Installation",
+        "definition":  "Installing an OS from scratch without keeping previous data or settings. Recommended for fixing corrupted systems or major OS issues."
+    },
+    {
+        "id":  "c2_037",
+        "exam":  "Core 2",
+        "objective":  "1.2 - OS Installations \u0026 Upgrades",
+        "term":  "In-Place Upgrade",
+        "definition":  "Upgrading to a newer OS version while keeping existing files, settings, and applications. Faster but carries more risk of conflicts."
+    },
+    {
+        "id":  "c2_038",
+        "exam":  "Core 2",
+        "objective":  "1.2 - OS Installations \u0026 Upgrades",
+        "term":  "Recovery Partition",
+        "definition":  "A hidden system partition containing OS recovery tools and restore image data. Allows repair without external media."
+    },
+    {
+        "id":  "c2_039",
+        "exam":  "Core 2",
+        "objective":  "1.3 - Windows Edition Features",
+        "term":  "BitLocker",
+        "definition":  "Windows Pro/Enterprise encryption feature that encrypts entire drives. Requires TPM 2.0. Part of Windows security hardening."
+    },
+    {
+        "id":  "c2_040",
+        "exam":  "Core 2",
+        "objective":  "1.3 - Windows Edition Features",
+        "term":  "Group Policy (gpedit.msc)",
+        "definition":  "Management tool for configuring Windows policies. Available in Pro/Enterprise editions. Not in Home edition."
+    },
+    {
+        "id":  "c2_041",
+        "exam":  "Core 2",
+        "objective":  "1.3 - Windows Edition Features",
+        "term":  "Remote Desktop",
+        "definition":  "Pro/Enterprise feature allowing remote access to PC. Home edition cannot host but can connect to others."
+    },
+    {
+        "id":  "c2_042",
+        "exam":  "Core 2",
+        "objective":  "1.3 - Windows Edition Features",
+        "term":  "AppLocker",
+        "definition":  "Enterprise-only feature that restricts which applications can run. Requires Group Policy to configure."
+    },
+    {
+        "id":  "c2_043",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Task Manager",
+        "definition":  "Shows running processes, performance metrics, and resource usage. Can end processes, adjust priority, and view network activity."
+    },
+    {
+        "id":  "c2_044",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Device Manager",
+        "definition":  "Manages hardware devices and drivers. Shows device status, allows driver updates/rollbacks, and disables devices."
+    },
+    {
+        "id":  "c2_045",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Disk Management",
+        "definition":  "Tool for managing partitions and volumes. Create/delete/resize partitions and extend volumes."
+    },
+    {
+        "id":  "c2_046",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Event Viewer",
+        "definition":  "Displays system, security, and application logs. Shows errors, warnings, and informational events for troubleshooting."
+    },
+    {
+        "id":  "c2_047",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Services Console (services.msc)",
+        "definition":  "Manages Windows services. Can start/stop/disable services and set startup type (Automatic/Manual/Disabled)."
+    },
+    {
+        "id":  "c2_048",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Performance Monitor",
+        "definition":  "Monitors system performance counters in real-time. Shows CPU, memory, disk, and network metrics."
+    },
+    {
+        "id":  "c2_049",
+        "exam":  "Core 2",
+        "objective":  "1.4 - Windows Features \u0026 Admin Tools",
+        "term":  "Registry Editor (regedit)",
+        "definition":  "Advanced tool for editing Windows registry. Used for deep system configuration but risky if modified incorrectly."
+    },
+    {
+        "id":  "c2_050",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "ipconfig",
+        "definition":  "Displays and manages IP configuration. ipconfig /all shows full details, /release /renew for DHCP, /flushdns clears cache."
+    },
+    {
+        "id":  "c2_051",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "ping",
+        "definition":  "Tests connectivity and latency to a host. Returns response time and packet loss statistics."
+    },
+    {
+        "id":  "c2_052",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "nslookup",
+        "definition":  "Queries DNS servers for hostname/IP resolution. Helps diagnose DNS failures and verify DNS configuration."
+    },
+    {
+        "id":  "c2_053",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "netstat",
+        "definition":  "Shows active connections and listening ports. Useful for identifying suspicious network activity and open ports."
+    },
+    {
+        "id":  "c2_054",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "tracert",
+        "definition":  "Traces the path packets take to reach a destination. Shows each hop and response times. Identifies routing issues."
+    },
+    {
+        "id":  "c2_055",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "chkdsk",
+        "definition":  "Checks disk integrity and repairs errors. chkdsk /f fixes bad sectors, /r locates and marks bad areas."
+    },
+    {
+        "id":  "c2_056",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "format",
+        "definition":  "Formats a drive with a specified filesystem. Example: format E: /fs:NTFS"
+    },
+    {
+        "id":  "c2_057",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "diskpart",
+        "definition":  "Advanced disk partitioning tool. Creates/deletes partitions, converts MBR to GPT, cleans drives."
+    },
+    {
+        "id":  "c2_058",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "robocopy",
+        "definition":  "Robust file copy utility with multithreading and retry capability. Supports mirroring and logging."
+    },
+    {
+        "id":  "c2_059",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "sfc /scannow",
+        "definition":  "System File Checker scans and automatically repairs corrupted Windows system files."
+    },
+    {
+        "id":  "c2_060",
+        "exam":  "Core 2",
+        "objective":  "1.5 - Windows Command-Line Tools",
+        "term":  "gpupdate /force",
+        "definition":  "Refreshes Group Policy settings immediately without requiring a restart."
+    },
+    {
+        "id":  "c2_061",
+        "exam":  "Core 2",
+        "objective":  "1.6 - Windows Configuration Settings",
+        "term":  "User Account Control (UAC)",
+        "definition":  "Windows security feature that prompts for admin consent before elevated operations. Can be disabled but reduces security."
+    },
+    {
+        "id":  "c2_062",
+        "exam":  "Core 2",
+        "objective":  "1.6 - Windows Configuration Settings",
+        "term":  "Windows Firewall",
+        "definition":  "Built-in firewall that controls inbound and outbound traffic. Can create inbound/outbound rules."
+    },
+    {
+        "id":  "c2_063",
+        "exam":  "Core 2",
+        "objective":  "1.6 - Windows Configuration Settings",
+        "term":  "Windows Update",
+        "definition":  "Automatic OS and driver update mechanism. Critical for security patches and bug fixes."
+    },
+    {
+        "id":  "c2_064",
+        "exam":  "Core 2",
+        "objective":  "1.6 - Windows Configuration Settings",
+        "term":  "Power Settings",
+        "definition":  "Controls sleep, hibernate, and shutdown behavior. Affects battery life on laptops."
+    },
+    {
+        "id":  "c2_065",
+        "exam":  "Core 2",
+        "objective":  "1.6 - Windows Configuration Settings",
+        "term":  "Display Settings",
+        "definition":  "Configures resolution, refresh rate, scaling, and multi-monitor setup."
+    },
+    {
+        "id":  "c2_066",
+        "exam":  "Core 2",
+        "objective":  "1.7 - Windows Client Networking Configuration",
+        "term":  "Static IP Address",
+        "definition":  "Manually configured IP address that doesn\u0027t change. Used for servers and devices requiring consistent access."
+    },
+    {
+        "id":  "c2_067",
+        "exam":  "Core 2",
+        "objective":  "1.7 - Windows Client Networking Configuration",
+        "term":  "DHCP (Dynamic Host Configuration Protocol)",
+        "definition":  "Automatic IP assignment from a DHCP server. Default for most client devices. Provides IP, gateway, DNS."
+    },
+    {
+        "id":  "c2_068",
+        "exam":  "Core 2",
+        "objective":  "1.7 - Windows Client Networking Configuration",
+        "term":  "DNS (Domain Name System)",
+        "definition":  "Translates hostnames to IP addresses. Can configure multiple DNS servers for redundancy."
+    },
+    {
+        "id":  "c2_069",
+        "exam":  "Core 2",
+        "objective":  "1.7 - Windows Client Networking Configuration",
+        "term":  "Default Gateway",
+        "definition":  "Router address used to reach networks outside the local subnet. Critical for internet connectivity."
+    },
+    {
+        "id":  "c2_070",
+        "exam":  "Core 2",
+        "objective":  "1.7 - Windows Client Networking Configuration",
+        "term":  "VPN (Virtual Private Network)",
+        "definition":  "Encrypted tunnel to a remote network. Used for secure remote access and privacy."
+    },
+    {
+        "id":  "c2_071",
+        "exam":  "Core 2",
+        "objective":  "1.8 - macOS Features \u0026 Tools",
+        "term":  "macOS File System (APFS)",
+        "definition":  "Apple\u0027s modern filesystem with snapshots and encryption. Replaced HFS+."
+    },
+    {
+        "id":  "c2_072",
+        "exam":  "Core 2",
+        "objective":  "1.8 - macOS Features \u0026 Tools",
+        "term":  "Spotlight",
+        "definition":  "macOS search tool for files, applications, and system settings. Accessed with Command+Space."
+    },
+    {
+        "id":  "c2_073",
+        "exam":  "Core 2",
+        "objective":  "1.8 - macOS Features \u0026 Tools",
+        "term":  "Time Machine",
+        "definition":  "macOS backup utility that creates incremental backups to external drive. Can restore entire system or individual files."
+    },
+    {
+        "id":  "c2_074",
+        "exam":  "Core 2",
+        "objective":  "1.8 - macOS Features \u0026 Tools",
+        "term":  "Terminal",
+        "definition":  "macOS command-line interface using bash/zsh. Allows Unix commands and scripting."
+    },
+    {
+        "id":  "c2_075",
+        "exam":  "Core 2",
+        "objective":  "1.9 - Linux Client OS Features \u0026 Tools",
+        "term":  "Linux Distributions",
+        "definition":  "Different Linux variants like Ubuntu, Fedora, Debian. Each has different package managers and tools."
+    },
+    {
+        "id":  "c2_076",
+        "exam":  "Core 2",
+        "objective":  "1.9 - Linux Client OS Features \u0026 Tools",
+        "term":  "apt (Advanced Package Tool)",
+        "definition":  "Package manager used by Ubuntu/Debian. Syntax: apt install package-name"
+    },
+    {
+        "id":  "c2_077",
+        "exam":  "Core 2",
+        "objective":  "1.9 - Linux Client OS Features \u0026 Tools",
+        "term":  "yum (Yellowdog Updater, Modified)",
+        "definition":  "Package manager used by Red Hat/CentOS/Fedora. Syntax: yum install package-name"
+    },
+    {
+        "id":  "c2_078",
+        "exam":  "Core 2",
+        "objective":  "1.9 - Linux Client OS Features \u0026 Tools",
+        "term":  "sudo",
+        "definition":  "Runs commands with superuser privileges. Requires password confirmation. Essential for system administration."
+    },
+    {
+        "id":  "c2_079",
+        "exam":  "Core 2",
+        "objective":  "2.2 - Windows OS Security Settings",
+        "term":  "Windows Defender",
+        "definition":  "Built-in antivirus and anti-malware protection. Automatically enabled and updated via Windows Update."
+    },
+    {
+        "id":  "c2_080",
+        "exam":  "Core 2",
+        "objective":  "2.2 - Windows OS Security Settings",
+        "term":  "NTFS Permissions",
+        "definition":  "File-level access control allowing Read, Write, Execute permissions per user/group."
+    },
+    {
+        "id":  "c2_081",
+        "exam":  "Core 2",
+        "objective":  "2.2 - Windows OS Security Settings",
+        "term":  "Encryption File System (EFS)",
+        "definition":  "File-level encryption for NTFS. Different from BitLocker - encrypts individual files/folders."
+    },
+    {
+        "id":  "c2_082",
+        "exam":  "Core 2",
+        "objective":  "2.2 - Windows OS Security Settings",
+        "term":  "User Account Types",
+        "definition":  "Standard user (limited privileges) vs Administrator (full control). Security best practice: use Standard for daily work."
+    },
+    {
+        "id":  "c2_083",
+        "exam":  "Core 2",
+        "objective":  "2.2 - Windows OS Security Settings",
+        "term":  "Password Policy",
+        "definition":  "Enforced requirements for password complexity, minimum length, expiration, and history."
+    },
+    {
+        "id":  "c2_084",
+        "exam":  "Core 2",
+        "objective":  "2.3 - Wireless Security Protocols \u0026 Authentication",
+        "term":  "WPA3 (Wi-Fi Protected Access 3)",
+        "definition":  "Latest wireless security standard with 192-bit encryption. Most secure option for home and enterprise networks."
+    },
+    {
+        "id":  "c2_085",
+        "exam":  "Core 2",
+        "objective":  "2.3 - Wireless Security Protocols \u0026 Authentication",
+        "term":  "WPA2",
+        "definition":  "Previous standard with 128-bit CCMP encryption. Still widely used and acceptable but less secure than WPA3."
+    },
+    {
+        "id":  "c2_086",
+        "exam":  "Core 2",
+        "objective":  "2.3 - Wireless Security Protocols \u0026 Authentication",
+        "term":  "SSID Broadcast",
+        "definition":  "Whether wireless network name is publicly visible. Hiding SSID adds minimal security - WPA3/WPA2 encryption is primary defense."
+    },
+    {
+        "id":  "c2_087",
+        "exam":  "Core 2",
+        "objective":  "2.3 - Wireless Security Protocols \u0026 Authentication",
+        "term":  "MAC Filtering",
+        "definition":  "Allows/blocks specific MAC addresses. Easy to bypass but adds layer of access control."
+    },
+    {
+        "id":  "c2_088",
+        "exam":  "Core 2",
+        "objective":  "2.5 - Social Engineering Attacks, Threats \u0026 Vulnerabilities",
+        "term":  "Phishing",
+        "definition":  "Fraudulent emails/messages designed to steal credentials or deliver malware. Often impersonates banks or services."
+    },
+    {
+        "id":  "c2_089",
+        "exam":  "Core 2",
+        "objective":  "2.5 - Social Engineering Attacks, Threats \u0026 Vulnerabilities",
+        "term":  "Vishing",
+        "definition":  "Voice phishing via phone calls. Attacker impersonates authority (bank, IT support) to extract information."
+    },
+    {
+        "id":  "c2_090",
+        "exam":  "Core 2",
+        "objective":  "2.5 - Social Engineering Attacks, Threats \u0026 Vulnerabilities",
+        "term":  "Smishing",
+        "definition":  "SMS-based phishing. Text messages with malicious links or urgent requests to click/call."
+    },
+    {
+        "id":  "c2_091",
+        "exam":  "Core 2",
+        "objective":  "2.5 - Social Engineering Attacks, Threats \u0026 Vulnerabilities",
+        "term":  "Pretexting",
+        "definition":  "Creating fictional scenario to gain trust and extract information. Example: posing as IT asking for password."
+    },
+    {
+        "id":  "c2_092",
+        "exam":  "Core 2",
+        "objective":  "2.5 - Social Engineering Attacks, Threats \u0026 Vulnerabilities",
+        "term":  "Tailgating / Piggybacking",
+        "definition":  "Following authorized person through secure door without credentials. Access control vestibules prevent this."
+    },
+    {
+        "id":  "c2_093",
+        "exam":  "Core 2",
+        "objective":  "2.5 - Social Engineering Attacks, Threats \u0026 Vulnerabilities",
+        "term":  "Baiting",
+        "definition":  "Offering something attractive (USB drive, download) to entice user to compromise security. Often contains malware."
+    },
+    {
+        "id":  "c2_094",
+        "exam":  "Core 2",
+        "objective":  "2.6 - SOHO Malware Removal Procedures",
+        "term":  "Malware Removal Steps",
+        "definition":  "1) Disconnect from network 2) Boot into Safe Mode 3) Run antivirus/anti-malware scan 4) Use specialized tools if needed 5) Restore from backup if necessary."
+    },
+    {
+        "id":  "c2_095",
+        "exam":  "Core 2",
+        "objective":  "2.6 - SOHO Malware Removal Procedures",
+        "term":  "Safe Mode",
+        "definition":  "Boots Windows with minimal drivers and services. Used for troubleshooting and malware removal."
+    },
+    {
+        "id":  "c2_096",
+        "exam":  "Core 2",
+        "objective":  "2.6 - SOHO Malware Removal Procedures",
+        "term":  "Malwarebytes",
+        "definition":  "Dedicated anti-malware tool effective against spyware, PUPs, and advanced threats. Often used with traditional antivirus."
+    },
+    {
+        "id":  "c2_097",
+        "exam":  "Core 2",
+        "objective":  "2.7 - Workstation Security Options \u0026 Hardening",
+        "term":  "Firewall Hardening",
+        "definition":  "Configure inbound/outbound rules to block unnecessary traffic. Whitelist only required ports and services."
+    },
+    {
+        "id":  "c2_098",
+        "exam":  "Core 2",
+        "objective":  "2.7 - Workstation Security Options \u0026 Hardening",
+        "term":  "Disable Unnecessary Services",
+        "definition":  "Turn off services not needed for daily operation. Reduces attack surface and improves performance."
+    },
+    {
+        "id":  "c2_099",
+        "exam":  "Core 2",
+        "objective":  "2.7 - Workstation Security Options \u0026 Hardening",
+        "term":  "Keep Software Updated",
+        "definition":  "Install security patches promptly. Unpatched software is primary attack vector for exploits."
+    },
+    {
+        "id":  "c2_100",
+        "exam":  "Core 2",
+        "objective":  "2.7 - Workstation Security Options \u0026 Hardening",
+        "term":  "Use Strong Passwords",
+        "definition":  "At least 12 characters with uppercase, lowercase, numbers, special characters. Avoid dictionary words and personal info."
+    },
+    {
+        "id":  "c2_101",
+        "exam":  "Core 2",
+        "objective":  "2.8 - Mobile Device Security \u0026 Hardening",
+        "term":  "Mobile Device Lock Screen",
+        "definition":  "PIN, pattern, or biometric required to unlock device. Primary defense against physical theft."
+    },
+    {
+        "id":  "c2_102",
+        "exam":  "Core 2",
+        "objective":  "2.8 - Mobile Device Security \u0026 Hardening",
+        "term":  "Mobile Device Encryption",
+        "definition":  "Full-device encryption or app-specific encryption protects data if device is lost or stolen."
+    },
+    {
+        "id":  "c2_103",
+        "exam":  "Core 2",
+        "objective":  "2.8 - Mobile Device Security \u0026 Hardening",
+        "term":  "App Permissions",
+        "definition":  "Mobile OSes restrict app access to camera, location, contacts, etc. Review and restrict when installing apps."
+    },
+    {
+        "id":  "c2_104",
+        "exam":  "Core 2",
+        "objective":  "2.8 - Mobile Device Security \u0026 Hardening",
+        "term":  "Disable USB Debug Mode",
+        "definition":  "Developer feature allowing unauthorized device access. Should be disabled on user devices."
+    },
+    {
+        "id":  "c2_105",
+        "exam":  "Core 2",
+        "objective":  "2.9 - Data Destruction \u0026 Disposal Methods",
+        "term":  "Full Disk Encryption",
+        "definition":  "Encrypts entire storage device before recycling/disposal. Makes data unrecoverable even if drive is recovered."
+    },
+    {
+        "id":  "c2_106",
+        "exam":  "Core 2",
+        "objective":  "2.9 - Data Destruction \u0026 Disposal Methods",
+        "term":  "DBAN (Darik\u0027s Boot and Nuke)",
+        "definition":  "Free tool that securely wipes drives by overwriting all data. Prevents data recovery."
+    },
+    {
+        "id":  "c2_107",
+        "exam":  "Core 2",
+        "objective":  "2.9 - Data Destruction \u0026 Disposal Methods",
+        "term":  "Physical Destruction",
+        "definition":  "Physically destroying storage media (shredding SSD, degaussing magnetic drives). Absolute security for sensitive data."
+    },
+    {
+        "id":  "c2_108",
+        "exam":  "Core 2",
+        "objective":  "2.9 - Data Destruction \u0026 Disposal Methods",
+        "term":  "BIO Label",
+        "definition":  "Biohazard label on equipment containing hazardous materials. Required for certified disposal."
+    },
+    {
+        "id":  "c2_109",
+        "exam":  "Core 2",
+        "objective":  "3.2 - Troubleshooting Mobile OS \u0026 Application Issues",
+        "term":  "Force Stop Application",
+        "definition":  "Terminates unresponsive app without closing. Clears temporary cache and stops background processes."
+    },
+    {
+        "id":  "c2_110",
+        "exam":  "Core 2",
+        "objective":  "3.2 - Troubleshooting Mobile OS \u0026 Application Issues",
+        "term":  "Clear App Cache",
+        "definition":  "Removes temporary app data improving performance. Different from Clear Data which removes all app info."
+    },
+    {
+        "id":  "c2_111",
+        "exam":  "Core 2",
+        "objective":  "3.2 - Troubleshooting Mobile OS \u0026 Application Issues",
+        "term":  "Soft Reset",
+        "definition":  "Standard restart of mobile device. Clears RAM and many temporary issues."
+    },
+    {
+        "id":  "c2_112",
+        "exam":  "Core 2",
+        "objective":  "3.2 - Troubleshooting Mobile OS \u0026 Application Issues",
+        "term":  "Hard Reset",
+        "definition":  "Factory reset wiping all data and apps. Returns phone to out-of-box state. Last resort for severe issues."
+    }
 ]

@@ -20,6 +20,7 @@ class FlashcardView(ctk.CTkFrame):
         self.score_known = 0
         self.score_review = 0
         self.start_with_definition = False # Toggle for term vs definition start
+        self.selected_exam = "All"  # Track selected exam (All, Core 1, Core 2)
         self.selected_objective = "All"  # Track selected objective
 
         # Configure Grid Layout (Row 1 expands to hold the card)
@@ -72,6 +73,18 @@ class FlashcardView(ctk.CTkFrame):
                     objectives.add(main_obj)
         return sorted(list(objectives))
 
+    def get_available_exams(self):
+        """
+        Extract unique exams from flashcards (Core 1, Core 2, etc.).
+        :return: sorted list of exam names
+        """
+        exams = set()
+        for card in self.all_cards:
+            exam = card.get("exam", "")
+            if exam:
+                exams.add(exam)
+        return sorted(list(exams))
+
     def filter_cards_by_objective(self, objective):
         """
         Filter flashcards by main objective number.
@@ -89,22 +102,79 @@ class FlashcardView(ctk.CTkFrame):
                 if main_obj == objective:
                     filtered.append(card)
         return filtered
+
+    def filter_cards_by_exam(self, exam):
+        """
+        Filter flashcards by exam name.
+        :param exam: exam name (e.g., "Core 1", "Core 2") or "All"
+        :return: filtered list of cards
+        """
+        if exam == "All":
+            return self.all_cards
+
+        filtered = []
+        for card in self.all_cards:
+            card_exam = card.get("exam", "")
+            if card_exam == exam:
+                filtered.append(card)
+        return filtered
+
+    def filter_cards_by_exam_and_objective(self, exam, objective):
+        """
+        Filter flashcards by both exam and objective.
+        :param exam: exam name or "All"
+        :param objective: objective number or "All"
+        :return: filtered list of cards
+        """
+        filtered = self.filter_cards_by_exam(exam)
+
+        if objective == "All":
+            return filtered
+
+        result = []
+        for card in filtered:
+            obj_str = card.get("objective", "")
+            if obj_str:
+                main_obj = obj_str.split(".")[0].strip()
+                if main_obj == objective:
+                    result.append(card)
+        return result
     def create_header(self):
         """
-        Top section showing Objective selector, progress, and settings toggle.
+        Top section showing Exam selector, Objective selector, progress, and settings toggle.
         """
         header_frame = ctk.CTkFrame(self, fg_color="transparent")
         header_frame.grid(row=0, column=0, sticky="ew", padx=20, pady=(10, 5))
-        header_frame.grid_columnconfigure(2, weight=1)
+        header_frame.grid_columnconfigure(3, weight=1)
+
+        # Exam Selector Label
+        lbl_select_exam = ctk.CTkLabel(
+            header_frame,
+            text="Exam:",
+            font=ctk.CTkFont(size=12, weight="bold"),
+            text_color="gray",
+        )
+        lbl_select_exam.grid(row=0, column=0, sticky="w", padx=(0, 5))
+
+        # Exam Dropdown Menu
+        available_exams = ["All"] + self.get_available_exams()
+        self.exam_menu = ctk.CTkOptionMenu(
+            header_frame,
+            values=available_exams,
+            command=self.on_exam_change,
+            width=100,
+        )
+        self.exam_menu.set("All")
+        self.exam_menu.grid(row=0, column=1, sticky="w", padx=(0, 15))
 
         # Objective Selector Label
         lbl_select_obj = ctk.CTkLabel(
             header_frame,
-            text="Select Objective:",
+            text="Objective:",
             font=ctk.CTkFont(size=12, weight="bold"),
             text_color="gray",
         )
-        lbl_select_obj.grid(row=0, column=0, sticky="w", padx=(0, 10))
+        lbl_select_obj.grid(row=0, column=2, sticky="w", padx=(0, 5))
 
         # Objective Dropdown Menu
         available_objs = ["All"] + [f"Objective {obj}" for obj in self.get_available_objectives()]
@@ -112,10 +182,10 @@ class FlashcardView(ctk.CTkFrame):
             header_frame,
             values=available_objs,
             command=self.on_objective_change,
-            width=150,
+            width=120,
         )
         self.objective_menu.set("All")
-        self.objective_menu.grid(row=0, column=1, sticky="w", padx=(0, 15))
+        self.objective_menu.grid(row=0, column=3, sticky="w", padx=(0, 15))
 
         # Objective Label (shows current subset info)
         self.lbl_objective = ctk.CTkLabel(
@@ -124,7 +194,7 @@ class FlashcardView(ctk.CTkFrame):
             font=ctk.CTkFont(size=14, weight="bold"),
             text_color="gray",
         )
-        self.lbl_objective.grid(row=0, column=2, sticky="w")
+        self.lbl_objective.grid(row=0, column=4, sticky="w")
 
         # Start Mode Switch (Term vs Definition)
         self.switch_start_side = ctk.CTkSwitch(
@@ -132,7 +202,7 @@ class FlashcardView(ctk.CTkFrame):
             text="Start with Definition",
             command=self.toggle_start_side,
         )
-        self.switch_start_side.grid(row=0, column=3, sticky="e", padx=(15, 0))
+        self.switch_start_side.grid(row=0, column=5, sticky="e", padx=(15, 0))
 
     def create_card_widget(self):
         """Main Flashcard display box with responsive text wrapping."""
@@ -346,6 +416,22 @@ class FlashcardView(ctk.CTkFrame):
         self.is_flipped = False
         self.update_card_display()
 
+    def on_exam_change(self, choice):
+        """
+        Handler for exam dropdown menu selection.
+        :param choice: selected exam (e.g., "All", "Core 1", "Core 2")
+        """
+        self.selected_exam = choice if choice != "All" else "All"
+
+        # Re-filter cards and reset to first card
+        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objective)
+        random.shuffle(self.cards)
+        self.current_index = 0
+        self.is_flipped = False
+        self.score_known = 0
+        self.score_review = 0
+        self.update_card_display()
+
     def on_objective_change(self, choice):
         """
         Handler for objective dropdown menu selection.
@@ -358,7 +444,7 @@ class FlashcardView(ctk.CTkFrame):
             self.selected_objective = choice.split()[-1]
 
         # Re-filter cards and reset to first card
-        self.cards = self.filter_cards_by_objective(self.selected_objective)
+        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objective)
         random.shuffle(self.cards)  # Shuffle the filtered cards
         self.current_index = 0
         self.is_flipped = False
