@@ -2,6 +2,9 @@ import json
 from pathlib import Path
 import customtkinter as ctk
 import random
+from datetime import datetime
+from utils.goals_manager import GoalsManager
+from modules.dialogs.milestone_dialog import MilestoneDialog
 
 class FlashcardView(ctk.CTkFrame):
     """
@@ -20,6 +23,10 @@ class FlashcardView(ctk.CTkFrame):
             self.selected_exam = "All"
             self.selected_objectives = ["All"]
             self.card_limit = None
+
+        # Initialize Goals Manager for tracking progress
+        self.goals_manager = GoalsManager()
+        self.session_start_time = None  # Track session start for duration
 
         # State variables
         self.all_cards = self.load_data()
@@ -82,7 +89,7 @@ class FlashcardView(ctk.CTkFrame):
         Save the current review session to persistent storage.
         """
         review_data = {
-            "timestamp": str(Path("data").cwd()),  # Will use current time
+            "timestamp": datetime.now().isoformat(),
             "exam": self.selected_exam,
             "objectives": self.selected_objectives,  # Changed to list
             "cards_studied": len(self.cards_studied),
@@ -98,6 +105,21 @@ class FlashcardView(ctk.CTkFrame):
 
         # Load existing reviews
         review_path = Path("data/review_history.json")
+
+        reviews = []
+        if review_path.exists():
+            try:
+                with open(review_path, "r", encoding="utf-8") as f:
+                    reviews = json.load(f)
+            except:
+                reviews = []
+
+        # Add new review
+        reviews.append(review_data)
+
+        # Save back
+        with open(review_path, "w", encoding="utf-8") as f:
+            json.dump(reviews, f, indent=2, ensure_ascii=False)
         reviews = []
         if review_path.exists():
             try:
@@ -828,11 +850,35 @@ class FlashcardView(ctk.CTkFrame):
     def show_review_screen(self):
         """
         Display review summary screen with collapsible objectives showing reviewed cards.
+        Also updates study streak and checks for milestone achievements.
         """
         self._in_review_mode = True
 
         # Save this review to history
         self.save_review()
+
+        # Update goals manager with session data
+        try:
+            # Load the most recent review we just saved
+            review_path = Path("data/review_history.json")
+            if review_path.exists():
+                with open(review_path, "r", encoding="utf-8") as f:
+                    reviews = json.load(f)
+                    if reviews:
+                        # Get the last review (the one we just saved)
+                        latest_review = reviews[-1]
+
+                        # Update study streak based on this session
+                        self.goals_manager.update_study_streak(latest_review)
+
+                        # Check for milestone achievements
+                        new_milestones = self.goals_manager.check_for_milestone_achievement(reviews)
+
+                        # Show milestone celebrations if any were achieved
+                        if new_milestones:
+                            self.show_milestone_celebrations(new_milestones)
+        except Exception as e:
+            print(f"Error updating goals: {e}")
 
         # Clear the card content area
         self.text_card.configure(state="normal")
@@ -875,6 +921,18 @@ class FlashcardView(ctk.CTkFrame):
         # Change button labels
         self.btn_review.configure(text="New Review")
         self.btn_know.configure(text="Done")
+
+    def show_milestone_celebrations(self, milestones):
+        """
+        Display celebration dialogs for newly achieved milestones.
+        :param milestones: list of newly achieved milestone dictionaries
+        """
+        for milestone in milestones:
+            try:
+                dialog = MilestoneDialog(self, milestone)
+                self.wait_window(dialog)
+            except Exception as e:
+                print(f"Error showing milestone dialog: {e}")
 
     def reshuffle_cards(self):
         """Reshuffle the current card deck."""

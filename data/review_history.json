@@ -1,32 +1,91 @@
 [
   {
-    "timestamp": "C:\\Users\\Dylan\\source\\repos\\A_Plus_StudySuite",
+    "timestamp": "2026-08-14T15:55:39.070815",
     "exam": "All",
     "objectives": [
-      "1.1 - Laptop Hardware, Components & Physical Security",
-      "1.4 - Windows Features & Admin Tools"
+      "1.5 - Windows Command-Line Tools"
     ],
     "cards_studied": 10,
     "cards_reviewed": [
       {
-        "id": "fc_007",
-        "term": "DDR5 SO-DIMM Pin Count",
-        "objective": "1.1 - Laptop Hardware, Components & Physical Security"
+        "id": "c2_055",
+        "term": "chkdsk",
+        "objective": "1.5 - Windows Command-Line Tools"
       },
       {
-        "id": "fc_013",
-        "term": "Privacy Filter",
-        "objective": "1.1 - Laptop Hardware, Components & Physical Security"
+        "id": "c2_058",
+        "term": "robocopy",
+        "objective": "1.5 - Windows Command-Line Tools"
       },
       {
-        "id": "fc_005",
-        "term": "Disk Cloning",
-        "objective": "1.1 - Laptop Hardware, Components & Physical Security"
+        "id": "c2_052",
+        "term": "nslookup",
+        "objective": "1.5 - Windows Command-Line Tools"
       },
       {
-        "id": "c2_047",
-        "term": "Services Console (services.msc)",
-        "objective": "1.4 - Windows Features & Admin Tools"
+        "id": "c2_059",
+        "term": "sfc /scannow",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_060",
+        "term": "gpupdate /force",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_053",
+        "term": "netstat",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_057",
+        "term": "diskpart",
+        "objective": "1.5 - Windows Command-Line Tools"
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-14T15:55:39.070815",
+    "exam": "All",
+    "objectives": [
+      "1.5 - Windows Command-Line Tools"
+    ],
+    "cards_studied": 10,
+    "cards_reviewed": [
+      {
+        "id": "c2_055",
+        "term": "chkdsk",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_058",
+        "term": "robocopy",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_052",
+        "term": "nslookup",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_059",
+        "term": "sfc /scannow",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_060",
+        "term": "gpupdate /force",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_053",
+        "term": "netstat",
+        "objective": "1.5 - Windows Command-Line Tools"
+      },
+      {
+        "id": "c2_057",
+        "term": "diskpart",
+        "objective": "1.5 - Windows Command-Line Tools"
       }
     ]
   }

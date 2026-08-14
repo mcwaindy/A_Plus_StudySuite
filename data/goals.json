@@ -1,0 +1,24 @@
+{
+  "exam_target_date": null,
+  "target_readiness_percentage": 90,
+  "milestones_achieved": [
+    {
+      "type": "cards_studied",
+      "name": "First 10 Cards",
+      "icon": "\ud83c\udf89",
+      "threshold": 10,
+      "achieved_date": "2026-08-14T15:55:39.103312",
+      "celebrated": false
+    }
+  ],
+  "daily_goals": {
+    "target_cards_per_day": 20,
+    "target_exams_per_week": 2,
+    "target_minutes_per_day": 45
+  },
+  "study_streak": {
+    "current_days": 1,
+    "longest_streak": 1,
+    "last_study_date": "2026-08-14"
+  }
+}

@@ -9,6 +9,7 @@ from modules.diagram_view import DiagramView
 from modules.exam_view import ExamView
 from modules.custom_exam_view import CustomExamView
 from modules.game_view import GameView
+from modules.goals_view import GoalsView
 
 # Set dark mode theme and default color scheme
 ctk.set_appearance_mode("Dark")
@@ -66,6 +67,17 @@ class App(ctk.CTk):
             text_color="gray"
         )
         study_label.grid(row=1, column=0, padx=20, pady=(15,5), sticky="w")
+
+        btn_goals = ctk.CTkButton(
+            sidebar,
+            text="  📊 Goals & Progress",
+            anchor="w",
+            fg_color="transparent",
+            text_color=("gray10", "gray90"),
+            hover_color=("gray70", "gray30"),
+            command=lambda: self.switch_frame(GoalsView)
+        )
+        btn_goals.grid(row=2, column=0, padx=10, pady=2, sticky="ew")
 
         btn_notes = ctk.CTkButton(
             sidebar, text="  💠 Select Objectives", anchor="w", fg_color="transparent",
