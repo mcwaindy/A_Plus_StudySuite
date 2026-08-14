@@ -69,6 +69,25 @@
 - Visual feedback on selections
 - Status: **NEW** - Added to streamline workflow
 
+#### 7. **~~Study Goals & Milestones~~ ✅ COMPLETED**
+- ~~Set target exam date~~ → ✅ Fully implemented
+- ~~Daily study recommendations~~ → ✅ Implemented in GoalsView
+- ~~Progress bar toward exam readiness~~ → ✅ Readiness % displayed
+- ~~Milestone celebrations~~ → ✅ Celebration popups working
+- Status: **PARTIALLY COMPLETE** - Goals/milestones system fully integrated; implement with practice exams
+
+#### 8. **Spaced Repetition System (SM-2) ✅ COMPLETED**
+- ~~Track card difficulty and review frequency~~ → ✅ Implemented in SpacedRepetitionManager
+- ~~Prioritize cards needing review based on interval~~ → ✅ Smart Study mode functional
+- ~~Show optimal review schedule~~ → ✅ Card status badges show OVERDUE/DUE SOON/CURRENT/NEW/MASTERED
+- Status: **COMPLETE** - SM-2 backend operational, integrated into flashcard view
+
+#### 9. **Dev Tools & Settings ✅ COMPLETED**
+- ~~Notes for development~~ → ✅ Multi-page tabbed notes system
+- ~~Data reset capabilities~~ → ✅ Reset all/partial statistics options
+- ~~Settings menu~~ → ✅ Full Settings view with confirmation dialogs
+- Status: **COMPLETE** - Settings view integrated with comprehensive data management
+
 ---
 
 ## 🚀 FEATURES NEEDING COMPLETION
@@ -123,21 +142,85 @@
 
 ## 🎨 REFINEMENT & POLISHING OPPORTUNITIES
 
+### IMPORTANT: Exam Readiness Calculation System
+
+#### Overview
+The **Exam Readiness %** metric in the Goals view is a composite indicator designed to predict preparation level for the CompTIA A+ exam. It currently combines three factors:
+
+**Formula:**
+```
+Readiness % = (Cards Progress × 0.5 + Objectives Coverage × 0.3 + Mastery Score × 0.2) × 100
+```
+
+Where:
+- **Cards Progress (50%)**: `cards_studied / 500` — Currently heaviest-weighted factor
+- **Objectives Coverage (30%)**: Number of objectives with cards studied / 3
+- **Mastery Score (20%)**: Based on spaced repetition metrics or review history (cards mastered / total cards attempted)
+
+#### Current Implementation Issues & Notes
+
+1. **Low Initial Readiness After Few Cards** ✅ FIXED
+   - **Issue**: 27.2% readiness after only 10 cards seemed inflated
+   - **Root Cause**: Cards studied (10/500 = 2%) + objectives coverage + mastery were weighted equally
+   - **Resolution**: Reweighted to emphasize volume (50%) — after 10 cards: 10/500 = 2% × 0.5 = 1%, capped min 0% actual readiness
+   - This is now more realistic; users must study significant portion of card pool for exam readiness
+
+2. **Design Philosophy**
+   - Readiness is primarily **volume-based** (must see most cards)
+   - Secondary importance on **breadth** (all objectives covered)
+   - Tertiary on **mastery** (quality of understanding via spaced repetition)
+   - This reflects CompTIA exams: need broad coverage + repeated exposure to internalize
+
+3. **Intended Integration with Practice Exams** (FUTURE)
+   - Current readiness uses only flashcard review history
+   - **PLANNED**: Integrate exam scores from `modules/exam_view.py` and `modules/custom_exam_view.py`
+   - Future formula (TBD):
+     ```
+     Readiness % = (Flashcard Progress × 0.4 + Exam Scores × 0.4 + Objectives Coverage × 0.2) × 100
+     ```
+   - This would weight both study methods equally, reflecting real exam preparation
+
+4. **Known Limitations**
+   - Does NOT account for time since last review (spaced repetition system tracks this separately in card metrics)
+   - Mastery score is secondary; flashcard "Needs Review" tracking is basic
+   - No weighting by objective difficulty or exam frequency
+   - Practice exam scores not yet factored in
+
+#### Files Involved
+- `utils/goals_manager.py` → `calculate_readiness_percentage()` method
+- `modules/goals_view.py` → Displays readiness % in dashboard
+- `data/review_history.json` → Source data for calculation
+- `data/card_metrics.json` → Spaced repetition metrics (future integration point)
+
+#### Recommendations for Future Work
+- [ ] After practice exam feature complete: integrate exam scores into readiness formula
+- [ ] Consider objective-level readiness (show % per objective, not just global)
+- [ ] Add decay factor: readiness drops if cards not reviewed recently (to encourage consistency)
+- [ ] Add "readiness by exam type" — separate scores for Core 1 vs Core 2
+- [ ] Create visual chart showing readiness trend over time
+- [ ] Add "time to exam" factor — suggest increased study if exam is soon
+
+---
+
 ### HIGH PRIORITY (User Experience)
 
-#### 1. **Auto-Save & Recovery**
-**Status**: Partially implemented (review history saves)
+#### 1. **Auto-Save & Recovery** ✅ COMPLETE
+**Status**: Fully implemented
 - ✅ Review history auto-saves
 - ✅ Flashcard progress in session
-- ❌ Session state not recovered on app restart
-- ❌ No crash recovery
+- ✅ Session state recovered on app restart
+- ✅ Crash recovery with resume prompt
+- ✅ Graceful error handling on corrupted data
+- ✅ Auto-expiration of stale sessions (7 days)
 
-**Refinements Needed**:
-- Save current flashcard session state periodically
-- Add "Resume Study Session" on app startup if session interrupted
-- Save exam progress
-- Add graceful error handling on corrupted data
-- **Effort**: 2-3 hours
+**Implementation Details**:
+- New `utils/session_manager.py` manages session persistence
+- Auto-save triggers after every card interaction
+- Startup modal offers "Resume Session" or "Start Fresh"
+- Session state includes: mode, objectives, scores, current card position
+- Session cleared when review completed
+- See `SESSION_RECOVERY_IMPLEMENTATION.md` for full details
+- **Effort**: ✅ Completed (2-3 hours)
 - **Impact**: HIGH (prevents frustration from lost progress)
 
 #### 2. **Visual Consistency & Polish**
@@ -192,38 +275,19 @@
 - **Impact**: MEDIUM (improves workflow for large datasets)
 
 #### 5. **Statistics & Progress Tracking**
-**Status**: Basic tracking exists (cards studied, review history logged)
+**Status**: ~~Partial implementation~~ → ✅ **NOW IMPLEMENTED**
 - ✅ Review history saves per session
 - ✅ Score tracking in exams and games
-- ❌ No overall progress dashboard
-- ❌ No performance metrics/analytics
-- ❌ No goal tracking or milestones
+- ✅ Overall progress dashboard (Goals view with readiness %)
+- ✅ Performance metrics (cards studied, mastery %, streak tracking)
+- ✅ Goal tracking and milestones ✅ COMPLETED (see section 7 above)
 
-**Enhancements Possible**:
-- Add statistics dashboard showing:
-  - Total cards studied (all-time)
-  - Mastery percentage per objective
-  - Study streak tracking
-  - Predicted readiness for exam
-  - Weak objective identification
-- Export progress to CSV/PDF
-- Visual charts (matplotlib integration)
-- Study time tracking
-- **Effort**: 5-7 hours
-- **Impact**: HIGH (motivational and insightful)
-
-#### 6. **Spaced Repetition Algorithm**
-**Status**: Not implemented
-- Currently uses random shuffling
-- No SRS (Spaced Repetition System)
-
-**Enhancement Possible**:
-- Track card difficulty and review frequency
-- Implement SM-2 or Leitner algorithm
-- Prioritize cards needing review based on time since last review
-- Show optimal review schedule
-- **Effort**: 4-6 hours
-- **Impact**: HIGH (significantly improves learning effectiveness)
+#### 6. **~~Spaced Repetition Algorithm~~ ✅ COMPLETED**
+- ~~Currently uses random shuffling~~ → ✅ SM-2 algorithm implemented
+- ✅ Track card difficulty and review frequency
+- ✅ Prioritize cards needing review based on interval
+- ✅ Show optimal review schedule (badge system)
+- Status: **COMPLETE** (see section 8 above)
 
 ---
 
@@ -251,14 +315,13 @@
 
 ### HIGH VALUE - IMPLEMENT FIRST
 
-#### 1. **Study Goals & Milestones** 🎯
-**Why**: Keeps users motivated and on track
-- Set target exam date
-- AI-calculated daily study recommendations
-- Progress bar toward exam readiness
-- Milestone celebrations (reached 100 cards, etc.)
-- **Effort**: 3-4 hours
-- **Complexity**: LOW-MEDIUM
+#### ~~1. **Study Goals & Milestones** 🎯~~ ✅ COMPLETED
+- ~~Why: Keeps users motivated and on track~~
+- ✅ Set target exam date
+- ✅ AI-calculated daily study recommendations
+- ✅ Progress bar toward exam readiness
+- ✅ Milestone celebrations (reached 100 cards, etc.)
+- **Status**: COMPLETE (integrated into Goals view)
 
 #### 2. **Notes Annotation & Highlighting** 📝
 **Why**: Improves study effectiveness

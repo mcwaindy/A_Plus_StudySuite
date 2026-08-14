@@ -181,36 +181,117 @@ class NotesView(ctk.CTkFrame):
         return notes[0]
 
     def render_nav_list(self):
-        """Draws the grouped, filtered objective list."""
+        """Draws the grouped, filtered objective list with visual differentiation by match type."""
         for child in self.nav_list.winfo_children():
             child.destroy()
         self.nav_buttons = {}
 
         needle = self.filter_var.get().strip().lower()
         row = 0
-        matches = 0
+        matches_title = 0
+        matches_content = 0
+
+        # Categorize all notes by match type
+        all_matches_by_type = {'title': [], 'content': [], 'all': []}
 
         for section in self.sections:
-            visible = [n for n in section["notes"] if self._matches(n, needle)]
-            if not visible:
-                continue
+            for note in section["notes"]:
+                match_type = self._get_match_type(note, needle)
+                if match_type == 'title':
+                    all_matches_by_type['title'].append((section, note))
+                elif match_type == 'content':
+                    all_matches_by_type['content'].append((section, note))
+                elif match_type == 'all':
+                    all_matches_by_type['all'].append((section, note))
 
-            lbl = ctk.CTkLabel(
+        # If empty search, show ALL notes with default styling (no color coding)
+        if not needle:
+            section_map = {}
+            for section, note in all_matches_by_type['all']:
+                if section['label'] not in section_map:
+                    section_map[section['label']] = (section, [])
+                section_map[section['label']][1].append(note)
+
+            for section_label, (section, notes) in section_map.items():
+                lbl = ctk.CTkLabel(
+                    self.nav_list,
+                    text=section['label'].upper(),
+                    font=ctk.CTkFont(size=11, weight="bold"),
+                    text_color="gray",
+                    anchor="w",
+                )
+                lbl.grid(row=row, column=0, sticky="ew", padx=12, pady=(12, 4))
+                row += 1
+
+                for note in notes:
+                    self.nav_buttons[note["id"]] = self._add_nav_button(note, row, match_type='title')
+                    row += 1
+
+            self._highlight_active()
+            return
+
+        # Display title matches first (grouped by section)
+        if all_matches_by_type['title']:
+            section_map = {}
+            for section, note in all_matches_by_type['title']:
+                if section['label'] not in section_map:
+                    section_map[section['label']] = (section, [])
+                section_map[section['label']][1].append(note)
+
+            for section_label, (section, notes) in section_map.items():
+                lbl = ctk.CTkLabel(
+                    self.nav_list,
+                    text=section['label'].upper(),
+                    font=ctk.CTkFont(size=11, weight="bold"),
+                    text_color="gray",
+                    anchor="w",
+                )
+                lbl.grid(row=row, column=0, sticky="ew", padx=12, pady=(12, 4))
+                row += 1
+
+                for note in notes:
+                    self.nav_buttons[note["id"]] = self._add_nav_button(note, row, match_type='title')
+                    row += 1
+                    matches_title += 1
+
+        # Display content matches with "Found in notes:" separator (grouped by section)
+        if all_matches_by_type['content']:
+            # Add separator (show even if no title matches)
+            separator = ctk.CTkLabel(
                 self.nav_list,
-                text=section["label"].upper(),
-                font=ctk.CTkFont(size=11, weight="bold"),
-                text_color="gray",
+                text="FOUND IN NOTES:",
+                font=ctk.CTkFont(size=9, weight="bold"),
+                text_color="#888",
                 anchor="w",
             )
-            lbl.grid(row=row, column=0, sticky="ew", padx=12, pady=(12, 4))
+            separator.grid(row=row, column=0, sticky="ew", padx=12, pady=(16, 4))
             row += 1
 
-            for note in visible:
-                self.nav_buttons[note["id"]] = self._add_nav_button(note, row)
-                row += 1
-                matches += 1
+            section_map = {}
+            for section, note in all_matches_by_type['content']:
+                if section['label'] not in section_map:
+                    section_map[section['label']] = (section, [])
+                section_map[section['label']][1].append(note)
 
-        if not matches:
+            for section_label, (section, notes) in section_map.items():
+                # Only show section header if it's NOT already shown in title matches
+                if not any(s['label'] == section_label for s, _ in all_matches_by_type['title']):
+                    lbl = ctk.CTkLabel(
+                        self.nav_list,
+                        text=section['label'].upper(),
+                        font=ctk.CTkFont(size=11, weight="bold"),
+                        text_color="gray",
+                        anchor="w",
+                    )
+                    lbl.grid(row=row, column=0, sticky="ew", padx=12, pady=(12, 4))
+                    row += 1
+
+                for note in notes:
+                    self.nav_buttons[note["id"]] = self._add_nav_button(note, row, match_type='content')
+                    row += 1
+                    matches_content += 1
+
+        if not matches_title and not matches_content:
             message = "No matching objectives" if needle else "No notes in assets/notes/"
             ctk.CTkLabel(
                 self.nav_list,
@@ -222,16 +303,31 @@ class NotesView(ctk.CTkFrame):
 
         self._highlight_active()
 
-    def _add_nav_button(self, note, row):
-        """Creates one objective button, styled to match the app's main sidebar."""
+    def _add_nav_button(self, note, row, match_type='title'):
+        """Creates one objective button, styled to match the app's main sidebar.
+
+        match_type: 'title' for matches in objective name, 'content' for matches in note body
+        """
+        # Color coding based on match type
+        if match_type == 'content':
+            # Content matches get a subtle blue tint
+            text_color_empty = ("gray40", "gray55")
+            text_color_filled = ("#6ba3d9", "#7bb3e9")  # Blueish
+            hover_color = ("#8bc3ff", "#4a7fcc")  # Lighter blue on hover
+        else:
+            # Title matches use normal colors
+            text_color_empty = ("gray40", "gray55")
+            text_color_filled = ("gray10", "gray90")
+            hover_color = ("gray70", "gray30")
+
         btn = ctk.CTkButton(
             self.nav_list,
             text=self._nav_label(note),
             anchor="w",
             height=30,
             fg_color="transparent",
-            text_color=("gray10", "gray90") if not note["is_empty"] else ("gray40", "gray55"),
-            hover_color=("gray70", "gray30"),
+            text_color=text_color_empty if note["is_empty"] else text_color_filled,
+            hover_color=hover_color,
             font=ctk.CTkFont(size=12),
             command=lambda target=note: self.select_note(target),
         )
@@ -248,6 +344,33 @@ class NotesView(ctk.CTkFrame):
 
         objective = f"{note['objective']}  " if note["objective"] else ""
         return f"  {marker}  {objective}{title}"
+
+    def _get_match_type(self, note, needle):
+        """
+        Determine where a note matches the search term.
+        Returns: 'title' if matches in title/objective, 'content' if in note body, None if no match.
+        """
+        if not needle:
+            return 'all'
+
+        needle_lower = needle.lower()
+
+        # Check title/objective match (priority)
+        title_haystack = f"{note['objective']} {note['title']} {note['group_label']}".lower()
+        if needle_lower in title_haystack:
+            return 'title'
+
+        # Check content match
+        try:
+            if note['path'].exists():
+                with open(note['path'], 'r', encoding='utf-8') as f:
+                    content = f.read().lower()
+                    if needle_lower in content:
+                        return 'content'
+        except (OSError, KeyError):
+            pass
+
+        return None
 
     @staticmethod
     def _matches(note, needle):

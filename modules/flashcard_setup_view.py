@@ -11,6 +11,7 @@ class FlashcardSetupView(ctk.CTkFrame):
         self.on_start_callback = on_start_callback
         self.selected_objectives = []
         self.selected_card_limit = "All"
+        self.study_mode = "standard"  # NEW: "standard" or "smart"
         self.checkboxes = {}
         self.show_review_history = False
 
@@ -40,15 +41,63 @@ class FlashcardSetupView(ctk.CTkFrame):
         for core in self.objectives_by_core:
             self.objectives_by_core[core] = sorted(list(self.objectives_by_core[core]))
 
+    def create_mode_selector(self):
+        """Create study mode selector (Standard vs Smart Study)."""
+        mode_frame = ctk.CTkFrame(self, fg_color="transparent")
+        mode_frame.grid(row=0, column=0, sticky="ew", pady=(0, 15))
+        mode_frame.grid_columnconfigure(0, weight=0)
+        mode_frame.grid_columnconfigure(1, weight=0)
+        mode_frame.grid_columnconfigure(2, weight=1)
+
+        # Label
+        lbl = ctk.CTkLabel(
+            mode_frame,
+            text="Study Mode:",
+            font=ctk.CTkFont(size=12, weight="bold")
+        )
+        lbl.grid(row=0, column=0, sticky="w", padx=(0, 15))
+
+        # Create variable for radio buttons
+        self.mode_var = ctk.StringVar(value="standard")
+
+        # Standard mode radio button
+        radio_standard = ctk.CTkRadioButton(
+            mode_frame,
+            text="Standard (Random Order)",
+            variable=self.mode_var,
+            value="standard",
+            command=self.on_mode_changed
+        )
+        radio_standard.grid(row=0, column=1, sticky="w", padx=5)
+
+        # Smart Study mode radio button
+        radio_smart = ctk.CTkRadioButton(
+            mode_frame,
+            text="🧠 Smart Study (Spaced Repetition)",
+            variable=self.mode_var,
+            value="smart",
+            command=self.on_mode_changed
+        )
+        radio_smart.grid(row=0, column=2, sticky="w", padx=5)
+
+    def on_mode_changed(self):
+        """Handle study mode change."""
+        self.study_mode = self.mode_var.get()
+        self.update_summary()
+
     def create_setup_screen(self):
         """Main setup screen with two-column objective selection."""
-        self.grid_rowconfigure(0, weight=0)  # Title
-        self.grid_rowconfigure(1, weight=0)  # Subtitle
-        self.grid_rowconfigure(2, weight=1)  # Columns
-        self.grid_rowconfigure(3, weight=0)  # Card limit
-        self.grid_rowconfigure(4, weight=0)  # Buttons
-        self.grid_rowconfigure(5, weight=1)  # Review history (toggleable)
+        self.grid_rowconfigure(0, weight=0)  # Study mode selector
+        self.grid_rowconfigure(1, weight=0)  # Title
+        self.grid_rowconfigure(2, weight=0)  # Subtitle
+        self.grid_rowconfigure(3, weight=1)  # Columns
+        self.grid_rowconfigure(4, weight=0)  # Card limit
+        self.grid_rowconfigure(5, weight=0)  # Buttons
+        self.grid_rowconfigure(6, weight=1)  # Review history (toggleable)
         self.grid_columnconfigure(0, weight=1)
+
+        # Study mode selector (NEW)
+        self.create_mode_selector()
 
         # Title
         title = ctk.CTkLabel(
@@ -56,7 +105,7 @@ class FlashcardSetupView(ctk.CTkFrame):
             text="Flashcard Study Setup",
             font=ctk.CTkFont(size=20, weight="bold")
         )
-        title.grid(row=0, column=0, sticky="ew", pady=(0, 5))
+        title.grid(row=1, column=0, sticky="ew", pady=(0, 5))
 
         # Subtitle
         subtitle = ctk.CTkLabel(
@@ -65,11 +114,11 @@ class FlashcardSetupView(ctk.CTkFrame):
             font=ctk.CTkFont(size=11),
             text_color="gray"
         )
-        subtitle.grid(row=1, column=0, sticky="ew", pady=(0, 15))
+        subtitle.grid(row=2, column=0, sticky="ew", pady=(0, 15))
 
         # Two-column objectives frame
         columns_frame = ctk.CTkFrame(self, fg_color="transparent")
-        columns_frame.grid(row=2, column=0, sticky="nsew", pady=(0, 20))
+        columns_frame.grid(row=3, column=0, sticky="nsew", pady=(0, 20))
         columns_frame.grid_columnconfigure(0, weight=1)
         columns_frame.grid_columnconfigure(1, weight=1)
 
@@ -84,7 +133,7 @@ class FlashcardSetupView(ctk.CTkFrame):
 
         # Summary and start button
         bottom_frame = ctk.CTkFrame(self, fg_color="transparent")
-        bottom_frame.grid(row=4, column=0, sticky="ew", pady=(10, 0))
+        bottom_frame.grid(row=5, column=0, sticky="ew", pady=(10, 0))
         bottom_frame.grid_columnconfigure(0, weight=1)
 
         # Summary label
@@ -211,7 +260,7 @@ class FlashcardSetupView(ctk.CTkFrame):
     def create_card_limit_section(self):
         """Card limit selection section."""
         limit_frame = ctk.CTkFrame(self, fg_color="transparent")
-        limit_frame.grid(row=3, column=0, sticky="ew", pady=(0, 20))
+        limit_frame.grid(row=4, column=0, sticky="ew", pady=(0, 20))
         limit_frame.grid_columnconfigure(1, weight=1)
 
         # Label
@@ -276,7 +325,8 @@ class FlashcardSetupView(ctk.CTkFrame):
         config = {
             "exam": "All",  # Both cores selected
             "objectives": self.selected_objectives if self.selected_objectives != ["All"] else ["All"],
-            "card_limit": int(self.selected_card_limit) if self.selected_card_limit != "All" else None
+            "card_limit": int(self.selected_card_limit) if self.selected_card_limit != "All" else None,
+            "mode": self.study_mode  # NEW: "standard" or "smart"
         }
 
         if self.on_start_callback:

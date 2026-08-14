@@ -4,37 +4,67 @@ import customtkinter as ctk
 import random
 from datetime import datetime
 from utils.goals_manager import GoalsManager
+from utils.spaced_repetition_manager import SpacedRepetitionManager
+from utils.session_manager import SessionManager
 from modules.dialogs.milestone_dialog import MilestoneDialog
 
 class FlashcardView(ctk.CTkFrame):
     """
     Interactive Flashcard View for CompTIA A+ study terms.
+    Supports two study modes: Standard (random order) and Smart Study (spaced repetition).
+    Includes auto-save for session recovery.
     """
 
-    def __init__(self, parent, config=None):
+    def __init__(self, parent, config=None, recovered_session=None):
         super().__init__(parent)
 
-        # Load configuration from setup screen or use defaults
-        if config:
+        # Initialize Session Manager for auto-save
+        self.session_manager = SessionManager()
+
+        # Load configuration from setup screen, recovery, or defaults
+        if recovered_session:
+            # Restore from recovered session
+            session_data = recovered_session.get("data", {})
+            self.selected_exam = session_data.get("selected_exam", "All")
+            self.selected_objectives = session_data.get("selected_objectives", ["All"])
+            self.card_limit = session_data.get("card_limit", None)
+            self.study_mode = session_data.get("study_mode", "standard")
+            self._is_recovered_session = True
+        elif config:
             self.selected_exam = config.get("exam", "All")
             self.selected_objectives = config.get("objectives", ["All"])
             self.card_limit = config.get("card_limit", None)
+            self.study_mode = config.get("mode", "standard")  # NEW: "standard" or "smart"
+            self._is_recovered_session = False
         else:
             self.selected_exam = "All"
             self.selected_objectives = ["All"]
             self.card_limit = None
+            self.study_mode = "standard"
+            self._is_recovered_session = False
 
         # Initialize Goals Manager for tracking progress
         self.goals_manager = GoalsManager()
-        self.session_start_time = None  # Track session start for duration
+        self.session_start_time = datetime.now()  # Track session start for duration
 
         # State variables
         self.all_cards = self.load_data()
         self.cards = self.all_cards[:]  # Make a copy for filtering
 
-        # Filter by exam and objectives from config
-        self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objectives)
-        random.shuffle(self.cards)  # Shuffle on initial load
+        # Initialize spaced repetition manager if in smart study mode
+        self.sr_manager = None
+        if self.study_mode == "smart":
+            self.sr_manager = SpacedRepetitionManager(self.all_cards)
+            self.prioritized_cards = self.sr_manager.get_study_cards(
+                self.all_cards,
+                self.card_limit,
+                self.selected_objectives if self.selected_objectives != ["All"] else None
+            )
+            self.cards = [card["card"] for card in self.prioritized_cards]  # Extract cards
+        else:
+            # Standard mode: filter and shuffle
+            self.cards = self.filter_cards_by_exam_and_objective(self.selected_exam, self.selected_objectives)
+            random.shuffle(self.cards)
 
         self.current_index = 0
         self.is_flipped = False
@@ -100,7 +130,8 @@ class FlashcardView(ctk.CTkFrame):
                     "objective": card.get("objective")
                 }
                 for card in self.reviewed_cards
-            ]
+            ],
+            "mode": self.study_mode  # NEW: Track which mode was used
         }
 
         # Load existing reviews
@@ -120,20 +151,25 @@ class FlashcardView(ctk.CTkFrame):
         # Save back
         with open(review_path, "w", encoding="utf-8") as f:
             json.dump(reviews, f, indent=2, ensure_ascii=False)
-        reviews = []
-        if review_path.exists():
-            try:
-                with open(review_path, "r", encoding="utf-8") as f:
-                    reviews = json.load(f)
-            except:
-                reviews = []
 
-        # Add new review
-        reviews.append(review_data)
-
-        # Save back
-        with open(review_path, "w", encoding="utf-8") as f:
-            json.dump(reviews, f, indent=2, ensure_ascii=False)
+    def auto_save_session(self):
+        """
+        Auto-save current session state for recovery on app crash/close.
+        Called after each card interaction.
+        """
+        session_data = {
+            "selected_exam": self.selected_exam,
+            "selected_objectives": self.selected_objectives,
+            "card_limit": self.card_limit,
+            "study_mode": self.study_mode,
+            "current_index": self.current_index,
+            "cards_studied": self.cards_studied,
+            "reviewed_cards": self.reviewed_cards,
+            "score_known": self.score_known,
+            "score_review": self.score_review,
+            "is_flipped": self.is_flipped,
+        }
+        self.session_manager.save_flashcard_session(session_data)
 
     def load_reviews(self):
         """
@@ -539,15 +575,24 @@ class FlashcardView(ctk.CTkFrame):
 
         card = self.cards[self.current_index]
 
-        # Update progress header
+        # Build card position and status info
         total = len(self.cards)
+        status_badge = ""
+
+        # Add status badge for smart study mode
+        if self.study_mode == "smart" and self.sr_manager:
+            card_id = card.get("id")
+            if card_id:
+                status = self._get_card_status(card_id)
+                status_badge = f" [{status}]"
+
         if self.selected_objectives == ["All"]:
             obj_label = "All Objectives"
         else:
             obj_label = f"Objectives: {', '.join(self.selected_objectives)}"
 
         self.lbl_objective.configure(
-            text=f"Card {self.current_index + 1} of {total} | {obj_label}"
+            text=f"Card {self.current_index + 1} of {total} | {obj_label}{status_badge}"
         )
 
         # Show Term or Definition depending on flipped state and toggle
@@ -581,6 +626,32 @@ class FlashcardView(ctk.CTkFrame):
 
         # Update side indicator
         self.lbl_card_side.configure(text=sub_label)
+
+    def _get_card_status(self, card_id):
+        """Get card status badge for smart study mode."""
+        try:
+            stats = self.sr_manager.get_card_stats(card_id)
+            next_review_date = stats.get("next_review_date", "")
+            learning_stage = stats.get("learning_stage", "new")
+
+            if learning_stage == "mastered":
+                return "✅ MASTERED"
+
+            from datetime import datetime
+            today = datetime.now().date()
+            if next_review_date:
+                review_date = datetime.fromisoformat(next_review_date).date()
+                days_diff = (review_date - today).days
+                if days_diff < 0:
+                    return f"🔴 OVERDUE ({-days_diff}d)"
+                elif days_diff <= 2:
+                    return f"🟡 DUE SOON ({days_diff}d)"
+                else:
+                    return "🟢 CURRENT"
+            else:
+                return "🔵 NEW"
+        except Exception:
+            return "?"
 
     def _on_card_configure(self, event):
         """Handle card container resize events."""
@@ -811,11 +882,9 @@ class FlashcardView(ctk.CTkFrame):
         self.update_card_display()
 
     def exit_review_screen(self):
-        """Exit the review screen and return to normal state."""
+        """Exit the review screen and return to parent app (quit flashcard session)."""
         self._in_review_mode = False
-        self.btn_review.configure(text="Needs Review ✗")
-        self.btn_know.configure(text="Know It ✓")
-        self.start_new_session()
+        self.destroy()
 
     def record_answer(self, known: bool):
         """Tracks mastery score, cards reviewed, and advances to next card."""
@@ -828,14 +897,33 @@ class FlashcardView(ctk.CTkFrame):
             self.score_review += 1
             self.reviewed_cards.append(current_card)  # Track for review
 
+        # Update spaced repetition metrics if in smart study mode
+        if self.study_mode == "smart" and self.sr_manager:
+            card_id = current_card.get("id")
+            if card_id:
+                self.sr_manager.record_review(card_id, known)
+
         self.lbl_score.configure(
             text=f"Mastered: {self.score_known} | Needs Review: {self.score_review}"
         )
+
+        # Auto-save session state
+        self.auto_save_session()
 
         # Check if card limit reached
         total_answered = self.score_known + self.score_review
         if self.card_limit and total_answered >= self.card_limit:
             # Show review screen instead of next card
+            self.show_review_screen()
+            return
+
+        # If no card limit and user has reviewed all cards once, auto-end session
+        if not self.card_limit and total_answered >= len(self.cards):
+            self.show_review_screen()
+            return
+
+        # If no card limit and user has reviewed all cards once, auto-end session
+        if not self.card_limit and total_answered >= len(self.cards):
             self.show_review_screen()
             return
 
@@ -851,11 +939,15 @@ class FlashcardView(ctk.CTkFrame):
         """
         Display review summary screen with collapsible objectives showing reviewed cards.
         Also updates study streak and checks for milestone achievements.
+        Clears auto-saved session state.
         """
         self._in_review_mode = True
 
         # Save this review to history
         self.save_review()
+
+        # Clear auto-saved session since we're completing it
+        self.session_manager.clear_session()
 
         # Update goals manager with session data
         try:

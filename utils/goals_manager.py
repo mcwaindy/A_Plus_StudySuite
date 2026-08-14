@@ -150,12 +150,15 @@ class GoalsManager:
         Calculate exam readiness as percentage (0-100).
 
         Formula:
-        Readiness % = (A × 0.4 + B × 0.3 + C × 0.3) × 100
+        Readiness % = (A × 0.5 + B × 0.3 + C × 0.2) × 100
 
         Where:
-            A = Cards Studied Progress (current / target)
+            A = Cards Studied Progress (current / target) — HEAVILY WEIGHTED
             B = Objectives Coverage (objectives_with_cards / 3)
-            C = Mastery Score (cards_known / cards_studied)
+            C = Mastery Score (cards_mastered / cards_studied via spaced repetition)
+
+        Note: cards_reviewed in review history contains cards marked "Needs Review",
+        so mastery = total_studied - cards_needing_help.
 
         Args:
             review_history: Optional review history list. If None, loads from file.
@@ -169,12 +172,14 @@ class GoalsManager:
         if not review_history:
             return 0.0
 
-        # A: Cards Studied Progress
+        # A: Cards Studied Progress (DOMINANT FACTOR - 50%)
+        # This reflects raw volume of study; must see significant portion of card pool
         total_cards_studied = sum(r.get('cards_studied', 0) for r in review_history)
-        target_cards = 500  # Target for full readiness
+        target_cards = 500  # Rough target for full readiness; user should study most/all 222+ cards
         cards_progress = min(total_cards_studied / target_cards, 1.0) if target_cards > 0 else 0.0
 
-        # B: Objectives Coverage
+        # B: Objectives Coverage (30%)
+        # Encourages balanced study across all 3 objectives
         objectives_with_cards = set()
         for review in review_history:
             for objective in review.get('objectives', []):
@@ -182,24 +187,18 @@ class GoalsManager:
                     objectives_with_cards.add(objective)
         objectives_coverage = len(objectives_with_cards) / 3.0  # 3 objectives total
 
-        # C: Mastery Score
-        total_cards_known = 0
-        for review in review_history:
-            for card in review.get('cards_reviewed', []):
-                # Assume if in reviewed list, it was marked "Needs Review"
-                # So cards NOT in this list were "Known"
-                pass
-
-        # Count cards from all sessions that were marked as known
-        # This requires tracking "known" vs "reviewed" which should come from flashcard data
-        # For now, use a proxy: if cards studied - cards in needs_review
-        cards_reviewed_needing_help = sum(len(r.get('cards_reviewed', [])) for r in review_history)
+        # C: Mastery Score (20%)
+        # Based on spaced repetition when available; otherwise estimate from review data
+        # cards_reviewed contains cards marked "Needs Review", so:
+        # mastery = (total_studied - cards_needing_help) / total_studied
+        cards_needing_help = sum(len(r.get('cards_reviewed', [])) for r in review_history)
         total_attempts = total_cards_studied
-        cards_mastered = total_attempts - cards_reviewed_needing_help
+        cards_mastered = max(0, total_attempts - cards_needing_help)
         mastery_score = (cards_mastered / total_attempts) if total_attempts > 0 else 0.0
 
         # Calculate weighted readiness
-        readiness = (cards_progress * 0.4 + objectives_coverage * 0.3 + mastery_score * 0.3) * 100
+        # Heavy emphasis on cards_progress to reflect that readiness is primarily volume-based
+        readiness = (cards_progress * 0.5 + objectives_coverage * 0.3 + mastery_score * 0.2) * 100
         return min(readiness, 100.0)  # Cap at 100%
 
     # ==================== DAILY RECOMMENDATIONS ====================
@@ -461,3 +460,8 @@ class GoalsManager:
             'recent_milestones': self.get_recent_milestones(5),
             'target_readiness': self.goals_data.get('target_readiness_percentage', 90),
         }
+
+    def reset_goals(self) -> None:
+        """Reset all goals to defaults."""
+        self.goals_data = self._get_default_goals()
+        self._save_goals()

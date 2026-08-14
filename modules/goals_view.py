@@ -1,12 +1,15 @@
 """
 Goals View - Main dashboard for study goals and progress tracking.
 Displays exam countdown, readiness progress, daily recommendations,
-study streak, and recent milestones.
+study streak, recent milestones, and spaced repetition statistics.
 """
 
 import customtkinter as ctk
 from utils.goals_manager import GoalsManager
+from utils.spaced_repetition_manager import SpacedRepetitionManager
 from datetime import datetime
+import json
+from pathlib import Path
 
 
 class GoalsView(ctk.CTkFrame):
@@ -15,6 +18,17 @@ class GoalsView(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
         self.gm = GoalsManager()
+
+        # Initialize SR manager (if data available)
+        self.sr_manager = None
+        try:
+            flashcards_path = Path("data/flashcards.json")
+            if flashcards_path.exists():
+                with open(flashcards_path, "r", encoding="utf-8") as f:
+                    flashcards = json.load(f)
+                self.sr_manager = SpacedRepetitionManager(flashcards)
+        except Exception:
+            pass
 
         # Configure grid
         self.grid_columnconfigure(0, weight=1)
@@ -64,6 +78,9 @@ class GoalsView(ctk.CTkFrame):
 
         # Milestones section
         self.create_milestones_section()
+
+        # Spaced Repetition statistics section
+        self.create_sr_stats_section()
 
         # Buttons section
         self.create_buttons_section()
@@ -199,10 +216,87 @@ class GoalsView(ctk.CTkFrame):
         )
         self.no_milestones_label.grid(row=0, column=0, sticky="ew")
 
+    def create_sr_stats_section(self):
+        """Create spaced repetition statistics section."""
+        section = ctk.CTkFrame(self.scrollable_frame, corner_radius=10, fg_color=("gray85", "gray15"))
+        section.grid(row=5, column=0, sticky="ew", pady=(0, 15))
+        section.grid_columnconfigure(0, weight=1)
+
+        title = ctk.CTkLabel(
+            section,
+            text="🧠 SMART STUDY STATS",
+            font=ctk.CTkFont(size=14, weight="bold")
+        )
+        title.grid(row=0, column=0, sticky="w", padx=15, pady=(15, 10))
+
+        # Container for SR stats
+        self.sr_stats_container = ctk.CTkFrame(section, fg_color="transparent")
+        self.sr_stats_container.grid(row=1, column=0, sticky="ew", padx=15, pady=(0, 15))
+        self.sr_stats_container.grid_columnconfigure((0, 1), weight=1)
+
+    def update_sr_stats_display(self):
+        """Update spaced repetition statistics."""
+        if not self.sr_manager:
+            return
+
+        # Clear existing stats
+        for widget in self.sr_stats_container.winfo_children():
+            widget.destroy()
+
+        try:
+            stats = self.sr_manager.get_learning_statistics()
+
+            # Due today
+            due_today = ctk.CTkLabel(
+                self.sr_stats_container,
+                text=f"📋 Due Today: {stats['cards_due_today']}",
+                font=ctk.CTkFont(size=11),
+                text_color=("gray10", "gray90")
+            )
+            due_today.grid(row=0, column=0, sticky="w", pady=2)
+
+            # Overdue cards
+            overdue = ctk.CTkLabel(
+                self.sr_stats_container,
+                text=f"🔴 Overdue: {stats['overdue_cards']}",
+                font=ctk.CTkFont(size=11),
+                text_color=("gray10", "gray90")
+            )
+            overdue.grid(row=0, column=1, sticky="w", pady=2)
+
+            # Learning efficiency
+            efficiency = ctk.CTkLabel(
+                self.sr_stats_container,
+                text=f"📈 Efficiency: {stats['learning_efficiency']}%",
+                font=ctk.CTkFont(size=11),
+                text_color=("gray10", "gray90")
+            )
+            efficiency.grid(row=1, column=0, sticky="w", pady=2)
+
+            # Mastery estimate
+            mastery_date = stats.get('estimated_mastery_date', 'N/A')
+            mastery = ctk.CTkLabel(
+                self.sr_stats_container,
+                text=f"✅ Mastery by: {mastery_date}",
+                font=ctk.CTkFont(size=11),
+                text_color=("gray10", "gray90")
+            )
+            mastery.grid(row=1, column=1, sticky="w", pady=2)
+
+        except Exception:
+            # If SR data not available, show placeholder
+            placeholder = ctk.CTkLabel(
+                self.sr_stats_container,
+                text="Start Smart Study sessions to see stats",
+                font=ctk.CTkFont(size=11),
+                text_color=("gray50", "gray50")
+            )
+            placeholder.grid(row=0, column=0, columnspan=2, sticky="w", pady=2)
+
     def create_buttons_section(self):
         """Create action buttons."""
         button_frame = ctk.CTkFrame(self.scrollable_frame, fg_color="transparent")
-        button_frame.grid(row=5, column=0, sticky="ew", pady=(10, 0))
+        button_frame.grid(row=6, column=0, sticky="ew", pady=(10, 0))
         button_frame.grid_columnconfigure(0, weight=1)
         button_frame.grid_columnconfigure(1, weight=1)
 
@@ -260,6 +354,9 @@ class GoalsView(ctk.CTkFrame):
 
         # Update milestones
         self.update_milestones_display(summary['recent_milestones'])
+
+        # Update SR stats
+        self.update_sr_stats_display()
 
     def update_milestones_display(self, milestones):
         """Update the milestones display."""
